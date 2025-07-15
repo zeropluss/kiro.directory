@@ -495,6 +495,26 @@
             text-align: center;
         }
         
+        .card-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .btn-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            transition: opacity 0.2s;
+        }
+        
+        .btn-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
         /* Newsletter */
         .newsletter {
             background-color: var(--color-surface);
@@ -799,7 +819,10 @@ agents:
                     <div class="best-for">
                         <strong>Best for:</strong> Individual developers
                     </div>
-                    <a href="/compare/copilot/" class="btn btn-secondary">Compare with Kiro</a>
+                    <div class="card-actions">
+                        <a href="/compare/copilot/" class="btn btn-secondary">Compare with Kiro</a>
+                        <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="btn-link">Try Copilot →</a>
+                    </div>
                 </div>
                 
                 <div class="comparison-card">

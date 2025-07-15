@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro vs Claude Code - AI Coding Comparison | Kiro Directory</title>
+    <meta name="description" content="Compare AWS Kiro and Claude Code: spec-driven IDE vs code analysis tool. Understand the differences in approach, features, and pricing.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/compare/claude-code/">
+    <meta property="og:title" content="Kiro vs Claude Code - Comprehensive Comparison">
+    <meta property="og:description" content="AWS Kiro's production-ready approach vs Claude Code's deep analysis capabilities. Which AI tool fits your workflow?">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Kiro vs Claude Code - AI Coding Tools Comparison",
+      "description": "Compare AWS Kiro IDE and Claude Code features",
+      "author": {
+        "@type": "Organization",
+        "name": "Kiro Directory"
+      },
+      "datePublished": "2025-07-15",
+      "dateModified": "2025-07-15"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header styles */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        .breadcrumbs span {
+            margin: 0 0.5rem;
+        }
+        
+        /* Main content */
+        .comparison-header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .comparison-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background-color: var(--color-surface-2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .feature-name {
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        
+        .check {
+            color: var(--color-success);
+        }
+        
+        .cross {
+            color: var(--color-error);
+        }
+        
+        /* Winner badges */
+        .winner-badge {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        /* Section styling */
+        .section {
+            padding: 3rem 0;
+        }
+        
+        .section h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Use case cards */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .use-case-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .use-case-card h3 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+        }
+        
+        .recommendation {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .recommendation h3 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        /* Note box */
+        .note-box {
+            background-color: var(--color-surface);
+            border-left: 4px solid var(--color-info);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        .note-box h4 {
+            color: var(--color-info);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .comparison-table {
+                overflow-x: auto;
+            }
+            
+            .comparison-table table {
+                min-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a>
+            <span>›</span>
+            <a href="/#comparisons">Comparisons</a>
+            <span>›</span>
+            <span>Kiro vs Claude Code</span>
+        </div>
+        
+        <section class="comparison-header">
+            <h1>AWS Kiro vs Claude Code</h1>
+            <p class="comparison-subtitle">
+                Compare AWS Kiro's full IDE experience with Claude Code's focused code analysis capabilities. 
+                Both use Claude AI but serve different development needs.
+            </p>
+        </section>
+        
+        <div class="note-box">
+            <h4>Note: Same AI, Different Tools</h4>
+            <p>
+                Both Kiro and Claude Code are powered by Anthropic's Claude AI models. The key difference 
+                is in how they apply this AI: Kiro as a complete IDE with development workflow automation, 
+                Claude Code as a specialized code analysis and generation tool.
+            </p>
+        </div>
+        
+        <section class="section">
+            <h2>Quick Comparison</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AWS Kiro</th>
+                            <th>Claude Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Product Type</td>
+                            <td>Full IDE (VS Code-based) <span class="winner-badge">WINNER</span></td>
+                            <td>Code analysis tool</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Pricing</td>
+                            <td>$19-39/month</td>
+                            <td>$20/month</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">AI Model</td>
+                            <td>Claude 4 & Sonnet 3.7</td>
+                            <td>Claude (latest) <span class="winner-badge">SAME</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Context Window</td>
+                            <td>100,000 tokens <span class="winner-badge">SAME</span></td>
+                            <td>100,000 tokens</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">File Editing</td>
+                            <td><span class="check">✓</span> Native IDE editing</td>
+                            <td><span class="cross">✗</span> Copy-paste only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Project Management</td>
+                            <td><span class="check">✓</span> Full workspace <span class="winner-badge">WINNER</span></td>
+                            <td><span class="cross">✗</span> Single context</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Automation</td>
+                            <td><span class="check">✓</span> Hooks & specs <span class="winner-badge">WINNER</span></td>
+                            <td><span class="cross">✗</span> Manual only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Code Execution</td>
+                            <td><span class="check">✓</span> Via IDE <span class="winner-badge">WINNER</span></td>
+                            <td><span class="cross">✗</span> No execution</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Learning Focus</td>
+                            <td>Production development</td>
+                            <td>Code understanding <span class="winner-badge">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Best For</td>
+                            <td>Building applications</td>
+                            <td>Learning & analysis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>When to Use Each Tool</h2>
+            
+            <div class="use-cases">
+                <div class="use-case-card">
+                    <h3>Choose Kiro When:</h3>
+                    <ul>
+                        <li>Building complete applications</li>
+                        <li>Need an integrated development environment</li>
+                        <li>Want automated testing and documentation</li>
+                        <li>Working on production code</li>
+                        <li>Managing complex projects</li>
+                        <li>Need to execute and debug code</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>Choose Claude Code When:</h3>
+                    <ul>
+                        <li>Learning new programming concepts</li>
+                        <li>Analyzing existing code</li>
+                        <li>Getting detailed code explanations</li>
+                        <li>Code review and optimization</li>
+                        <li>Algorithm design and discussion</li>
+                        <li>Quick code generation without IDE</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Key Differences Explained</h2>
+            
+            <h3>Tool Philosophy</h3>
+            <p>
+                <strong>Kiro</strong> is a complete development environment. It's designed to be your primary 
+                tool for building software, with AI assistance integrated into every step from planning to 
+                deployment. You work in a familiar VS Code interface with added AI superpowers.
+            </p>
+            <p>
+                <strong>Claude Code</strong> is more like having an expert programmer sitting next to you. 
+                It excels at explaining complex code, suggesting improvements, and helping you understand 
+                programming concepts. It's conversational rather than tool-based.
+            </p>
+            
+            <h3>Workflow Integration</h3>
+            <p>
+                <strong>Kiro</strong> manages your entire project workflow. It creates specs, breaks down 
+                tasks, writes code, generates tests, and maintains documentation. Everything happens within 
+                the IDE with direct file manipulation.
+            </p>
+            <p>
+                <strong>Claude Code</strong> works through conversation. You paste code or describe what 
+                you need, and it provides analysis or generates code that you then copy back to your editor. 
+                It's more flexible but requires manual integration.
+            </p>
+            
+            <h3>Use Case Scenarios</h3>
+            <p>
+                <strong>Kiro Example:</strong> "Build a user authentication system" → Kiro generates 
+                requirements, designs the architecture, creates tasks, implements the code with proper 
+                structure, adds tests, and documents everything automatically.
+            </p>
+            <p>
+                <strong>Claude Code Example:</strong> "Explain this authentication code" → Claude provides 
+                detailed explanation of how the code works, potential security issues, and suggestions for 
+                improvement that you can learn from and apply manually.
+            </p>
+        </section>
+        
+        <section class="section">
+            <div class="recommendation">
+                <h3>Our Recommendation</h3>
+                <p>
+                    <strong>For active development:</strong> Choose Kiro for its complete IDE experience<br>
+                    <strong>For learning and analysis:</strong> Choose Claude Code for deep understanding<br>
+                    <strong>Power user tip:</strong> Use Claude Code to understand concepts, then Kiro to build
+                </p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Detailed Feature Breakdown</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Kiro</th>
+                            <th>Claude Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Code Generation</td>
+                            <td>Structured, file-based</td>
+                            <td>Conversational snippets</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Code Review</td>
+                            <td>Automated via hooks</td>
+                            <td>Manual, detailed analysis</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Debugging</td>
+                            <td>IDE debugger + AI help</td>
+                            <td>Explanation only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Documentation</td>
+                            <td>Auto-generated & maintained</td>
+                            <td>Explains existing docs</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Team Features</td>
+                            <td>Shared specs & standards</td>
+                            <td>Individual use only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Language Support</td>
+                            <td>All VS Code languages</td>
+                            <td>All major languages</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS or Anthropic</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

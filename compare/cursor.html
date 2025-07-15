@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro vs Cursor - AI IDE Comparison | Kiro Directory</title>
+    <meta name="description" content="Compare AWS Kiro and Cursor: spec-driven development vs AI-native editing. Features, pricing, and use cases for choosing the right AI coding assistant.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/compare/cursor/">
+    <meta property="og:title" content="Kiro vs Cursor - Which AI IDE is Better?">
+    <meta property="og:description" content="Detailed comparison of AWS Kiro's spec-driven approach vs Cursor's AI-native editing. Find the best tool for your development workflow.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Kiro vs Cursor - AI IDE Comparison",
+      "description": "Compare AWS Kiro and Cursor AI IDEs",
+      "author": {
+        "@type": "Organization",
+        "name": "Kiro Directory"
+      },
+      "datePublished": "2025-07-15",
+      "dateModified": "2025-07-15"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header styles */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        .breadcrumbs span {
+            margin: 0 0.5rem;
+        }
+        
+        /* Main content */
+        .comparison-header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .comparison-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background-color: var(--color-surface-2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .feature-name {
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        
+        .check {
+            color: var(--color-success);
+        }
+        
+        .cross {
+            color: var(--color-error);
+        }
+        
+        /* Winner badges */
+        .winner-badge {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        /* Section styling */
+        .section {
+            padding: 3rem 0;
+        }
+        
+        .section h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Use case cards */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .use-case-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .use-case-card h3 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+        }
+        
+        .recommendation {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .recommendation h3 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .comparison-table {
+                overflow-x: auto;
+            }
+            
+            .comparison-table table {
+                min-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a>
+            <span>›</span>
+            <a href="/#comparisons">Comparisons</a>
+            <span>›</span>
+            <span>Kiro vs Cursor</span>
+        </div>
+        
+        <section class="comparison-header">
+            <h1>AWS Kiro vs Cursor</h1>
+            <p class="comparison-subtitle">
+                Compare spec-driven development with Kiro against Cursor's AI-native editing experience. 
+                Both are VS Code-based but with different philosophies on AI integration.
+            </p>
+        </section>
+        
+        <section class="section">
+            <h2>Quick Comparison</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AWS Kiro</th>
+                            <th>Cursor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Base Price</td>
+                            <td>$19/month</td>
+                            <td>$20/month <span class="winner-badge">SIMILAR</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">IDE Type</td>
+                            <td>VS Code-based</td>
+                            <td>VS Code-based</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Development Approach</td>
+                            <td>Spec-driven (structured) <span class="winner-badge">WINNER</span></td>
+                            <td>Free-form AI chat</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">AI Models</td>
+                            <td>Claude 4 & Sonnet 3.7</td>
+                            <td>GPT-4, Claude, Custom <span class="winner-badge">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Multi-file Editing</td>
+                            <td><span class="check">✓</span> Via specs & tasks</td>
+                            <td><span class="check">✓</span> Native support</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Automation</td>
+                            <td><span class="check">✓</span> Hooks system <span class="winner-badge">WINNER</span></td>
+                            <td><span class="cross">✗</span> Manual only</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Test Generation</td>
+                            <td><span class="check">✓</span> Automatic <span class="winner-badge">WINNER</span></td>
+                            <td><span class="cross">✗</span> Manual request</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Documentation</td>
+                            <td><span class="check">✓</span> Auto-maintained <span class="winner-badge">WINNER</span></td>
+                            <td><span class="cross">✗</span> Manual</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Context Window</td>
+                            <td>100,000 tokens</td>
+                            <td>Varies by model</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Offline Mode</td>
+                            <td><span class="cross">✗</span> Cloud required</td>
+                            <td><span class="cross">✗</span> Cloud required</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>When to Use Each Tool</h2>
+            
+            <div class="use-cases">
+                <div class="use-case-card">
+                    <h3>Choose Kiro When:</h3>
+                    <ul>
+                        <li>Building complex applications from scratch</li>
+                        <li>Need structured development process</li>
+                        <li>Want automatic tests and documentation</li>
+                        <li>Working in teams with standards</li>
+                        <li>Prefer planning before coding</li>
+                        <li>Building production-ready systems</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>Choose Cursor When:</h3>
+                    <ul>
+                        <li>Prefer flexible, chat-based AI</li>
+                        <li>Working on existing codebases</li>
+                        <li>Need quick edits and refactoring</li>
+                        <li>Want control over AI interactions</li>
+                        <li>Exploring and prototyping</li>
+                        <li>Individual developer workflows</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Key Differences Explained</h2>
+            
+            <h3>Development Philosophy</h3>
+            <p>
+                <strong>Kiro</strong> enforces a structured workflow: Requirements → Design → Tasks → Code. 
+                This spec-driven approach ensures you plan before coding, resulting in better architecture 
+                and fewer rewrites. The AI generates comprehensive specs that guide development.
+            </p>
+            <p>
+                <strong>Cursor</strong> offers more flexibility with its chat-based interface. You can ask 
+                the AI to make changes, explain code, or generate new features without following a rigid 
+                structure. This is faster for quick changes but may lead to less organized codebases.
+            </p>
+            
+            <h3>AI Integration Depth</h3>
+            <p>
+                <strong>Kiro's AI</strong> is deeply integrated into every phase of development. It doesn't 
+                just write code – it creates requirements, designs systems, breaks down tasks, generates 
+                tests, and maintains documentation. The hooks system runs AI tasks automatically on events.
+            </p>
+            <p>
+                <strong>Cursor's AI</strong> is more of an intelligent assistant. It excels at understanding 
+                context across your entire codebase and can make sophisticated multi-file changes, but 
+                you need to explicitly ask for each action.
+            </p>
+            
+            <h3>Team Collaboration</h3>
+            <p>
+                <strong>Kiro</strong> generates shareable spec documents that serve as a contract between 
+                team members. The structured approach ensures everyone understands the system design and 
+                requirements, making it ideal for team projects.
+            </p>
+            <p>
+                <strong>Cursor</strong> is more suited to individual developers or loose collaboration. 
+                While multiple people can use it on the same project, there's no built-in structure for 
+                coordinating AI-assisted development.
+            </p>
+        </section>
+        
+        <section class="section">
+            <div class="recommendation">
+                <h3>Our Recommendation</h3>
+                <p>
+                    <strong>For new projects and teams:</strong> Choose Kiro for its structure and automation<br>
+                    <strong>For existing projects and solo devs:</strong> Choose Cursor for flexibility<br>
+                    <strong>For maximum productivity:</strong> Consider using both for different phases
+                </p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Feature Comparison Details</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Capability</th>
+                            <th>Kiro</th>
+                            <th>Cursor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Code Generation</td>
+                            <td>Task-based from specs</td>
+                            <td>Chat-based prompts</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Refactoring</td>
+                            <td>Spec-guided changes</td>
+                            <td>Interactive edits</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Debugging Help</td>
+                            <td>Automatic error resolution</td>
+                            <td>Chat-based assistance</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Learning Curve</td>
+                            <td>Moderate (spec concepts)</td>
+                            <td>Low (familiar chat)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Best Project Size</td>
+                            <td>Medium to Large</td>
+                            <td>Any size</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS or Cursor</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
