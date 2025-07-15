@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro vs GitHub Copilot - Detailed Comparison | Kiro Directory</title>
+    <meta name="description" content="Compare AWS Kiro and GitHub Copilot: features, pricing, AI models, and use cases. Find which AI coding assistant fits your spec-driven development needs.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/compare/copilot/">
+    <meta property="og:title" content="Kiro vs GitHub Copilot - Which AI IDE is Right for You?">
+    <meta property="og:description" content="Detailed comparison of AWS Kiro's spec-driven development vs GitHub Copilot's code completion. Pricing, features, and real-world use cases.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Kiro vs GitHub Copilot - Detailed Comparison",
+      "description": "Compare AWS Kiro and GitHub Copilot features, pricing, and use cases",
+      "author": {
+        "@type": "Organization",
+        "name": "Kiro Directory"
+      },
+      "datePublished": "2025-07-15",
+      "dateModified": "2025-07-15"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Reuse header styles from index.html */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        .breadcrumbs span {
+            margin: 0 0.5rem;
+        }
+        
+        /* Main content */
+        .comparison-header {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .comparison-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Comparison Table */
+        .comparison-table {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th {
+            background-color: var(--color-surface-2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .feature-name {
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        
+        .check {
+            color: var(--color-success);
+        }
+        
+        .cross {
+            color: var(--color-error);
+        }
+        
+        /* Winner badges */
+        .winner-badge {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        /* Section styling */
+        .section {
+            padding: 3rem 0;
+        }
+        
+        .section h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Use case cards */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .use-case-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .use-case-card h3 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+        }
+        
+        .recommendation {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .recommendation h3 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer reuse */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .comparison-table {
+                overflow-x: auto;
+            }
+            
+            .comparison-table table {
+                min-width: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a>
+            <span>›</span>
+            <a href="/#comparisons">Comparisons</a>
+            <span>›</span>
+            <span>Kiro vs GitHub Copilot</span>
+        </div>
+        
+        <section class="comparison-header">
+            <h1>AWS Kiro vs GitHub Copilot</h1>
+            <p class="comparison-subtitle">
+                Compare spec-driven development with Kiro against traditional AI code completion with Copilot. 
+                Find which tool matches your workflow and project needs.
+            </p>
+        </section>
+        
+        <section class="section">
+            <h2>Quick Comparison</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AWS Kiro</th>
+                            <th>GitHub Copilot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Pricing (Pro)</td>
+                            <td>$19/month <span class="winner-badge">WINNER</span></td>
+                            <td>$10-39/month</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Development Approach</td>
+                            <td>Spec-driven (EARS) <span class="winner-badge">WINNER</span></td>
+                            <td>Code completion</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Automation Hooks</td>
+                            <td><span class="check">✓</span> Full hooks system</td>
+                            <td><span class="cross">✗</span> Limited</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">AI Models</td>
+                            <td>Claude 4 & Sonnet 3.7</td>
+                            <td>GPT-4.1, Claude, Gemini <span class="winner-badge">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">IDE Support</td>
+                            <td>VS Code-based (Kiro IDE)</td>
+                            <td>VS Code, JetBrains, Vim, etc. <span class="winner-badge">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Production Readiness</td>
+                            <td><span class="check">✓</span> Auto tests & docs <span class="winner-badge">WINNER</span></td>
+                            <td><span class="cross">✗</span> Manual process</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Context Window</td>
+                            <td>100,000 tokens <span class="winner-badge">WINNER</span></td>
+                            <td>8,000-16,000 tokens</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Community Size</td>
+                            <td>Growing (New)</td>
+                            <td>Large, established <span class="winner-badge">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Learning Curve</td>
+                            <td>Moderate (spec syntax)</td>
+                            <td>Low <span class="winner-badge">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Free Tier</td>
+                            <td>50 interactions/month <span class="winner-badge">WINNER</span></td>
+                            <td>Limited trial</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>When to Use Each Tool</h2>
+            
+            <div class="use-cases">
+                <div class="use-case-card">
+                    <h3>Choose Kiro When:</h3>
+                    <ul>
+                        <li>Building production-ready applications</li>
+                        <li>Need automated testing and documentation</li>
+                        <li>Working with complex specifications</li>
+                        <li>Want end-to-end development automation</li>
+                        <li>Prefer spec-first approach</li>
+                        <li>Need consistent code quality</li>
+                    </ul>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3>Choose Copilot When:</h3>
+                    <ul>
+                        <li>Rapid prototyping and exploration</li>
+                        <li>Working across multiple IDEs</li>
+                        <li>Need quick code suggestions</li>
+                        <li>Prefer traditional coding workflow</li>
+                        <li>Want multiple AI model options</li>
+                        <li>Working in a large team already using it</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Key Differences Explained</h2>
+            
+            <h3>Development Philosophy</h3>
+            <p>
+                <strong>Kiro</strong> follows a spec-driven approach where you define requirements in EARS format, 
+                and the AI generates not just code but also tests, documentation, and deployment configurations. 
+                This ensures production-ready output from the start.
+            </p>
+            <p>
+                <strong>Copilot</strong> focuses on in-the-moment code completion and generation based on context. 
+                It excels at understanding your intent from comments and partial code but leaves testing and 
+                documentation as separate tasks.
+            </p>
+            
+            <h3>Automation Capabilities</h3>
+            <p>
+                <strong>Kiro's hooks system</strong> automatically triggers actions on save, commit, or other events. 
+                For example, saving a file can automatically run tests, update documentation, and check security 
+                vulnerabilities without manual intervention.
+            </p>
+            <p>
+                <strong>Copilot</strong> requires manual integration with CI/CD pipelines and doesn't provide 
+                built-in automation for the development lifecycle beyond code generation.
+            </p>
+            
+            <h3>Context and Understanding</h3>
+            <p>
+                <strong>Kiro</strong> maintains project-wide context through spec files and can understand 
+                entire system architectures, making it ideal for large, complex applications.
+            </p>
+            <p>
+                <strong>Copilot</strong> works with local file context and recently opened files, which is 
+                sufficient for most coding tasks but may miss broader architectural concerns.
+            </p>
+        </section>
+        
+        <section class="section">
+            <div class="recommendation">
+                <h3>Our Recommendation</h3>
+                <p>
+                    <strong>For production applications and teams focused on quality:</strong> Choose Kiro<br>
+                    <strong>For rapid development and multi-IDE flexibility:</strong> Choose Copilot<br>
+                    <strong>Best of both worlds:</strong> Use Kiro for main development, Copilot for quick edits
+                </p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Pricing Breakdown</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Plan</th>
+                            <th>Kiro</th>
+                            <th>Copilot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">Free</td>
+                            <td>50 interactions/month</td>
+                            <td>Limited trial</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Individual</td>
+                            <td>$19/month (1,000 interactions)</td>
+                            <td>$10/month</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Pro/Team</td>
+                            <td>$39/month (3,000 interactions)</td>
+                            <td>$39/user/month</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Enterprise</td>
+                            <td>Coming soon</td>
+                            <td>$39/user/month + features</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS or GitHub</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

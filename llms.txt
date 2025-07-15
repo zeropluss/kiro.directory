@@ -1,0 +1,32 @@
+# Kiro Directory
+
+> The definitive resource for AWS Kiro tips, cheat sheets, and comparisons. Master spec-driven AI development with comprehensive guides on Kiro's hooks, agents, and automation features.
+
+Kiro.directory helps developers transition from "vibe coding" to production-ready AI-assisted development. We provide practical examples, pricing comparisons, and best practices for AWS Kiro's agentic IDE.
+
+## Core Resources
+
+- [Kiro Cheat Sheet](https://kiro.directory/cheatsheets/): Complete reference for Kiro specs, hooks, and commands
+- [Tips & Tricks](https://kiro.directory/tips/): Practical guides for spec-driven development workflows
+- [Kiro vs Copilot](https://kiro.directory/compare/copilot/): Detailed comparison of features, pricing, and use cases
+- [Kiro vs Cursor](https://kiro.directory/compare/cursor/): Side-by-side analysis of AI IDE capabilities
+- [Pricing Tracker](https://kiro.directory/pricing/): Real-time pricing comparison across AI coding assistants
+- [Hook Examples](https://kiro.directory/tips/hooks/): Production-ready automation hooks for testing, docs, and CI/CD
+
+## Getting Started
+
+- [Quick Start Guide](https://kiro.directory/quickstart/): Set up Kiro and write your first spec
+- [EARS Format Tutorial](https://kiro.directory/tips/ears-format/): Master requirement specification syntax
+- [Migration from VS Code](https://kiro.directory/tips/vscode-migration/): Seamlessly transition your workflow
+
+## Advanced Topics
+
+- [Multi-Agent Workflows](https://kiro.directory/tips/multi-agent/): Coordinate AI agents for complex tasks
+- [Custom Hooks Development](https://kiro.directory/tips/custom-hooks/): Build automation for your team
+- [AWS Integration](https://kiro.directory/tips/aws-integration/): Connect Kiro with AWS services
+
+## Optional
+
+- [Community Contributions](https://kiro.directory/community/): User-submitted specs and hooks
+- [Blog & Updates](https://kiro.directory/blog/): Latest Kiro features and industry news
+- [API Documentation](https://kiro.directory/api/): Integrate Kiro Directory data into your tools

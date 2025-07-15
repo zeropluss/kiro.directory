@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Cheat Sheets & Comparisons - Ship AI-ready code faster</title>
+    <meta name="description" content="All the AWS Kiro tips, specs & comparisons in one place. Master spec-driven development, hooks automation, and compare Kiro with Copilot, Cursor, and more.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/">
+    <meta property="og:title" content="Kiro Cheat Sheets & Comparisons">
+    <meta property="og:description" content="Master AWS Kiro's spec-driven development. Tips, tricks, comparisons, and pricing tracker.">
+    <meta property="og:image" content="https://kiro.directory/og-image.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/">
+    <meta property="twitter:title" content="Kiro Cheat Sheets & Comparisons">
+    <meta property="twitter:description" content="Master AWS Kiro's spec-driven development. Tips, tricks, comparisons, and pricing tracker.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Kiro Directory",
+      "url": "https://kiro.directory/",
+      "description": "AWS Kiro tips, cheat sheets, and comparisons for spec-driven AI development",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://kiro.directory/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        /* Search Box */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            transition: border-color 0.2s;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+        
+        .search-box::placeholder {
+            color: var(--color-text-muted);
+        }
+        
+        /* CTA Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(138, 255, 239, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-accent-2);
+            border: 2px solid var(--color-accent-2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 212, 107, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        /* Quick Start Cards */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .spec-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        .spec-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 255, 239, 0.1);
+        }
+        
+        .spec-card h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--color-accent);
+        }
+        
+        .spec-card p {
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        /* Comparison Section */
+        .comparison-carousel {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+        
+        .comparison-card {
+            min-width: 300px;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.2s;
+        }
+        
+        .comparison-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+        
+        .comparison-card h3 {
+            font-family: var(--font-mono);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-badge {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .pros-cons {
+            margin-top: 1rem;
+        }
+        
+        .pros-cons h4 {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pros-cons ul {
+            list-style: none;
+            font-size: 0.875rem;
+        }
+        
+        .pros-cons li::before {
+            content: "→ ";
+            color: var(--color-accent);
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter h2 {
+            font-family: var(--font-mono);
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.75rem 1rem;
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            color: var(--color-text);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero container">
+            <h1>Kiro Cheat Sheets & Comparisons</h1>
+            <p class="hero-subtitle">Ship AI-ready code faster with AWS Kiro's spec-driven development</p>
+            
+            <div class="search-container">
+                <input type="search" class="search-box" placeholder="Search tips, specs, hooks, comparisons..." aria-label="Search">
+            </div>
+            
+            <div class="cta-group">
+                <a href="#quickstart" class="btn btn-primary">Start with Kiro Cheat Sheet</a>
+                <a href="/compare/copilot/" class="btn btn-secondary">See Kiro vs Copilot</a>
+            </div>
+        </section>
+        
+        <section id="quickstart" class="section container">
+            <h2 class="section-title">Quick-Start Specs</h2>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <h3>Basic Spec Structure</h3>
+                    <p>Define your requirements in EARS format for automatic task generation</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre># User Story
+As a developer
+I want to add user authentication
+So that users can securely access their data
+
+# Acceptance Criteria
+- Users can register with email
+- Passwords are encrypted
+- Session management included</pre>
+                    </div>
+                </div>
+                
+                <div class="spec-card">
+                    <h3>Hook: Auto-Test on Save</h3>
+                    <p>Automatically run tests when saving files with specific patterns</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// .kiro/hooks/onSave.test.js
+module.exports = {
+  pattern: "**/*.{js,ts,jsx,tsx}",
+  action: async (file) => {
+    await exec(`npm test ${file}`);
+  }
+}</pre>
+                    </div>
+                </div>
+                
+                <div class="spec-card">
+                    <h3>AI Agent Configuration</h3>
+                    <p>Configure Claude model preferences and context limits</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// .kiro/config.json
+{
+  "model": "claude-sonnet-3.7",
+  "contextLimit": 100000,
+  "hooks": {
+    "beforeCommit": ["lint", "test"]
+  }
+}</pre>
+                    </div>
+                </div>
+                
+                <div class="spec-card">
+                    <h3>Spec-Driven API Design</h3>
+                    <p>Generate API endpoints from high-level specifications</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>spec: "User Management API"
+features:
+  - CRUD operations for users
+  - JWT authentication
+  - Rate limiting
+  - OpenAPI documentation</pre>
+                    </div>
+                </div>
+                
+                <div class="spec-card">
+                    <h3>Hook: Doc Sync</h3>
+                    <p>Keep documentation in sync with code changes automatically</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// .kiro/hooks/onCommit.docs.js
+module.exports = {
+  trigger: "pre-commit",
+  action: async () => {
+    await generateDocs();
+    await updateChangelog();
+  }
+}</pre>
+                    </div>
+                </div>
+                
+                <div class="spec-card">
+                    <h3>Multi-Agent Workflow</h3>
+                    <p>Coordinate multiple AI agents for complex tasks</p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>workflow: "Feature Implementation"
+agents:
+  - architect: "Design system architecture"
+  - coder: "Implement components"
+  - tester: "Write test cases"
+  - reviewer: "Code review & optimize"</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="comparisons" class="section container">
+            <h2 class="section-title">Competitor Snapshot</h2>
+            <div class="comparison-carousel">
+                <a href="/compare/copilot/" class="comparison-card">
+                    <h3>GitHub Copilot</h3>
+                    <span class="price-badge">$10-39/mo</span>
+                    <div class="pros-cons">
+                        <h4>Pros</h4>
+                        <ul>
+                            <li>Wide IDE support</li>
+                            <li>Multiple AI models</li>
+                            <li>Large community</li>
+                        </ul>
+                        <h4>Cons</h4>
+                        <ul>
+                            <li>Code completion focused</li>
+                            <li>Limited automation</li>
+                            <li>No spec-driven workflow</li>
+                        </ul>
+                    </div>
+                </a>
+                
+                <a href="/compare/cursor/" class="comparison-card">
+                    <h3>Cursor</h3>
+                    <span class="price-badge">$20/mo</span>
+                    <div class="pros-cons">
+                        <h4>Pros</h4>
+                        <ul>
+                            <li>Built-in AI chat</li>
+                            <li>Context awareness</li>
+                            <li>Good UX</li>
+                        </ul>
+                        <h4>Cons</h4>
+                        <ul>
+                            <li>Proprietary IDE</li>
+                            <li>Limited extensibility</li>
+                            <li>No hooks system</li>
+                        </ul>
+                    </div>
+                </a>
+                
+                <a href="/compare/q-developer/" class="comparison-card">
+                    <h3>Amazon Q Developer</h3>
+                    <span class="price-badge">$19/mo</span>
+                    <div class="pros-cons">
+                        <h4>Pros</h4>
+                        <ul>
+                            <li>AWS integration</li>
+                            <li>Security scanning</li>
+                            <li>Code transformation</li>
+                        </ul>
+                        <h4>Cons</h4>
+                        <ul>
+                            <li>AWS-centric</li>
+                            <li>Less flexible</li>
+                            <li>Traditional approach</li>
+                        </ul>
+                    </div>
+                </a>
+                
+                <a href="/compare/gemini/" class="comparison-card">
+                    <h3>Gemini Code Assist</h3>
+                    <span class="price-badge">$22.8-54/mo</span>
+                    <div class="pros-cons">
+                        <h4>Pros</h4>
+                        <ul>
+                            <li>Large context window</li>
+                            <li>Multi-cloud support</li>
+                            <li>Google backing</li>
+                        </ul>
+                        <h4>Cons</h4>
+                        <ul>
+                            <li>Higher pricing</li>
+                            <li>GCP focused</li>
+                            <li>Early stage</li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <section class="section container">
+            <div class="newsletter">
+                <h2>Ship-faster Friday Newsletter</h2>
+                <p>Weekly Kiro tips, new hooks, and productivity hacks delivered to your inbox</p>
+                <form class="newsletter-form" onsubmit="return handleSubscribe(event)">
+                    <input type="email" placeholder="your@email.com" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+        
+        // Newsletter subscription
+        function handleSubscribe(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+            // TODO: Implement newsletter subscription
+            alert('Thanks for subscribing! Feature coming soon.');
+            return false;
+        }
+        
+        // Search functionality placeholder
+        document.querySelector('.search-box').addEventListener('input', (e) => {
+            // TODO: Implement search with Algolia DocSearch
+            console.log('Search:', e.target.value);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+# Allow core search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 5
+
+# General web crawlers
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /404
+Disallow: /500
+Disallow: /*.json$
+
+# AI Crawlers - Block most, allow access to llms.txt
+User-agent: GPTBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: ChatGPT-User
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: Claude-Web
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: anthropic-ai
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: PerplexityBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: GoogleOther
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: DuckAssistBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: ClaudeBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: Amazonbot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+# Sitemap
+Sitemap: https://kiro.directory/sitemap.xml
