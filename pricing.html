@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Assistant Pricing Tracker | Kiro Directory</title>
+    <meta name="description" content="Real-time pricing comparison of AI coding assistants: AWS Kiro, GitHub Copilot, Cursor, Amazon Q, and more. Updated pricing, features, and limits.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/pricing/">
+    <meta property="og:title" content="AI Coding Assistant Pricing Comparison 2025">
+    <meta property="og:description" content="Compare pricing of Kiro, Copilot, Cursor, and other AI coding tools. Find the best value for your development needs.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "AI Coding Assistant Pricing Tracker",
+      "description": "Compare pricing of AWS Kiro, GitHub Copilot, Cursor, and other AI coding assistants",
+      "url": "https://kiro.directory/pricing/"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Page header */
+        .page-header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+        }
+        
+        .last-updated {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-accent);
+        }
+        
+        /* Pricing grid */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .pricing-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 255, 239, 0.1);
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--color-accent);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 1rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .tool-name {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-tagline {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .price-display {
+            margin: 1.5rem 0;
+        }
+        
+        .price {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+        
+        .price-unit {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+        }
+        
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .features-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            color: var(--color-success);
+            margin-right: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .limitations {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 1.5rem;
+            background-color: transparent;
+            border: 2px solid var(--color-accent);
+            border-radius: 6px;
+            color: var(--color-accent);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .cta-button:hover {
+            background-color: rgba(138, 255, 239, 0.1);
+        }
+        
+        /* Comparison table for enterprise */
+        .enterprise-section {
+            margin: 4rem 0;
+            padding: 3rem;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .enterprise-section h2 {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        /* Notes section */
+        .notes-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .notes-section h3 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .notes-section ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+        
+        .notes-section li {
+            margin: 0.5rem 0;
+            position: relative;
+        }
+        
+        .notes-section li::before {
+            content: "→";
+            color: var(--color-accent);
+            position: absolute;
+            left: -1rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <section class="page-header">
+            <h1>AI Coding Assistant Pricing Tracker</h1>
+            <p class="page-subtitle">Compare real-time pricing across all major AI development tools</p>
+            <p class="last-updated">Last updated: July 15, 2025</p>
+        </section>
+        
+        <section class="pricing-grid">
+            <div class="pricing-card featured">
+                <span class="featured-badge">SPEC-DRIVEN</span>
+                <h2 class="tool-name">AWS Kiro</h2>
+                <p class="tool-tagline">From prototype to production</p>
+                <div class="price-display">
+                    <span class="price">$19</span>
+                    <span class="price-unit">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>1,000 agent interactions</li>
+                    <li>Spec-driven development</li>
+                    <li>Automated hooks system</li>
+                    <li>Claude 4 & Sonnet 3.7</li>
+                    <li>VS Code compatible</li>
+                </ul>
+                <p class="limitations">Free tier: 50 interactions/month</p>
+                <a href="/compare/kiro/" class="cta-button">Learn More</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h2 class="tool-name">GitHub Copilot</h2>
+                <p class="tool-tagline">AI pair programmer</p>
+                <div class="price-display">
+                    <span class="price">$10</span>
+                    <span class="price-unit">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>Unlimited completions</li>
+                    <li>Multi-model support</li>
+                    <li>All major IDEs</li>
+                    <li>Chat interface</li>
+                    <li>Security scanning</li>
+                </ul>
+                <p class="limitations">Pro: $39/month with advanced features</p>
+                <a href="/compare/copilot/" class="cta-button">Compare with Kiro</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h2 class="tool-name">Cursor</h2>
+                <p class="tool-tagline">AI-first code editor</p>
+                <div class="price-display">
+                    <span class="price">$20</span>
+                    <span class="price-unit">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>500 fast requests</li>
+                    <li>Built-in AI chat</li>
+                    <li>Context awareness</li>
+                    <li>Codebase indexing</li>
+                    <li>Multiple AI models</li>
+                </ul>
+                <p class="limitations">200 slow requests included</p>
+                <a href="/compare/cursor/" class="cta-button">Compare with Kiro</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h2 class="tool-name">Amazon Q Developer</h2>
+                <p class="tool-tagline">AWS-integrated AI assistant</p>
+                <div class="price-display">
+                    <span class="price">$19</span>
+                    <span class="price-unit">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>Unlimited interactions</li>
+                    <li>AWS service integration</li>
+                    <li>Code transformation</li>
+                    <li>Security remediation</li>
+                    <li>SSO support</li>
+                </ul>
+                <p class="limitations">Free tier available with limits</p>
+                <a href="/compare/q-developer/" class="cta-button">Compare with Kiro</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h2 class="tool-name">Gemini Code Assist</h2>
+                <p class="tool-tagline">Google's AI coding companion</p>
+                <div class="price-display">
+                    <span class="price">$22.8</span>
+                    <span class="price-unit">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>1M token context window</li>
+                    <li>Multi-cloud support</li>
+                    <li>20+ languages</li>
+                    <li>IDE + CLI + Cloud</li>
+                    <li>Code customization</li>
+                </ul>
+                <p class="limitations">Enterprise: $54/month</p>
+                <a href="/compare/gemini/" class="cta-button">Compare with Kiro</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h2 class="tool-name">Tabnine</h2>
+                <p class="tool-tagline">Private AI code assistant</p>
+                <div class="price-display">
+                    <span class="price">$9</span>
+                    <span class="price-unit">/month</span>
+                </div>
+                <ul class="features-list">
+                    <li>Unlimited completions</li>
+                    <li>Private deployment option</li>
+                    <li>Code privacy guarantee</li>
+                    <li>Team learning</li>
+                    <li>All major IDEs</li>
+                </ul>
+                <p class="limitations">Enterprise: $39/month</p>
+                <a href="/compare/tabnine/" class="cta-button">Compare with Kiro</a>
+            </div>
+        </section>
+        
+        <section class="enterprise-section">
+            <h2>Enterprise & Team Plans</h2>
+            <p style="text-align: center; color: var(--color-text-muted); margin-bottom: 2rem;">
+                Most providers offer custom enterprise pricing with additional features like SSO, 
+                admin controls, and SLAs. Contact vendors directly for team pricing.
+            </p>
+            <div style="text-align: center;">
+                <a href="/contact/" class="cta-button" style="display: inline-block; width: auto; padding: 0.75rem 2rem;">
+                    Request Enterprise Comparison
+                </a>
+            </div>
+        </section>
+        
+        <section class="notes-section">
+            <h3>Important Notes</h3>
+            <ul>
+                <li>Prices shown are for individual/pro plans in USD</li>
+                <li>AWS Kiro is currently in preview with introductory pricing</li>
+                <li>Some tools offer free tiers with limited features</li>
+                <li>Annual billing often provides 10-20% discount</li>
+                <li>Educational discounts available for most tools</li>
+                <li>Pricing last verified: July 15, 2025</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Independent comparison site</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

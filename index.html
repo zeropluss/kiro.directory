@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://kiro.directory/">
     <meta property="og:title" content="Kiro Cheat Sheets & Comparisons">
     <meta property="og:description" content="Master AWS Kiro's spec-driven development. Tips, tricks, comparisons, and pricing tracker.">
-    <meta property="og:image" content="https://kiro.directory/og-image.png">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
     
     <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image">
@@ -23,6 +23,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
     
     <!-- Analytics -->
     <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
@@ -294,63 +307,192 @@
         }
         
         /* Comparison Section */
-        .comparison-carousel {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 1.125rem;
+            margin-top: -1rem;
+            margin-bottom: 2rem;
         }
         
-        .comparison-card {
-            min-width: 300px;
+        /* Quick Comparison Table */
+        .comparison-table-wrapper {
             background-color: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: 8px;
-            padding: 1.5rem;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .quick-comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .quick-comparison-table th {
+            background-color: var(--color-surface-2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-muted);
+        }
+        
+        .quick-comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .quick-comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .badge-new {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .link-compare {
+            color: var(--color-accent);
             text-decoration: none;
-            color: var(--color-text);
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        
+        .link-compare:hover {
+            opacity: 0.8;
+        }
+        
+        .table-more {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--color-surface);
+        }
+        
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .comparison-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
             transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
         }
         
         .comparison-card:hover {
             border-color: var(--color-accent);
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 255, 239, 0.1);
         }
         
-        .comparison-card h3 {
+        .comparison-card.featured {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 1px var(--color-accent);
+        }
+        
+        .card-header {
+            padding: 1.5rem 1.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .card-header h3 {
             font-family: var(--font-mono);
-            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            margin: 0;
         }
         
-        .price-badge {
-            display: inline-block;
+        .badge-featured,
+        .badge-popular,
+        .badge-ai {
             background-color: var(--color-accent);
             color: var(--color-base);
-            padding: 0.25rem 0.75rem;
+            padding: 0.25rem 0.5rem;
             border-radius: 4px;
-            font-size: 0.875rem;
+            font-size: 0.625rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-popular {
+            background-color: var(--color-info);
+        }
+        
+        .badge-ai {
+            background-color: var(--color-warning);
+        }
+        
+        .price-display {
+            padding: 0 1.5rem;
             margin-bottom: 1rem;
-        }
-        
-        .pros-cons {
-            margin-top: 1rem;
-        }
-        
-        .pros-cons h4 {
             font-size: 0.875rem;
             color: var(--color-text-muted);
-            margin-bottom: 0.5rem;
         }
         
-        .pros-cons ul {
+        .price-display .price {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        
+        .features {
+            padding: 0 1.5rem 1rem;
+            flex-grow: 1;
+        }
+        
+        .features h4 {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .features ul {
             list-style: none;
             font-size: 0.875rem;
         }
         
-        .pros-cons li::before {
-            content: "→ ";
+        .features li {
+            padding: 0.25rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li::before {
+            content: "•";
             color: var(--color-accent);
+            margin-right: 0.75rem;
+        }
+        
+        .best-for {
+            padding: 1rem 1.5rem;
+            background-color: var(--color-surface-2);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .comparison-card .btn {
+            margin: 1.5rem;
+            margin-top: 0;
+            text-align: center;
         }
         
         /* Newsletter */
@@ -561,83 +703,259 @@ agents:
         </section>
         
         <section id="comparisons" class="section container">
-            <h2 class="section-title">Competitor Snapshot</h2>
-            <div class="comparison-carousel">
-                <a href="/compare/copilot/" class="comparison-card">
-                    <h3>GitHub Copilot</h3>
-                    <span class="price-badge">$10-39/mo</span>
-                    <div class="pros-cons">
-                        <h4>Pros</h4>
+            <h2 class="section-title">AI Coding Tools Comparison Directory</h2>
+            <p class="section-subtitle">Compare AWS Kiro with 15+ AI coding assistants</p>
+            
+            <!-- Quick Comparison Table -->
+            <div class="comparison-table-wrapper">
+                <table class="quick-comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Type</th>
+                            <th>Price</th>
+                            <th>Best For</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AWS Kiro</strong></td>
+                            <td>Spec-driven IDE</td>
+                            <td>$19-39/mo</td>
+                            <td>Production-ready code</td>
+                            <td><span class="badge-new">NEW</span></td>
+                        </tr>
+                        <tr>
+                            <td>GitHub Copilot</td>
+                            <td>Code completion</td>
+                            <td>$10-39/mo</td>
+                            <td>Quick coding</td>
+                            <td><a href="/compare/copilot/" class="link-compare">Compare →</a></td>
+                        </tr>
+                        <tr>
+                            <td>Cursor</td>
+                            <td>AI-first IDE</td>
+                            <td>$20/mo</td>
+                            <td>Context-aware editing</td>
+                            <td><a href="/compare/cursor/" class="link-compare">Compare →</a></td>
+                        </tr>
+                        <tr>
+                            <td>Claude Code</td>
+                            <td>Code analysis</td>
+                            <td>$20/mo</td>
+                            <td>Deep understanding</td>
+                            <td><a href="/compare/claude-code/" class="link-compare">Compare →</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-more">
+                    <a href="#all-tools" class="btn btn-secondary">View All 15+ Tools ↓</a>
+                </div>
+            </div>
+            
+            <!-- Detailed Comparison Grid -->
+            <div id="all-tools" class="comparison-grid">
+                <div class="comparison-card featured">
+                    <div class="card-header">
+                        <h3>AWS Kiro</h3>
+                        <span class="badge-featured">SPEC-DRIVEN</span>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$19-39</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
                         <ul>
-                            <li>Wide IDE support</li>
-                            <li>Multiple AI models</li>
-                            <li>Large community</li>
-                        </ul>
-                        <h4>Cons</h4>
-                        <ul>
-                            <li>Code completion focused</li>
-                            <li>Limited automation</li>
-                            <li>No spec-driven workflow</li>
+                            <li>Spec-driven development</li>
+                            <li>Automated hooks & tests</li>
+                            <li>Claude 4 powered</li>
+                            <li>VS Code based</li>
                         </ul>
                     </div>
-                </a>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Teams building production apps
+                    </div>
+                    <a href="/pricing/" class="btn btn-primary">View Pricing</a>
+                </div>
                 
-                <a href="/compare/cursor/" class="comparison-card">
-                    <h3>Cursor</h3>
-                    <span class="price-badge">$20/mo</span>
-                    <div class="pros-cons">
-                        <h4>Pros</h4>
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>GitHub Copilot</h3>
+                        <span class="badge-popular">POPULAR</span>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$10-39</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
                         <ul>
-                            <li>Built-in AI chat</li>
-                            <li>Context awareness</li>
-                            <li>Good UX</li>
-                        </ul>
-                        <h4>Cons</h4>
-                        <ul>
-                            <li>Proprietary IDE</li>
-                            <li>Limited extensibility</li>
-                            <li>No hooks system</li>
+                            <li>Code completion</li>
+                            <li>Multi-IDE support</li>
+                            <li>GPT-4 powered</li>
+                            <li>Chat interface</li>
                         </ul>
                     </div>
-                </a>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Individual developers
+                    </div>
+                    <a href="/compare/copilot/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
                 
-                <a href="/compare/q-developer/" class="comparison-card">
-                    <h3>Amazon Q Developer</h3>
-                    <span class="price-badge">$19/mo</span>
-                    <div class="pros-cons">
-                        <h4>Pros</h4>
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>Cursor</h3>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$20</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>AI-native editor</li>
+                            <li>Multi-file edits</li>
+                            <li>Context engine</li>
+                            <li>Codebase search</li>
+                        </ul>
+                    </div>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Power users
+                    </div>
+                    <a href="/compare/cursor/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>Claude Code</h3>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$20</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>100K token context</li>
+                            <li>Code explanation</li>
+                            <li>Refactoring</li>
+                            <li>Documentation</li>
+                        </ul>
+                    </div>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Code review & learning
+                    </div>
+                    <a href="/compare/claude-code/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>Devin</h3>
+                        <span class="badge-ai">FULL AI</span>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$99+</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Autonomous coding</li>
+                            <li>End-to-end tasks</li>
+                            <li>Self-debugging</li>
+                            <li>Deploy capable</li>
+                        </ul>
+                    </div>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Automated workflows
+                    </div>
+                    <a href="/compare/devin/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>Windsurf</h3>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$15</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Flow-based coding</li>
+                            <li>AI workflows</li>
+                            <li>Multi-agent</li>
+                            <li>Google backed</li>
+                        </ul>
+                    </div>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Complex projects
+                    </div>
+                    <a href="/compare/windsurf/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>v0.dev</h3>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$20</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>UI generation</li>
+                            <li>Tailwind CSS</li>
+                            <li>React components</li>
+                            <li>Vercel integration</li>
+                        </ul>
+                    </div>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Frontend prototypes
+                    </div>
+                    <a href="/compare/v0/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>Bolt.new</h3>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$20</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
+                        <ul>
+                            <li>Full-stack apps</li>
+                            <li>Instant deploy</li>
+                            <li>WebContainer</li>
+                            <li>Live preview</li>
+                        </ul>
+                    </div>
+                    <div class="best-for">
+                        <strong>Best for:</strong> Rapid prototyping
+                    </div>
+                    <a href="/compare/bolt/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <h3>Amazon Q</h3>
+                    </div>
+                    <div class="price-display">
+                        <span class="price">$19</span>/mo
+                    </div>
+                    <div class="features">
+                        <h4>Key Features</h4>
                         <ul>
                             <li>AWS integration</li>
-                            <li>Security scanning</li>
-                            <li>Code transformation</li>
-                        </ul>
-                        <h4>Cons</h4>
-                        <ul>
-                            <li>AWS-centric</li>
-                            <li>Less flexible</li>
-                            <li>Traditional approach</li>
+                            <li>Code transform</li>
+                            <li>Security scan</li>
+                            <li>IDE plugins</li>
                         </ul>
                     </div>
-                </a>
-                
-                <a href="/compare/gemini/" class="comparison-card">
-                    <h3>Gemini Code Assist</h3>
-                    <span class="price-badge">$22.8-54/mo</span>
-                    <div class="pros-cons">
-                        <h4>Pros</h4>
-                        <ul>
-                            <li>Large context window</li>
-                            <li>Multi-cloud support</li>
-                            <li>Google backing</li>
-                        </ul>
-                        <h4>Cons</h4>
-                        <ul>
-                            <li>Higher pricing</li>
-                            <li>GCP focused</li>
-                            <li>Early stage</li>
-                        </ul>
+                    <div class="best-for">
+                        <strong>Best for:</strong> AWS developers
                     </div>
-                </a>
+                    <a href="/compare/q-developer/" class="btn btn-secondary">Compare with Kiro</a>
+                </div>
             </div>
         </section>
         

@@ -1,0 +1,26 @@
+{
+  "name": "Kiro Directory",
+  "short_name": "Kiro Dir",
+  "description": "AWS Kiro tips, cheat sheets, and comparisons for spec-driven AI development",
+  "theme_color": "#0D1117",
+  "background_color": "#0D1117",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/logo/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo/favicon-2048x2048.png",
+      "sizes": "2048x2048",
+      "type": "image/png"
+    }
+  ]
+}
