@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Kiro Cheat Sheet - Complete Command Reference & Quick Start Guide</title>
+    <meta name="description" content="The ultimate AWS Kiro cheat sheet. Quick reference for all commands, spec formats, hooks, multi-agent workflows, and production patterns. Copy-paste ready examples.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/cheatsheets/">
+    <meta property="og:title" content="AWS Kiro Cheat Sheet - Complete Reference">
+    <meta property="og:description" content="Master AWS Kiro with our comprehensive cheat sheet. Commands, specs, hooks, and production patterns.">
+    <meta property="og:image" content="https://kiro.directory/images/kiro-cheatsheet-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AWS Kiro Cheat Sheet">
+    <meta name="twitter:description" content="Complete command reference and quick start guide for AWS Kiro">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,600,800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <style>
+        :root {
+            --bg-primary: #0A0F1B;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1A2332;
+            --text-primary: #E5E7EB;
+            --text-secondary: #9CA3AF;
+            --text-tertiary: #6B7280;
+            --accent-mint: #8AFFEF;
+            --accent-sunray: #FFD46B;
+            --accent-purple: #C084FC;
+            --border-color: #2A3441;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --code-bg: #0D1117;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(17, 24, 39, 0.95);
+        }
+        
+        nav {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-mint);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-mint);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+        
+        .hero h1 {
+            background: linear-gradient(135deg, var(--accent-mint) 0%, var(--accent-sunray) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Quick Nav */
+        .quick-nav {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .quick-nav a {
+            padding: 0.5rem 1.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .quick-nav a:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-mint);
+            color: var(--accent-mint);
+            transform: translateY(-2px);
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .content-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        /* Code Blocks */
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .code-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+        
+        .copy-btn {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-mint);
+            color: var(--accent-mint);
+        }
+        
+        .copy-btn.copied {
+            background: var(--accent-mint);
+            color: var(--bg-primary);
+        }
+        
+        pre {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+        
+        /* Command Grid */
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .command-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .command-card:hover {
+            border-color: var(--accent-mint);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+        
+        .command-card h4 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-mint);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .command-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .command-example {
+            background: var(--code-bg);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        td {
+            color: var(--text-secondary);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Tips and Warnings */
+        .tip, .warning {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .tip {
+            background: rgba(138, 255, 239, 0.1);
+            border: 1px solid rgba(138, 255, 239, 0.3);
+        }
+        
+        .warning {
+            background: rgba(255, 212, 107, 0.1);
+            border: 1px solid rgba(255, 212, 107, 0.3);
+        }
+        
+        .tip-icon, .warning-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-mint);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .command-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .code-block {
+                padding: 1rem;
+            }
+            
+            table {
+                font-size: 0.875rem;
+            }
+            
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["TechArticle", "HowTo"],
+        "headline": "AWS Kiro Cheat Sheet - Complete Command Reference",
+        "description": "Comprehensive cheat sheet for AWS Kiro including commands, spec formats, hooks, and production patterns",
+        "datePublished": "2025-01-15",
+        "dateModified": "2025-01-15",
+        "author": {
+            "@type": "Organization",
+            "name": "Kiro Directory"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Kiro Directory",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://kiro.directory/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://kiro.directory/cheatsheets/"
+        },
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Install Kiro",
+                "text": "brew install awslabs/tap/kiro"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Initialize project",
+                "text": "kiro init"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Write specification",
+                "text": "kiro spec create feature-name"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Generate code",
+                "text": "kiro generate"
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">
+                <span>⚡</span> Kiro
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/compare/">Compare</a></li>
+                <li><a href="/cheatsheets/" class="active">Cheat Sheets</a></li>
+                <li><a href="/tips/">Tips</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>AWS Kiro Cheat Sheet</h1>
+            <p>Complete command reference, spec formats, and production patterns. Everything you need to master spec-driven development with Kiro.</p>
+            
+            <!-- Quick Navigation -->
+            <div class="quick-nav">
+                <a href="#installation">Installation</a>
+                <a href="#basic-commands">Basic Commands</a>
+                <a href="#spec-formats">Spec Formats</a>
+                <a href="#hooks">Hooks</a>
+                <a href="#multi-agent">Multi-Agent</a>
+                <a href="#ears-format">EARS Format</a>
+                <a href="#best-practices">Best Practices</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Installation Section -->
+    <section id="installation" class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">📦</div>
+            <h2>Installation & Setup</h2>
+        </div>
+        
+        <div class="command-grid">
+            <div class="command-card">
+                <h4>macOS (Homebrew)</h4>
+                <p>Recommended for most users</p>
+                <div class="command-example">
+                    brew install awslabs/tap/kiro
+                </div>
+            </div>
+            
+            <div class="command-card">
+                <h4>Linux/WSL</h4>
+                <p>Using package manager</p>
+                <div class="command-example">
+                    curl -fsSL https://kiro.aws/install.sh | sh
+                </div>
+            </div>
+            
+            <div class="command-card">
+                <h4>Windows</h4>
+                <p>PowerShell installation</p>
+                <div class="command-example">
+                    irm https://kiro.aws/install.ps1 | iex
+                </div>
+            </div>
+            
+            <div class="command-card">
+                <h4>Docker</h4>
+                <p>Containerized environment</p>
+                <div class="command-example">
+                    docker pull aws/kiro:latest
+                </div>
+            </div>
+            
+            <div class="command-card">
+                <h4>AWS CloudShell</h4>
+                <p>Pre-installed in CloudShell</p>
+                <div class="command-example">
+                    kiro --version
+                </div>
+            </div>
+            
+            <div class="command-card">
+                <h4>Verify Installation</h4>
+                <p>Check version and config</p>
+                <div class="command-example">
+                    kiro doctor
+                </div>
+            </div>
+        </div>
+        
+        <div class="tip">
+            <span class="tip-icon">💡</span>
+            <div>
+                <strong>Pro Tip:</strong> Run <code>kiro doctor</code> after installation to verify your environment is properly configured. It checks for common issues and suggests fixes.
+            </div>
+        </div>
+    </section>
+    
+    <!-- Basic Commands Section -->
+    <section id="basic-commands" class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">🚀</div>
+            <h2>Essential Commands</h2>
+        </div>
+        
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">Quick Start Commands</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre># Initialize a new Kiro project
+kiro init
+
+# Create a new specification
+kiro spec create user-authentication
+
+# Generate code from spec
+kiro generate
+
+# Run with specific model
+kiro generate --model claude-3-opus
+
+# Watch mode for continuous generation
+kiro watch
+
+# List all specifications
+kiro spec list
+
+# Validate specifications
+kiro spec validate
+
+# Show diff before applying changes
+kiro generate --dry-run</pre>
+        </div>
+        
+        <h3>Command Reference Table</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Command</th>
+                    <th>Description</th>
+                    <th>Common Flags</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>kiro init</code></td>
+                    <td>Initialize new project with .kiro/ directory</td>
+                    <td><code>--template</code>, <code>--force</code></td>
+                </tr>
+                <tr>
+                    <td><code>kiro spec create</code></td>
+                    <td>Create new specification file</td>
+                    <td><code>--type</code>, <code>--template</code></td>
+                </tr>
+                <tr>
+                    <td><code>kiro generate</code></td>
+                    <td>Generate code from specifications</td>
+                    <td><code>--model</code>, <code>--dry-run</code></td>
+                </tr>
+                <tr>
+                    <td><code>kiro watch</code></td>
+                    <td>Watch specs and regenerate on change</td>
+                    <td><code>--debounce</code>, <code>--filter</code></td>
+                </tr>
+                <tr>
+                    <td><code>kiro validate</code></td>
+                    <td>Validate all specifications</td>
+                    <td><code>--strict</code>, <code>--fix</code></td>
+                </tr>
+                <tr>
+                    <td><code>kiro test</code></td>
+                    <td>Run generated tests</td>
+                    <td><code>--coverage</code>, <code>--watch</code></td>
+                </tr>
+                <tr>
+                    <td><code>kiro rollback</code></td>
+                    <td>Rollback to previous generation</td>
+                    <td><code>--to</code>, <code>--list</code></td>
+                </tr>
+                <tr>
+                    <td><code>kiro config</code></td>
+                    <td>Manage configuration</td>
+                    <td><code>--get</code>, <code>--set</code>, <code>--list</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <!-- Spec Formats Section -->
+    <section id="spec-formats" class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">📝</div>
+            <h2>Specification Formats</h2>
+        </div>
+        
+        <h3>Basic Specification Structure</h3>
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">user-auth.kiro.yaml</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre>apiVersion: kiro.aws/v1
+kind: Specification
+metadata:
+  name: user-authentication
+  description: User authentication and authorization system
+  tags:
+    - auth
+    - security
+    - api
+spec:
+  requirements:
+    - id: AUTH-001
+      description: Users SHALL authenticate using email and password
+      priority: MUST
+      acceptance:
+        - Valid email format required
+        - Password minimum 8 characters
+        - Account lockout after 5 failed attempts
+    
+    - id: AUTH-002  
+      description: System SHALL support OAuth2 providers
+      priority: SHOULD
+      providers:
+        - google
+        - github
+        - aws-sso
+  
+  architecture:
+    type: microservice
+    components:
+      - name: auth-service
+        type: api
+        framework: fastapi
+        database: postgresql
+      
+      - name: token-store
+        type: cache
+        technology: redis
+        ttl: 3600
+  
+  testing:
+    coverage: 80
+    types:
+      - unit
+      - integration
+      - e2e</pre>
+        </div>
+        
+        <h3>Advanced Specification Features</h3>
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">payment-processing.kiro.yaml</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre>apiVersion: kiro.aws/v1
+kind: Specification
+metadata:
+  name: payment-processing
+  version: 2.0.0
+  owner: platform-team
+  dependencies:
+    - user-authentication
+    - inventory-management
+spec:
+  requirements:
+    - id: PAY-001
+      description: |
+        WHEN a customer initiates payment
+        THEN the system SHALL validate payment details
+        AND process the transaction within 3 seconds
+      type: functional
+      priority: MUST
+      
+  constraints:
+    - id: CON-001
+      type: performance
+      description: Response time < 3s for 99% of requests
+      sla: 99.9
+    
+    - id: CON-002
+      type: security
+      description: PCI DSS Level 1 compliance required
+      
+  interfaces:
+    - name: PaymentAPI
+      type: rest
+      authentication: bearer
+      endpoints:
+        - method: POST
+          path: /payments
+          description: Process new payment
+          request:
+            schema: PaymentRequest
+          response:
+            schema: PaymentResponse
+            
+  data_models:
+    PaymentRequest:
+      type: object
+      required: [amount, currency, method]
+      properties:
+        amount:
+          type: number
+          minimum: 0.01
+        currency:
+          type: string
+          enum: [USD, EUR, GBP]
+        method:
+          type: string
+          enum: [card, bank, wallet]</pre>
+        </div>
+    </section>
+    
+    <!-- Hooks Section -->
+    <section id="hooks" class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">🪝</div>
+            <h2>Hooks System</h2>
+        </div>
+        
+        <p>Kiro hooks allow you to customize the generation pipeline with custom scripts and validations.</p>
+        
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">.kiro/hooks/pre-generate.sh</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre>#!/bin/bash
+# Pre-generation hook - runs before code generation
+
+echo "Running pre-generation checks..."
+
+# Validate environment
+if [ -z "$AWS_REGION" ]; then
+    echo "Error: AWS_REGION not set"
+    exit 1
+fi
+
+# Check dependencies
+npm audit --audit-level=high
+if [ $? -ne 0 ]; then
+    echo "Security vulnerabilities found"
+    exit 1
+fi
+
+# Format specifications
+kiro spec format --write
+
+echo "Pre-generation checks passed ✓"</pre>
+        </div>
+        
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">.kiro/hooks/post-generate.py</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre>#!/usr/bin/env python3
+"""Post-generation hook - runs after code generation"""
+
+import os
+import subprocess
+import sys
+
+def run_linters():
+    """Run code quality checks"""
+    print("Running linters...")
+    
+    # Python files
+    subprocess.run(["black", ".", "--check"])
+    subprocess.run(["ruff", "check", "."])
+    
+    # JavaScript/TypeScript
+    subprocess.run(["eslint", ".", "--fix"])
+    
+def update_documentation():
+    """Generate API documentation"""
+    print("Updating documentation...")
+    subprocess.run(["npm", "run", "docs:generate"])
+    
+def run_tests():
+    """Run test suite"""
+    print("Running tests...")
+    result = subprocess.run(["npm", "test"], capture_output=True)
+    if result.returncode != 0:
+        print("Tests failed!")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    run_linters()
+    update_documentation()
+    run_tests()
+    print("Post-generation tasks completed ✓")</pre>
+        </div>
+        
+        <h3>Available Hooks</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hook</th>
+                    <th>Timing</th>
+                    <th>Use Cases</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pre-init</code></td>
+                    <td>Before project initialization</td>
+                    <td>Environment setup, dependency checks</td>
+                </tr>
+                <tr>
+                    <td><code>post-init</code></td>
+                    <td>After project initialization</td>
+                    <td>Install dependencies, configure tools</td>
+                </tr>
+                <tr>
+                    <td><code>pre-generate</code></td>
+                    <td>Before code generation</td>
+                    <td>Validate specs, format code, security scans</td>
+                </tr>
+                <tr>
+                    <td><code>post-generate</code></td>
+                    <td>After code generation</td>
+                    <td>Run tests, update docs, deploy</td>
+                </tr>
+                <tr>
+                    <td><code>pre-validate</code></td>
+                    <td>Before spec validation</td>
+                    <td>Custom validation rules</td>
+                </tr>
+                <tr>
+                    <td><code>on-error</code></td>
+                    <td>When generation fails</td>
+                    <td>Cleanup, notifications, rollback</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <!-- Multi-Agent Section -->
+    <section id="multi-agent" class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">🤖</div>
+            <h2>Multi-Agent Workflows</h2>
+        </div>
+        
+        <p>Kiro's multi-agent system coordinates specialized AI agents for complex tasks.</p>
+        
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">multi-agent-config.yaml</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre>apiVersion: kiro.aws/v1
+kind: MultiAgentWorkflow
+metadata:
+  name: full-stack-feature
+  description: Complete feature implementation workflow
+spec:
+  agents:
+    - name: architect
+      role: system-design
+      model: claude-3-opus
+      responsibilities:
+        - Design system architecture
+        - Define interfaces
+        - Plan data models
+        
+    - name: backend-developer
+      role: implementation
+      model: gpt-4-turbo
+      focus: backend
+      languages: [python, go]
+      
+    - name: frontend-developer
+      role: implementation
+      model: claude-3-sonnet
+      focus: frontend
+      frameworks: [react, vue]
+      
+    - name: tester
+      role: quality-assurance
+      model: gpt-4
+      tasks:
+        - Write unit tests
+        - Create integration tests
+        - Generate test data
+        
+    - name: reviewer
+      role: code-review
+      model: claude-3-opus
+      criteria:
+        - Security best practices
+        - Performance optimization
+        - Code quality
+        
+  workflow:
+    - stage: design
+      agent: architect
+      output: architecture-doc
+      
+    - stage: implement-backend
+      agent: backend-developer
+      input: architecture-doc
+      output: backend-code
+      
+    - stage: implement-frontend
+      agent: frontend-developer
+      input: architecture-doc
+      output: frontend-code
+      parallel: true  # Run parallel with backend
+      
+    - stage: test
+      agent: tester
+      input: [backend-code, frontend-code]
+      output: test-suite
+      
+    - stage: review
+      agent: reviewer
+      input: [backend-code, frontend-code, test-suite]
+      output: review-report
+      
+  coordination:
+    strategy: event-driven
+    communication: shared-context
+    conflict-resolution: architect-decides</pre>
+        </div>
+        
+        <h3>Multi-Agent Commands</h3>
+        <div class="command-grid">
+            <div class="command-card">
+                <h4>Run Workflow</h4>
+                <p>Execute multi-agent workflow</p>
+                <div class="command-example">
+                    kiro workflow run full-stack-feature
+                </div>
+            </div>
+            
+            <div class="command-card">
+                <h4>Watch Progress</h4>
+                <p>Monitor agent activities</p>
+                <div class="command-example">
+                    kiro workflow status --watch
+                </div>
+            </div>
+            
+            <div class="command-card">
+                <h4>Debug Mode</h4>
+                <p>Detailed agent reasoning</p>
+                <div class="command-example">
+                    kiro workflow run --debug --verbose
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- EARS Format Section -->
+    <section id="ears-format" class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">📋</div>
+            <h2>EARS Format Guide</h2>
+        </div>
+        
+        <p>The Easy Approach to Requirements Syntax (EARS) provides templates for clear, unambiguous specifications.</p>
+        
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">EARS Templates</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre># Ubiquitous Requirements (always active)
+The system SHALL provide user authentication
+
+# Event-Driven Requirements
+WHEN user clicks logout button
+THEN the system SHALL terminate the session
+AND redirect to login page
+
+# Unwanted Behaviors
+IF payment processing fails
+THEN the system SHALL NOT charge the customer
+AND SHALL rollback the transaction
+
+# State-Driven Requirements  
+WHILE the system is in maintenance mode
+The system SHALL display maintenance page
+AND SHALL queue incoming requests
+
+# Optional Features
+WHERE high-availability is configured
+The system SHALL maintain 99.99% uptime
+AND SHALL auto-failover within 30 seconds
+
+# Complex Requirements
+WHEN user uploads a file
+IF file size > 100MB
+THEN the system SHALL use chunked upload
+AND SHALL show progress indicator
+WHILE maintaining upload state
+WHERE network interruption occurs
+The system SHALL resume from last chunk</pre>
+        </div>
+        
+        <h3>EARS Pattern Reference</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Pattern</th>
+                    <th>Keywords</th>
+                    <th>Use Case</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ubiquitous</td>
+                    <td>SHALL</td>
+                    <td>Always true requirements</td>
+                    <td>System SHALL log all transactions</td>
+                </tr>
+                <tr>
+                    <td>Event-Driven</td>
+                    <td>WHEN...THEN</td>
+                    <td>Triggered by events</td>
+                    <td>WHEN error occurs THEN notify admin</td>
+                </tr>
+                <tr>
+                    <td>Unwanted</td>
+                    <td>IF...THEN...NOT</td>
+                    <td>Prevent behaviors</td>
+                    <td>IF timeout THEN SHALL NOT retry</td>
+                </tr>
+                <tr>
+                    <td>State-Driven</td>
+                    <td>WHILE...THE</td>
+                    <td>During states</td>
+                    <td>WHILE loading THE spinner SHALL show</td>
+                </tr>
+                <tr>
+                    <td>Optional</td>
+                    <td>WHERE...THE</td>
+                    <td>Conditional features</td>
+                    <td>WHERE premium THE limits SHALL increase</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    
+    <!-- Best Practices Section -->
+    <section id="best-practices" class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">⭐</div>
+            <h2>Best Practices</h2>
+        </div>
+        
+        <h3>Specification Writing</h3>
+        <div class="tip">
+            <span class="tip-icon">💡</span>
+            <div>
+                <strong>Be Specific:</strong> Use concrete examples and test cases in your specifications. The more specific you are, the better the generated code will match your intentions.
+            </div>
+        </div>
+        
+        <div class="tip">
+            <span class="tip-icon">💡</span>
+            <div>
+                <strong>Use EARS Format:</strong> Structure requirements using WHEN/THEN for clarity. This helps Kiro understand cause-and-effect relationships.
+            </div>
+        </div>
+        
+        <div class="tip">
+            <span class="tip-icon">💡</span>
+            <div>
+                <strong>Version Control:</strong> Always commit your .kiro/ directory. Specifications are source code and should be reviewed like code.
+            </div>
+        </div>
+        
+        <h3>Performance Optimization</h3>
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">kiro.config.yaml</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre># Optimize for large codebases
+generation:
+  parallel: true
+  max_workers: 4
+  cache_enabled: true
+  incremental: true
+  
+# Model selection for speed vs quality
+models:
+  default: claude-3-haiku  # Fast iteration
+  complex: claude-3-opus   # Complex logic
+  review: gpt-4-turbo     # Code review
+  
+# Selective generation
+filters:
+  include:
+    - "src/**/*.py"
+    - "tests/**/*.py"
+  exclude:
+    - "**/migrations/**"
+    - "**/vendor/**"</pre>
+        </div>
+        
+        <h3>Common Pitfalls to Avoid</h3>
+        <div class="warning">
+            <span class="warning-icon">⚠️</span>
+            <div>
+                <strong>Avoid Ambiguity:</strong> Terms like "fast", "user-friendly", or "scalable" are too vague. Define specific metrics (e.g., "response time < 200ms").
+            </div>
+        </div>
+        
+        <div class="warning">
+            <span class="warning-icon">⚠️</span>
+            <div>
+                <strong>Don't Over-Specify Implementation:</strong> Focus on WHAT the system should do, not HOW. Let Kiro determine optimal implementation details.
+            </div>
+        </div>
+        
+        <div class="warning">
+            <span class="warning-icon">⚠️</span>
+            <div>
+                <strong>Test Incrementally:</strong> Don't generate entire systems at once. Build and test in small increments for better results.
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick Reference Card -->
+    <section class="content-section container">
+        <div class="section-header">
+            <div class="section-icon">🎯</div>
+            <h2>Quick Reference Card</h2>
+        </div>
+        
+        <div class="code-block">
+            <div class="code-header">
+                <span class="code-label">Most Used Commands</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <pre># Project Setup
+kiro init && cd .kiro
+
+# Daily Workflow  
+kiro spec create feature-name
+kiro generate --dry-run
+kiro generate
+kiro test
+
+# Debugging
+kiro doctor
+kiro validate --strict
+kiro generate --debug --verbose
+
+# Multi-Agent
+kiro workflow list
+kiro workflow run feature --watch
+
+# Configuration
+kiro config set model claude-3-opus
+kiro config set parallel true
+
+# Rollback
+kiro history
+kiro rollback --to HEAD~1</pre>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                        <li><a href="/tips/">Tips & Tricks</a></li>
+                        <li><a href="/quickstart/">Quick Start</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Compare</h4>
+                    <ul class="footer-links">
+                        <li><a href="/compare/copilot/">vs GitHub Copilot</a></li>
+                        <li><a href="/compare/cursor/">vs Cursor</a></li>
+                        <li><a href="/compare/claude-code/">vs Claude Code</a></li>
+                        <li><a href="/compare/">All Comparisons</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/aws/kiro">GitHub</a></li>
+                        <li><a href="/community/">Contribute</a></li>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/privacy/">Privacy Policy</a></li>
+                        <li><a href="/terms/">Terms of Service</a></li>
+                        <li><a href="/security/">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kiro Directory. Not affiliated with AWS. Updated weekly.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block');
+            const code = codeBlock.querySelector('pre').textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight active section in navigation
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.quick-nav a').forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section[id]').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://plausible.io/js/script.js"></script>
+</body>
+</html>
