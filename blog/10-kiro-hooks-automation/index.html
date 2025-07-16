@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Kiro Hooks That Will Transform Your Workflow | Kiro Directory</title>
+    <meta name="description" content="Discover powerful automation hooks that ensure your code is always production-ready. From auto-testing to documentation sync.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/blog/10-kiro-hooks-automation/">
+    <meta property="og:title" content="10 Kiro Hooks That Will Transform Your Workflow">
+    <meta property="og:description" content="Discover powerful automation hooks that ensure your code is always production-ready">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/blog/10-kiro-hooks-automation/">
+    <meta property="twitter:title" content="10 Kiro Hooks That Will Transform Your Workflow">
+    <meta property="twitter:description" content="Discover powerful automation hooks that ensure your code is always production-ready">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "10 Kiro Hooks That Will Transform Your Workflow",
+      "author": {
+        "@type": "Person",
+        "name": "Kiro Directory Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      },
+      "datePublished": "2025-01-08",
+      "description": "Discover powerful automation hooks that ensure your code is always production-ready"
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+        
+        /* Article Content */
+        .article-header {
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 3rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .article-category {
+            color: var(--color-accent);
+            background-color: var(--color-surface);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .article-title {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .article-excerpt {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content {
+            padding-bottom: 4rem;
+        }
+        
+        .article-content h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--color-accent-2);
+        }
+        
+        .article-content h4 {
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        .highlight-box {
+            background-color: var(--color-surface);
+            border-left: 4px solid var(--color-accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .highlight-box h4 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+        }
+        
+        .hook-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            transition: all 0.2s;
+        }
+        
+        .hook-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+        
+        .hook-number {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        /* Back Navigation */
+        .back-nav {
+            border-top: 1px solid var(--color-border);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .back-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+        
+        .back-link:hover {
+            gap: 0.75rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <article>
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">📅 January 8, 2025</span>
+                    <span class="article-category">Tips & Tricks</span>
+                </div>
+                <h1 class="article-title">10 Kiro Hooks That Will Transform Your Workflow</h1>
+                <p class="article-excerpt">Discover powerful automation hooks that ensure your code is always production-ready. From auto-testing to documentation sync.</p>
+            </header>
+            
+            <div class="article-content">
+                <p>Kiro's agent hooks are game-changers for developer productivity. These event-driven automations act like an experienced developer constantly watching your back, catching common mistakes, and ensuring best practices without manual intervention.</p>
+                
+                <p>Think of hooks as your personal code review assistant, documentation keeper, and quality assurance engineer rolled into one. Here are 10 essential hooks that will transform how you build software.</p>
+                
+                <div class="hook-card">
+                    <div class="hook-number">1</div>
+                    <h4>Auto-Test Generator</h4>
+                    <p><strong>Trigger:</strong> When you save a React component or function</p>
+                    <p><strong>Action:</strong> Automatically generates or updates corresponding test files with comprehensive test cases.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Auto Test Generator",
+  "trigger": "onSave",
+  "pattern": "**/*.{jsx,tsx,js,ts}",
+  "exclude": "**/*.test.*",
+  "action": "Generate unit tests for the saved component"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Ensures every component has test coverage, catching bugs before they reach production.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">2</div>
+                    <h4>API Documentation Sync</h4>
+                    <p><strong>Trigger:</strong> When you modify API routes or endpoints</p>
+                    <p><strong>Action:</strong> Updates README files, API documentation, and OpenAPI specs.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "API Doc Sync",
+  "trigger": "onSave",
+  "pattern": "**/routes/**/*.{js,ts}",
+  "action": "Update API documentation and OpenAPI specs"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Keeps documentation in perfect sync with your API changes, eliminating stale docs.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">3</div>
+                    <h4>Security Scanner</h4>
+                    <p><strong>Trigger:</strong> Before commit</p>
+                    <p><strong>Action:</strong> Scans for leaked credentials, hardcoded secrets, and security vulnerabilities.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Security Scanner",
+  "trigger": "preCommit",
+  "action": "Scan for API keys, passwords, and security issues",
+  "blockOnFailure": true
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Prevents accidental credential leaks and identifies security issues early.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">4</div>
+                    <h4>Code Standards Enforcer</h4>
+                    <p><strong>Trigger:</strong> When you save any code file</p>
+                    <p><strong>Action:</strong> Validates code against team standards and style guidelines.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Code Standards",
+  "trigger": "onSave",
+  "pattern": "**/*.{js,ts,jsx,tsx}",
+  "action": "Ensure Single Responsibility Principle and team coding standards"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Maintains consistent code quality across your entire team automatically.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">5</div>
+                    <h4>Dependency Tracker</h4>
+                    <p><strong>Trigger:</strong> When package.json changes</p>
+                    <p><strong>Action:</strong> Updates dependency documentation and checks for security vulnerabilities.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Dependency Tracker",
+  "trigger": "onSave",
+  "pattern": "**/package.json",
+  "action": "Update dependency docs and run security audit"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Keeps track of dependencies and identifies security vulnerabilities in third-party packages.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">6</div>
+                    <h4>Database Schema Sync</h4>
+                    <p><strong>Trigger:</strong> When you modify database models</p>
+                    <p><strong>Action:</strong> Updates migration files and database documentation.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Schema Sync",
+  "trigger": "onSave",
+  "pattern": "**/models/**/*.{js,ts}",
+  "action": "Generate migrations and update schema documentation"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Ensures database changes are properly tracked and documented.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">7</div>
+                    <h4>Environment Config Validator</h4>
+                    <p><strong>Trigger:</strong> When you modify environment files</p>
+                    <p><strong>Action:</strong> Validates environment variables and updates configuration documentation.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Env Validator",
+  "trigger": "onSave", 
+  "pattern": "**/.env*",
+  "action": "Validate environment variables and update config docs"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Prevents configuration errors and maintains up-to-date environment documentation.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">8</div>
+                    <h4>Performance Monitor</h4>
+                    <p><strong>Trigger:</strong> After running tests</p>
+                    <p><strong>Action:</strong> Analyzes performance metrics and suggests optimizations.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Performance Monitor",
+  "trigger": "postTest",
+  "action": "Analyze bundle size, load times, and suggest optimizations"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Catches performance regressions early and provides optimization suggestions.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">9</div>
+                    <h4>Changelog Generator</h4>
+                    <p><strong>Trigger:</strong> Before version tagging</p>
+                    <p><strong>Action:</strong> Automatically generates changelog entries from commit messages and pull requests.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Changelog Generator",
+  "trigger": "preTag",
+  "action": "Generate changelog from commits since last version"
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Maintains accurate release notes without manual effort.</p>
+                </div>
+                
+                <div class="hook-card">
+                    <div class="hook-number">10</div>
+                    <h4>Deployment Readiness Checker</h4>
+                    <p><strong>Trigger:</strong> Before production deployment</p>
+                    <p><strong>Action:</strong> Runs comprehensive checks including tests, security scans, and performance validation.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre>// Hook Configuration
+{
+  "name": "Deployment Checker",
+  "trigger": "preDeploy",
+  "action": "Run full test suite, security scan, and performance checks",
+  "blockOnFailure": true
+}</pre>
+                    </div>
+                    <p><strong>Why it matters:</strong> Ensures only production-ready code gets deployed, reducing downtime and bugs.</p>
+                </div>
+                
+                <h2>Best Practices for Hook Management</h2>
+                
+                <h3>Start Simple</h3>
+                <p>Begin with basic hooks like auto-testing and documentation sync. Add more complex automation as your team becomes comfortable with the workflow.</p>
+                
+                <h3>Team Alignment</h3>
+                <p>Make sure your entire team understands and agrees to the automated processes. Hooks should enhance productivity, not create friction.</p>
+                
+                <h3>Regular Review</h3>
+                <p>Periodically review your hooks to ensure they're still providing value and adjust them as your project evolves.</p>
+                
+                <div class="highlight-box">
+                    <h4>Pro Tip</h4>
+                    <p>Use Kiro's Agent Hooks panel to access, update, and monitor all your hooks in one place. You can modify triggers, file patterns, and instructions anytime, with changes applying immediately.</p>
+                </div>
+                
+                <h2>Setting Up Your First Hook</h2>
+                
+                <p>To create a hook in Kiro:</p>
+                <ol>
+                    <li>Open the Agent Hooks section in the Kiro panel</li>
+                    <li>Click "Create New Hook"</li>
+                    <li>Define the trigger event (onSave, preCommit, etc.)</li>
+                    <li>Set file patterns to monitor</li>
+                    <li>Describe the desired action in plain English</li>
+                    <li>Test the hook and refine as needed</li>
+                </ol>
+                
+                <p>The hooks system saved me countless hours of manual testing and documentation. It's like having an experienced developer watching my back, ensuring I never forget the important details that make code production-ready.</p>
+                
+                <h2>Conclusion</h2>
+                
+                <p>Kiro's hooks represent a fundamental shift in how we think about development automation. Instead of remembering to run tests, update docs, or check for security issues, you can set up intelligent automation that handles these tasks consistently and reliably.</p>
+                
+                <p>Start with these 10 hooks and customize them for your specific workflow. The goal is to automate the repetitive tasks that consume mental energy, freeing you to focus on solving complex problems and building great software.</p>
+                
+                <div class="back-nav">
+                    <a href="/blog/" class="back-link">← Back to Blog</a>
+                </div>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

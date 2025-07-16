@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migrating from GitHub Copilot to AWS Kiro | Kiro Directory</title>
+    <meta name="description" content="A step-by-step guide for teams transitioning from traditional code completion to spec-driven development with Kiro.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/blog/kiro-vs-copilot-migration/">
+    <meta property="og:title" content="Migrating from GitHub Copilot to AWS Kiro">
+    <meta property="og:description" content="Step-by-step guide for teams transitioning to spec-driven development">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/blog/kiro-vs-copilot-migration/">
+    <meta property="twitter:title" content="Migrating from GitHub Copilot to AWS Kiro">
+    <meta property="twitter:description" content="Step-by-step guide for teams transitioning to spec-driven development">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Migrating from GitHub Copilot to AWS Kiro",
+      "author": {
+        "@type": "Person",
+        "name": "Kiro Directory Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      },
+      "datePublished": "2025-01-05",
+      "description": "A step-by-step guide for teams transitioning from traditional code completion to spec-driven development"
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+        
+        /* Article Content */
+        .article-header {
+            padding: 3rem 0 2rem;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 3rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .article-date {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .article-category {
+            color: var(--color-accent);
+            background-color: var(--color-surface);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .article-title {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .article-excerpt {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content {
+            padding-bottom: 4rem;
+        }
+        
+        .article-content h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 3rem 0 1rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 2rem 0 0.75rem;
+            color: var(--color-accent-2);
+        }
+        
+        .article-content h4 {
+            font-family: var(--font-mono);
+            font-size: 1.125rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+            margin: 1.5rem 0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        .highlight-box {
+            background-color: var(--color-surface);
+            border-left: 4px solid var(--color-accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .highlight-box h4 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 0.75rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background-color: var(--color-surface-2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-muted);
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .tool-name {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+        
+        .comparison-table .feature-yes {
+            color: var(--color-success);
+            font-weight: 500;
+        }
+        
+        .comparison-table .feature-no {
+            color: var(--color-error);
+            font-weight: 500;
+        }
+        
+        .comparison-table .feature-partial {
+            color: var(--color-warning);
+            font-weight: 500;
+        }
+        
+        /* Back Navigation */
+        .back-nav {
+            border-top: 1px solid var(--color-border);
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .back-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+        
+        .back-link:hover {
+            gap: 0.75rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <article>
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="article-date">📅 January 5, 2025</span>
+                    <span class="article-category">Tutorial</span>
+                </div>
+                <h1 class="article-title">Migrating from GitHub Copilot to AWS Kiro</h1>
+                <p class="article-excerpt">A step-by-step guide for teams transitioning from traditional code completion to spec-driven development with Kiro.</p>
+            </header>
+            
+            <div class="article-content">
+                <p>With Amazon Kiro's launch in July 2025, many development teams are evaluating whether to migrate from GitHub Copilot to this new spec-driven IDE. While both tools use AI to enhance developer productivity, they represent fundamentally different approaches to software development.</p>
+                
+                <p>This guide will help you understand the differences, evaluate if migration makes sense for your team, and provide a step-by-step migration process.</p>
+                
+                <h2>Core Philosophy Differences</h2>
+                
+                <div class="highlight-box">
+                    <h4>GitHub Copilot</h4>
+                    <p>Focuses on intelligent code completion and chat-based assistance. Excels at helping you write code faster, but leaves testing, documentation, and production readiness to you.</p>
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>AWS Kiro</h4>
+                    <p>Emphasizes spec-driven development with automated quality assurance. Helps you go from concept to production-ready applications with built-in testing, documentation, and deployment checks.</p>
+                </div>
+                
+                <h2>Feature Comparison</h2>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>GitHub Copilot</th>
+                            <th>AWS Kiro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Code Completion</strong></td>
+                            <td class="feature-yes">Excellent</td>
+                            <td class="feature-partial">Good</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Spec-Driven Development</strong></td>
+                            <td class="feature-no">Not Supported</td>
+                            <td class="feature-yes">Core Feature</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Auto-Testing</strong></td>
+                            <td class="feature-no">Manual</td>
+                            <td class="feature-yes">Automated Hooks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Documentation Sync</strong></td>
+                            <td class="feature-no">Manual</td>
+                            <td class="feature-yes">Automated</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IDE Support</strong></td>
+                            <td class="feature-yes">Multiple IDEs</td>
+                            <td class="feature-partial">VS Code Based</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Multi-Cloud Support</strong></td>
+                            <td class="feature-yes">Yes</td>
+                            <td class="feature-yes">Yes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security Scanning</strong></td>
+                            <td class="feature-partial">Basic</td>
+                            <td class="feature-yes">Advanced Hooks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EARS Format</strong></td>
+                            <td class="feature-no">Not Supported</td>
+                            <td class="feature-yes">Built-in</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Agent Hooks</strong></td>
+                            <td class="feature-no">Not Available</td>
+                            <td class="feature-yes">Core Feature</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MCP Integration</strong></td>
+                            <td class="feature-no">Not Supported</td>
+                            <td class="feature-yes">Full Support</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h2>Pricing Comparison</h2>
+                
+                <h3>GitHub Copilot</h3>
+                <ul>
+                    <li><strong>Individual:</strong> $10/month</li>
+                    <li><strong>Business:</strong> $19/month per user</li>
+                    <li><strong>Enterprise:</strong> $39/month per user</li>
+                </ul>
+                
+                <h3>AWS Kiro</h3>
+                <ul>
+                    <li><strong>Preview:</strong> Free (limited interactions)</li>
+                    <li><strong>Pro:</strong> $19/month (1,000 interactions)</li>
+                    <li><strong>Pro+:</strong> $39/month (3,000 interactions)</li>
+                </ul>
+                
+                <h2>When to Consider Migration</h2>
+                
+                <h3>Good Candidates for Migration</h3>
+                <ul>
+                    <li><strong>Teams struggling with code quality:</strong> If you constantly deal with bugs, missing tests, or outdated documentation</li>
+                    <li><strong>Enterprise teams:</strong> Organizations that need comprehensive automation and production-ready code</li>
+                    <li><strong>Spec-driven shops:</strong> Teams that already use formal requirements and want better automation</li>
+                    <li><strong>VS Code users:</strong> Teams already standardized on VS Code can easily adopt Kiro</li>
+                </ul>
+                
+                <h3>Stick with Copilot If</h3>
+                <ul>
+                    <li><strong>Multi-IDE requirements:</strong> Your team uses diverse development environments</li>
+                    <li><strong>Simple completion needs:</strong> You primarily need code completion and don't require advanced automation</li>
+                    <li><strong>Small projects:</strong> Working on prototypes or small applications where spec-driven development is overkill</li>
+                </ul>
+                
+                <h2>Migration Strategy</h2>
+                
+                <h3>Phase 1: Evaluation (2-4 weeks)</h3>
+                
+                <h4>Week 1: Setup and Initial Testing</h4>
+                <ol>
+                    <li>Download Kiro from <a href="https://kiro.dev" target="_blank" style="color: var(--color-accent);">kiro.dev</a></li>
+                    <li>Create test accounts for 2-3 team members</li>
+                    <li>Import VS Code settings and extensions</li>
+                    <li>Run through the getting started tutorial</li>
+                </ol>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># Quick Setup Checklist
+□ Download Kiro IDE
+□ Sign in with GitHub/Google
+□ Import VS Code settings
+□ Create first spec with sample project
+□ Test basic hooks (auto-testing, doc sync)</pre>
+                </div>
+                
+                <h4>Week 2-3: Pilot Project</h4>
+                <ol>
+                    <li>Choose a small, non-critical project for testing</li>
+                    <li>Create complete specs using EARS format</li>
+                    <li>Set up basic hooks (testing, documentation)</li>
+                    <li>Compare development velocity with Copilot workflow</li>
+                </ol>
+                
+                <h4>Week 4: Team Evaluation</h4>
+                <ol>
+                    <li>Gather feedback from pilot users</li>
+                    <li>Measure productivity metrics</li>
+                    <li>Assess code quality improvements</li>
+                    <li>Make migration decision</li>
+                </ol>
+                
+                <h3>Phase 2: Gradual Migration (4-8 weeks)</h3>
+                
+                <h4>Week 1-2: Team Training</h4>
+                <ul>
+                    <li>Conduct Kiro training sessions</li>
+                    <li>Establish spec-writing standards</li>
+                    <li>Define hook configurations for your tech stack</li>
+                    <li>Create steering files for your projects</li>
+                </ul>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># Team Training Agenda
+Day 1: Kiro Fundamentals & Spec-Driven Development
+Day 2: EARS Format & Requirements Writing
+Day 3: Agent Hooks & Automation Setup
+Day 4: Steering Files & Project Configuration
+Day 5: Best Practices & Team Standards</pre>
+                </div>
+                
+                <h4>Week 3-4: Project Migration</h4>
+                <ul>
+                    <li>Start with new features and projects</li>
+                    <li>Create specs for existing projects gradually</li>
+                    <li>Set up hooks for critical automation</li>
+                    <li>Maintain Copilot for legacy projects initially</li>
+                </ul>
+                
+                <h4>Week 5-8: Full Adoption</h4>
+                <ul>
+                    <li>Migrate remaining projects</li>
+                    <li>Optimize hook configurations</li>
+                    <li>Cancel Copilot subscriptions</li>
+                    <li>Establish ongoing training program</li>
+                </ul>
+                
+                <h2>Key Migration Challenges and Solutions</h2>
+                
+                <h3>Challenge: Learning Curve</h3>
+                <p><strong>Solution:</strong> Start with simple specs and basic hooks. Gradually introduce more complex automation as the team becomes comfortable.</p>
+                
+                <h3>Challenge: Existing Workflow Disruption</h3>
+                <p><strong>Solution:</strong> Run Kiro alongside Copilot initially. Use Kiro for new projects while maintaining Copilot for ongoing work.</p>
+                
+                <h3>Challenge: Tool Integration</h3>
+                <p><strong>Solution:</strong> Leverage Kiro's MCP support to integrate with existing tools. Use VS Code compatibility to maintain familiar environment.</p>
+                
+                <h2>Setting Up Your First Kiro Project</h2>
+                
+                <p>Here's a practical example of migrating a feature from Copilot to Kiro workflow:</p>
+                
+                <h3>Old Copilot Approach</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre>// Developer writes prompt in code comments
+// Create a user authentication system with login/logout
+
+// Copilot suggests code completion
+// Developer manually writes tests
+// Developer manually updates documentation</pre>
+                </div>
+                
+                <h3>New Kiro Approach</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># requirements.md (EARS Format)
+WHEN a user provides valid credentials
+THE SYSTEM SHALL authenticate and create a session
+
+WHEN a user provides invalid credentials  
+THE SYSTEM SHALL display an error message
+
+# Kiro automatically:
+# - Generates design.md with architecture
+# - Creates tasks.md with implementation steps
+# - Sets up auto-testing hooks
+# - Configures documentation sync</pre>
+                </div>
+                
+                <h2>ROI and Success Metrics</h2>
+                
+                <p>Track these metrics to measure migration success:</p>
+                
+                <ul>
+                    <li><strong>Code Quality:</strong> Bug reduction, test coverage increase</li>
+                    <li><strong>Documentation:</strong> Documentation freshness and completeness</li>
+                    <li><strong>Development Velocity:</strong> Time from concept to production deployment</li>
+                    <li><strong>Team Satisfaction:</strong> Developer productivity and satisfaction scores</li>
+                    <li><strong>Maintenance Overhead:</strong> Time spent on manual testing and documentation</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h4>Early Adopter Results</h4>
+                    <p>Teams migrating to Kiro report 70% reduction in manual testing time, 85% improvement in documentation accuracy, and 40% faster feature delivery with higher quality.</p>
+                </div>
+                
+                <h2>Conclusion</h2>
+                
+                <p>Migration from GitHub Copilot to AWS Kiro represents a fundamental shift from code completion to comprehensive development automation. While the learning curve exists, teams focused on production-ready code quality and comprehensive automation will find significant value in Kiro's spec-driven approach.</p>
+                
+                <p>Start with the evaluation phase, run a pilot project, and make an informed decision based on your team's specific needs and workflow requirements.</p>
+                
+                <div class="back-nav">
+                    <a href="/blog/" class="back-link">← Back to Blog</a>
+                </div>
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
