@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EARS Format Complete Guide - Easy Approach to Requirements Syntax | Kiro Directory</title>
+    <meta name="description" content="Master the EARS format for writing clear, testable requirements in AWS Kiro. Complete guide with examples, patterns, and best practices.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/tips/ears-format/">
+    <meta property="og:title" content="EARS Format Complete Guide">
+    <meta property="og:description" content="Learn the Easy Approach to Requirements Syntax for AWS Kiro development.">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/tips/ears-format/">
+    <meta property="twitter:title" content="EARS Format Complete Guide">
+    <meta property="twitter:description" content="Master requirements writing with EARS syntax">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "EARS Format Complete Guide",
+      "description": "Complete guide to writing requirements using the Easy Approach to Requirements Syntax (EARS) in AWS Kiro",
+      "image": "https://kiro.directory/logo/favicon-2048x2048.png",
+      "totalTime": "PT30M",
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Basic understanding of requirements gathering"
+        },
+        {
+          "@type": "HowToSupply", 
+          "name": "AWS Kiro project setup"
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "AWS Kiro IDE"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Learn the basic EARS syntax structure"
+        },
+        {
+          "@type": "HowToStep", 
+          "text": "Practice with different requirement types"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Apply advanced EARS patterns for complex scenarios"
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Article Layout */
+        .article-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .article-content {
+            padding: 3rem 0;
+        }
+        
+        .prose {
+            max-width: none;
+        }
+        
+        .prose h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--color-accent);
+        }
+        
+        .prose h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--color-text);
+        }
+        
+        .prose h4 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--color-accent-2);
+        }
+        
+        .prose p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .prose ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .prose a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .prose a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            color: var(--color-text);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        /* EARS format components */
+        .ears-component {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .ears-component h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        .ears-syntax {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            background-color: var(--color-surface-2);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--color-accent);
+        }
+        
+        .ears-example {
+            background-color: rgba(138, 255, 239, 0.05);
+            border: 1px solid rgba(138, 255, 239, 0.2);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .ears-example .example-label {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Pattern cards */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .pattern-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .pattern-card h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--color-accent-2);
+        }
+        
+        .pattern-card .pattern-syntax {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            background-color: var(--color-surface-2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.75rem 0;
+        }
+        
+        .pattern-card .pattern-example {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+        
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .comparison-table th {
+            background-color: var(--color-surface-2);
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .bad {
+            color: var(--color-error);
+        }
+        
+        .comparison-table .good {
+            color: var(--color-success);
+        }
+        
+        /* Warning/Info boxes */
+        .warning-box {
+            background-color: rgba(255, 180, 84, 0.1);
+            border: 1px solid var(--color-warning);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--color-warning);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: rgba(78, 161, 255, 0.1);
+            border: 1px solid var(--color-info);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-box h4 {
+            color: var(--color-info);
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-box {
+            background-color: rgba(0, 193, 124, 0.1);
+            border: 1px solid var(--color-success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .success-box h4 {
+            color: var(--color-success);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .prose {
+                font-size: 1rem;
+            }
+            
+            .pattern-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-table {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a> › <a href="/cheatsheets/">Cheat Sheets</a> › EARS Format Guide
+        </div>
+        
+        <section class="article-header">
+            <h1>EARS Format Complete Guide</h1>
+            <p class="article-subtitle">Master the Easy Approach to Requirements Syntax for clear, testable specifications</p>
+        </section>
+        
+        <section class="article-content">
+            <div class="prose">
+                <div class="toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#introduction">What is EARS Format?</a></li>
+                        <li><a href="#basic-syntax">Basic EARS Syntax</a></li>
+                        <li><a href="#requirement-types">Requirement Types</a></li>
+                        <li><a href="#advanced-patterns">Advanced Patterns</a></li>
+                        <li><a href="#real-world-examples">Real-World Examples</a></li>
+                        <li><a href="#common-mistakes">Common Mistakes</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                        <li><a href="#testing-ears">Testing EARS Requirements</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introduction">What is EARS Format?</h2>
+                
+                <p>EARS (Easy Approach to Requirements Syntax) is a structured method for writing clear, unambiguous software requirements. Developed by Rolls-Royce, EARS forces clarity by using specific templates that eliminate common sources of confusion in requirements documents.</p>
+                
+                <p>AWS Kiro adopted EARS as its standard requirements format because it produces specifications that are both human-readable and machine-parseable, making them perfect for AI-assisted development.</p>
+
+                <div class="info-box">
+                    <h4>Why EARS in Kiro?</h4>
+                    <ul>
+                        <li><strong>Testability</strong> - Each requirement clearly states conditions and expected behavior</li>
+                        <li><strong>Clarity</strong> - Eliminates ambiguous language like "should", "may", or "appropriate"</li>
+                        <li><strong>Completeness</strong> - Forces you to specify triggers, conditions, and responses</li>
+                        <li><strong>AI-friendly</strong> - Structured format helps AI understand and implement requirements</li>
+                    </ul>
+                </div>
+
+                <h2 id="basic-syntax">Basic EARS Syntax</h2>
+
+                <p>All EARS requirements follow this fundamental structure:</p>
+
+                <div class="ears-syntax">
+                    WHEN [condition] THE SYSTEM SHALL [behavior]
+                </div>
+
+                <p>This simple template forces you to specify:</p>
+                <ul>
+                    <li><strong>WHEN</strong> - The trigger or condition that activates the requirement</li>
+                    <li><strong>THE SYSTEM SHALL</strong> - What the system must do (never "should" or "may")</li>
+                    <li><strong>[behavior]</strong> - The specific, measurable action or response</li>
+                </ul>
+
+                <div class="ears-component">
+                    <h4>Basic Example</h4>
+                    <div class="ears-example">
+                        <div class="example-label">❌ Vague Requirement</div>
+                        <p>"The system should validate user input appropriately."</p>
+                    </div>
+                    
+                    <div class="ears-example">
+                        <div class="example-label">✅ EARS Requirement</div>
+                        <p><strong>WHEN</strong> a user submits a form with empty required fields <strong>THE SYSTEM SHALL</strong> display specific error messages for each missing field and prevent form submission.</p>
+                    </div>
+                </div>
+
+                <h2 id="requirement-types">Requirement Types</h2>
+
+                <p>EARS defines several requirement patterns for different scenarios:</p>
+
+                <div class="pattern-grid">
+                    <div class="pattern-card">
+                        <h4>Ubiquitous Requirements</h4>
+                        <p>Always active system behaviors</p>
+                        <div class="pattern-syntax">THE SYSTEM SHALL [behavior]</div>
+                        <div class="pattern-example">THE SYSTEM SHALL encrypt all user passwords using bcrypt with minimum 12 rounds</div>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>Event-Driven Requirements</h4>
+                        <p>Triggered by specific events</p>
+                        <div class="pattern-syntax">WHEN [event] THE SYSTEM SHALL [behavior]</div>
+                        <div class="pattern-example">WHEN a user clicks the logout button THE SYSTEM SHALL clear the session and redirect to the login page</div>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>State-Driven Requirements</h4>
+                        <p>Active while in specific state</p>
+                        <div class="pattern-syntax">WHILE [state] THE SYSTEM SHALL [behavior]</div>
+                        <div class="pattern-example">WHILE a file is uploading THE SYSTEM SHALL display a progress bar with percentage complete</div>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>Optional Features</h4>
+                        <p>Features that may be included</p>
+                        <div class="pattern-syntax">WHERE [feature] THE SYSTEM SHALL [behavior]</div>
+                        <div class="pattern-example">WHERE dark mode is enabled THE SYSTEM SHALL use the dark color theme for all UI elements</div>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>Unwanted Behaviors</h4>
+                        <p>Things the system must not do</p>
+                        <div class="pattern-syntax">THE SYSTEM SHALL NOT [behavior]</div>
+                        <div class="pattern-example">THE SYSTEM SHALL NOT store payment card numbers in plain text</div>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <h4>Complex Conditions</h4>
+                        <p>Multiple conditions with logical operators</p>
+                        <div class="pattern-syntax">WHEN [condition] AND [condition] THE SYSTEM SHALL [behavior]</div>
+                        <div class="pattern-example">WHEN a user is authenticated AND has admin privileges THE SYSTEM SHALL display the admin dashboard</div>
+                    </div>
+                </div>
+
+                <h2 id="advanced-patterns">Advanced EARS Patterns</h2>
+
+                <h3>Conditional Logic</h3>
+                <p>For complex business logic, EARS supports conditional statements:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Order Processing Example
+WHEN a customer submits an order THE SYSTEM SHALL:
+  IF the order total is less than $50 
+    THEN add a $5 shipping fee
+  ELSE IF the order total is between $50 and $100
+    THEN add a $2 shipping fee  
+  ELSE
+    THEN provide free shipping
+
+WHEN payment processing fails THE SYSTEM SHALL:
+  - Send an email notification to the customer
+  - Log the failure details for investigation
+  - Retain the order in "pending payment" status for 24 hours</code></pre>
+                </div>
+
+                <h3>Performance Requirements</h3>
+                <p>EARS excels at specifying measurable performance criteria:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Performance Specifications
+THE SYSTEM SHALL respond to user login requests within 2 seconds under normal load
+
+WHEN processing batch reports THE SYSTEM SHALL:
+  - Complete processing within 30 minutes for files up to 10MB
+  - Provide progress updates every 10% completion
+  - Allow users to cancel processing at any time
+
+THE SYSTEM SHALL support up to 1000 concurrent users without degrading response time beyond 5 seconds</code></pre>
+                </div>
+
+                <h3>Error Handling</h3>
+                <p>Specify exactly how errors should be handled:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Error Handling Requirements
+WHEN an API request fails due to network timeout THE SYSTEM SHALL:
+  - Retry the request up to 3 times with exponential backoff
+  - Display a user-friendly error message after all retries fail
+  - Log the failure details for debugging
+
+WHEN a user uploads an invalid file format THE SYSTEM SHALL:
+  - Reject the upload immediately
+  - Display specific error message listing supported formats
+  - Allow the user to select a different file without losing other form data
+
+THE SYSTEM SHALL NOT expose internal error details to end users</code></pre>
+                </div>
+
+                <h2 id="real-world-examples">Real-World Examples</h2>
+
+                <p>Here are complete EARS specifications for common application features:</p>
+
+                <h3>User Authentication System</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># User Authentication Requirements
+
+## Login Process
+WHEN a user enters valid credentials THE SYSTEM SHALL:
+  - Authenticate the user against the database
+  - Create a secure session token
+  - Redirect to the user's dashboard
+  - Log the successful login event
+
+WHEN a user enters invalid credentials THE SYSTEM SHALL:
+  - Display "Invalid username or password" message
+  - Increment failed login counter for that username
+  - Log the failed attempt with IP address
+  - NOT reveal whether username or password was incorrect
+
+WHEN a user account has 5 failed login attempts within 15 minutes THE SYSTEM SHALL:
+  - Lock the account for 30 minutes
+  - Send account lockout notification email
+  - Log security event for monitoring
+
+## Password Requirements
+THE SYSTEM SHALL enforce passwords that:
+  - Are at least 8 characters long
+  - Contain at least one uppercase letter
+  - Contain at least one lowercase letter  
+  - Contain at least one number
+  - Contain at least one special character
+
+THE SYSTEM SHALL NOT accept passwords that:
+  - Match the previous 5 passwords
+  - Contain the username
+  - Are common dictionary words
+
+## Session Management  
+WHILE a user session is active THE SYSTEM SHALL:
+  - Refresh session tokens every 30 minutes
+  - Track user activity timestamps
+  - Automatically logout after 2 hours of inactivity
+
+WHEN a user logs out THE SYSTEM SHALL:
+  - Invalidate the session token immediately
+  - Clear all session data
+  - Redirect to login page</code></pre>
+                </div>
+
+                <h3>E-commerce Shopping Cart</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Shopping Cart Requirements
+
+## Adding Items
+WHEN a user clicks "Add to Cart" for an available product THE SYSTEM SHALL:
+  - Add the selected quantity to the cart
+  - Update cart total and item count
+  - Display confirmation message with product name
+  - Persist cart contents to user session or database
+
+WHEN a user tries to add more items than available in stock THE SYSTEM SHALL:
+  - Display current stock level
+  - Allow adding only up to available quantity
+  - Suggest alternatives or backorder options
+
+## Modifying Cart
+WHEN a user changes item quantity in cart THE SYSTEM SHALL:
+  - Update cart totals instantly
+  - Validate new quantity against stock levels
+  - Save changes automatically
+  - Recalculate shipping and tax amounts
+
+WHEN a user removes an item from cart THE SYSTEM SHALL:
+  - Remove item immediately
+  - Update all totals and counts
+  - Provide "undo" option for 10 seconds
+  - Show updated cart summary
+
+## Cart Persistence
+THE SYSTEM SHALL preserve cart contents:
+  - For 30 days for registered users
+  - For duration of browser session for guests
+  - Across device switches for logged-in users
+
+WHEN a user's cart contains items no longer available THE SYSTEM SHALL:
+  - Mark unavailable items clearly
+  - Remove them from total calculations
+  - Suggest similar alternative products
+  - Allow proceeding with remaining items</code></pre>
+                </div>
+
+                <h2 id="common-mistakes">Common EARS Mistakes</h2>
+
+                <p>Avoid these frequent pitfalls when writing EARS requirements:</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>❌ Common Mistake</th>
+                            <th>✅ Correct EARS Format</th>
+                            <th>Why It Matters</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="bad">The system should validate input</td>
+                            <td class="good">WHEN a user submits a form THE SYSTEM SHALL validate all required fields</td>
+                            <td>Eliminates ambiguity about when validation occurs</td>
+                        </tr>
+                        <tr>
+                            <td class="bad">The system may send notifications</td>
+                            <td class="good">WHEN an order status changes THE SYSTEM SHALL send email notification to customer</td>
+                            <td>Makes notification sending mandatory, not optional</td>
+                        </tr>
+                        <tr>
+                            <td class="bad">Handle errors appropriately</td>
+                            <td class="good">WHEN API call fails THE SYSTEM SHALL display user-friendly error message and log technical details</td>
+                            <td>Specifies exactly what "appropriate" means</td>
+                        </tr>
+                        <tr>
+                            <td class="bad">Provide good user experience</td>
+                            <td class="good">WHEN page load time exceeds 3 seconds THE SYSTEM SHALL display loading indicator</td>
+                            <td>Defines measurable criteria for "good"</td>
+                        </tr>
+                        <tr>
+                            <td class="bad">System will be secure</td>
+                            <td class="good">THE SYSTEM SHALL encrypt all data transmissions using TLS 1.3</td>
+                            <td>Specifies concrete security measures</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 id="best-practices">EARS Best Practices</h2>
+
+                <h3>Writing Guidelines</h3>
+                <ul>
+                    <li><strong>Be specific</strong> - Avoid vague terms like "appropriate", "reasonable", or "user-friendly"</li>
+                    <li><strong>Use active voice</strong> - "THE SYSTEM SHALL process" not "data will be processed"</li>
+                    <li><strong>Include measurable criteria</strong> - Time limits, quantities, percentages</li>
+                    <li><strong>Specify error conditions</strong> - Don't just describe happy path scenarios</li>
+                    <li><strong>One requirement per statement</strong> - Avoid compound requirements with "and"</li>
+                </ul>
+
+                <h3>Organizational Tips</h3>
+                <ul>
+                    <li><strong>Group related requirements</strong> - Use clear section headers</li>
+                    <li><strong>Number requirements</strong> - Makes them easier to reference and track</li>
+                    <li><strong>Use consistent terminology</strong> - Define terms in a glossary</li>
+                    <li><strong>Include rationale</strong> - Explain why the requirement is needed</li>
+                    <li><strong>Mark priority levels</strong> - Must-have vs. nice-to-have features</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4>Avoid These Words in EARS</h4>
+                    <p>These vague terms lead to ambiguous requirements:</p>
+                    <ul>
+                        <li><strong>Should/May/Might</strong> - Use "SHALL" for mandatory requirements</li>
+                        <li><strong>Appropriate/Suitable/Proper</strong> - Specify exact criteria</li>
+                        <li><strong>User-friendly/Intuitive</strong> - Define measurable usability metrics</li>
+                        <li><strong>Fast/Quick/Slow</strong> - Provide specific time measurements</li>
+                        <li><strong>Large/Small/Big</strong> - Give exact sizes, quantities, or limits</li>
+                    </ul>
+                </div>
+
+                <h2 id="testing-ears">Testing EARS Requirements</h2>
+
+                <p>Well-written EARS requirements naturally translate into test cases:</p>
+
+                <h3>From Requirement to Test</h3>
+                <div class="ears-component">
+                    <h4>EARS Requirement</h4>
+                    <div class="ears-example">
+                        <p><strong>WHEN</strong> a user submits a contact form with valid data <strong>THE SYSTEM SHALL</strong> send confirmation email within 5 minutes and display success message</p>
+                    </div>
+                    
+                    <h4>Derived Test Cases</h4>
+                    <div class="code-block">
+                        <pre><code>Test Case 1: Valid Form Submission
+- Input: Complete form with valid email, name, message
+- Expected: Success message appears immediately
+- Expected: Confirmation email received within 5 minutes
+
+Test Case 2: Email Delivery Timing
+- Input: Valid form submission
+- Measure: Time from submission to email delivery
+- Expected: ≤ 5 minutes
+
+Test Case 3: Email Content Validation
+- Input: Form with specific test data
+- Expected: Email contains form data correctly
+- Expected: Email sent to submitted address</code></pre>
+                    </div>
+                </div>
+
+                <h3>Test Categories from EARS</h3>
+                <ul>
+                    <li><strong>Condition Testing</strong> - Verify WHEN conditions trigger correctly</li>
+                    <li><strong>Behavior Testing</strong> - Confirm SHALL behaviors execute as specified</li>
+                    <li><strong>Boundary Testing</strong> - Test limits specified in requirements</li>
+                    <li><strong>Error Testing</strong> - Validate error handling requirements</li>
+                    <li><strong>Performance Testing</strong> - Measure against specified timing requirements</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4>EARS Testing Benefits</h4>
+                    <ul>
+                        <li><strong>Automatic test generation</strong> - Each EARS statement suggests test scenarios</li>
+                        <li><strong>Complete coverage</strong> - Forces consideration of all conditions and responses</li>
+                        <li><strong>Measurable outcomes</strong> - Clear pass/fail criteria</li>
+                        <li><strong>Regression prevention</strong> - Specific requirements prevent scope creep</li>
+                    </ul>
+                </div>
+
+                <h3>Integration with Kiro</h3>
+                <p>Kiro's AI agents can automatically generate test suites from EARS requirements:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># In your tasks.md file:
+- [ ] Generate unit tests for all EARS requirements in requirements.md
+- [ ] Create integration tests for multi-step EARS workflows  
+- [ ] Implement performance tests for timing requirements
+- [ ] Set up automated regression testing for SHALL NOT requirements</code></pre>
+                </div>
+
+                <div class="info-box">
+                    <h4>Next Steps</h4>
+                    <p>Ready to implement EARS in your Kiro project?</p>
+                    <ul>
+                        <li><a href="/tips/spec-writing/">Read the Spec Writing Guide</a> for complete project examples</li>
+                        <li><a href="/tips/getting-started/">Start with the Getting Started tutorial</a> to practice EARS</li>
+                        <li><a href="/cheatsheets/">Browse the Cheat Sheets</a> for quick EARS reference</li>
+                        <li><a href="/tips/hooks-basics/">Learn about Hooks</a> to automate EARS validation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

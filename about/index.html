@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Kiro Directory - AWS Kiro Resource Hub</title>
+    <meta name="description" content="Learn about Kiro Directory, the community-driven resource hub for AWS Kiro developers. Comprehensive guides, comparisons, and tools for spec-driven development.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/about/">
+    <meta property="og:title" content="About Kiro Directory">
+    <meta property="og:description" content="Community-driven resource hub for AWS Kiro developers">
+    <meta property="og:image" content="https://kiro.directory/images/kiro-about-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About Kiro Directory">
+    <meta name="twitter:description" content="The ultimate resource hub for AWS Kiro">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,600,800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <style>
+        :root {
+            --bg-primary: #0A0F1B;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1A2332;
+            --text-primary: #E5E7EB;
+            --text-secondary: #9CA3AF;
+            --text-tertiary: #6B7280;
+            --accent-mint: #8AFFEF;
+            --accent-sunray: #FFD46B;
+            --accent-purple: #C084FC;
+            --border-color: #2A3441;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(17, 24, 39, 0.95);
+        }
+        
+        nav {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-mint);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-mint);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+        
+        .hero h1 {
+            background: linear-gradient(135deg, var(--accent-mint) 0%, var(--accent-sunray) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Content Sections */
+        .content-section {
+            padding: 3rem 0;
+        }
+        
+        .content-section:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .content-section h2 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .content-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Mission Statement */
+        .mission-statement {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent-mint);
+        }
+        
+        .mission-statement h3 {
+            color: var(--accent-mint);
+            margin-bottom: 1rem;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--accent-mint);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+        
+        .feature-card h4 {
+            color: var(--accent-mint);
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+        
+        .stat-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-mint);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        /* Team */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .team-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+        }
+        
+        .team-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .team-role {
+            color: var(--accent-mint);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .team-card p {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-mint);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+        
+        .timeline-date {
+            color: var(--accent-mint);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--accent-mint);
+            color: var(--bg-primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(138, 255, 239, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent-mint);
+            color: var(--accent-mint);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-mint);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Kiro Directory",
+        "description": "Community-driven resource hub for AWS Kiro developers",
+        "url": "https://kiro.directory/about/",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "Kiro Directory",
+            "description": "The ultimate resource hub for AWS Kiro spec-driven development",
+            "url": "https://kiro.directory",
+            "foundingDate": "2024",
+            "sameAs": [
+                "https://github.com/kiro-directory"
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">
+                <span>⚡</span> Kiro
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/compare/">Compare</a></li>
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/tips/">Tips</a></li>
+                <li><a href="/about/" class="active">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>About Kiro Directory</h1>
+            <p>The community-driven resource hub for AWS Kiro developers. Comprehensive guides, tool comparisons, and everything you need to master spec-driven development.</p>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Mission -->
+        <section class="content-section">
+            <h2>
+                <div class="section-icon">🎯</div>
+                Our Mission
+            </h2>
+            <div class="mission-statement">
+                <h3>Empowering Developers Through Spec-Driven Development</h3>
+                <p>We believe that AWS Kiro represents the future of software development. By providing comprehensive resources, tutorials, and community insights, we help developers transition from traditional coding to specification-driven development.</p>
+                <p>Our goal is to make Kiro accessible to developers of all skill levels, from beginners taking their first steps in spec-driven development to enterprise teams scaling production systems.</p>
+            </div>
+        </section>
+        
+        <!-- What We Offer -->
+        <section class="content-section">
+            <h2>
+                <div class="section-icon">🚀</div>
+                What We Offer
+            </h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>📚 Comprehensive Guides</h4>
+                    <p>From quick-start tutorials to advanced multi-agent workflows, our guides cover every aspect of Kiro development with practical examples.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>⚡ Command Cheat Sheets</h4>
+                    <p>Quick reference materials for all Kiro commands, EARS format patterns, and common development workflows to boost your productivity.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔍 Tool Comparisons</h4>
+                    <p>Detailed comparisons between Kiro and 15+ AI coding tools, helping you make informed decisions for your development workflow.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💡 Tips & Tricks</h4>
+                    <p>Expert tips from the community on optimization, best practices, and advanced techniques for getting the most out of Kiro.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🏗️ Architecture Patterns</h4>
+                    <p>Proven architectural patterns and design principles for building production-ready applications with spec-driven development.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🤝 Community Hub</h4>
+                    <p>A place for developers to share experiences, showcase projects, and collaborate on improving the Kiro ecosystem.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats -->
+        <section class="content-section">
+            <h2>
+                <div class="section-icon">📊</div>
+                Community Impact
+            </h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Monthly Visitors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Guides & Tutorials</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Tool Comparisons</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5K+</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Timeline -->
+        <section class="content-section">
+            <h2>
+                <div class="section-icon">📅</div>
+                Our Journey
+            </h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">🌱</div>
+                    <div class="timeline-date">Q4 2024</div>
+                    <div class="timeline-title">Kiro Directory Launched</div>
+                    <div class="timeline-desc">Started as a simple resource collection for early Kiro adopters, focusing on basic tutorials and command references.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">📚</div>
+                    <div class="timeline-date">Q1 2025</div>
+                    <div class="timeline-title">Comprehensive Guide Library</div>
+                    <div class="timeline-desc">Expanded to include detailed guides, EARS format tutorials, and multi-agent workflow documentation.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">🔍</div>
+                    <div class="timeline-date">Q1 2025</div>
+                    <div class="timeline-title">Tool Comparison Hub</div>
+                    <div class="timeline-desc">Launched comprehensive comparisons with GitHub Copilot, Cursor, Claude Code, and 15+ other AI development tools.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">🤝</div>
+                    <div class="timeline-date">Q2 2025</div>
+                    <div class="timeline-title">Community Platform</div>
+                    <div class="timeline-desc">Building a collaborative platform for developers to share patterns, showcase projects, and contribute to the ecosystem.</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Values -->
+        <section class="content-section">
+            <h2>
+                <div class="section-icon">💎</div>
+                Our Values
+            </h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h4>🌟 Quality First</h4>
+                    <p>Every guide and tutorial is thoroughly tested and reviewed to ensure accuracy and practical value for real-world development.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎓 Education Focused</h4>
+                    <p>We believe in teaching principles, not just commands. Our content helps you understand the 'why' behind spec-driven development.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🌍 Community Driven</h4>
+                    <p>Built by developers, for developers. We listen to the community and adapt our content based on real needs and feedback.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔓 Open & Accessible</h4>
+                    <p>All our resources are freely available. We believe knowledge should be accessible to every developer, regardless of background.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Disclaimer -->
+        <section class="content-section">
+            <h2>
+                <div class="section-icon">ℹ️</div>
+                Important Note
+            </h2>
+            <div style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; border-left: 4px solid var(--accent-sunray);">
+                <p><strong>Independent Resource:</strong> Kiro Directory is an independent, community-driven project. We are not affiliated with Amazon Web Services (AWS) or the official AWS Kiro team.</p>
+                <p>Our goal is to provide valuable resources and insights about AWS Kiro from a developer perspective. All content is created based on publicly available information, community experiences, and extensive testing.</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="cta-section">
+            <h2>Join Our Community</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Whether you're just starting with Kiro or you're an experienced practitioner, there's a place for you in our community.
+            </p>
+            <div class="cta-buttons">
+                <a href="/quickstart/" class="btn btn-primary">Start Learning</a>
+                <a href="https://github.com/kiro-directory" class="btn btn-secondary" target="_blank" rel="noopener">Contribute on GitHub</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                        <li><a href="/tips/">Tips & Tricks</a></li>
+                        <li><a href="/quickstart/">Quick Start</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Compare</h4>
+                    <ul class="footer-links">
+                        <li><a href="/compare/copilot/">vs GitHub Copilot</a></li>
+                        <li><a href="/compare/cursor/">vs Cursor</a></li>
+                        <li><a href="/compare/claude-code/">vs Claude Code</a></li>
+                        <li><a href="/compare/">All Comparisons</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/kiro-directory">GitHub</a></li>
+                        <li><a href="/community/">Contribute</a></li>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/privacy/">Privacy Policy</a></li>
+                        <li><a href="/terms/">Terms of Service</a></li>
+                        <li><a href="/security/">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kiro Directory. Not affiliated with AWS. Updated weekly.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://plausible.io/js/script.js"></script>
+</body>
+</html>

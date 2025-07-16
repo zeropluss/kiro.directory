@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Steering Configuration Guide - Project Context & AI Guidance | Kiro Directory</title>
+    <meta name="description" content="Master AWS Kiro steering files to provide context and guidance for AI agents. Complete guide with examples and best practices.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/tips/steering-setup/">
+    <meta property="og:title" content="Kiro Steering Configuration Guide">
+    <meta property="og:description" content="Learn to configure Kiro steering files for better AI agent context and guidance.">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/tips/steering-setup/">
+    <meta property="twitter:title" content="Kiro Steering Configuration Guide">
+    <meta property="twitter:description" content="Configure project context for smarter AI assistance">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Kiro Steering Configuration Guide",
+      "description": "Complete guide to configuring AWS Kiro steering files for better AI agent context and project guidance",
+      "image": "https://kiro.directory/logo/favicon-2048x2048.png",
+      "totalTime": "PT20M",
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "AWS Kiro project setup"
+        },
+        {
+          "@type": "HowToSupply", 
+          "name": "Basic understanding of YAML"
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "AWS Kiro IDE"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Create project steering configuration"
+        },
+        {
+          "@type": "HowToStep", 
+          "text": "Configure AI agent personas and behaviors"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Set up code style and convention guidelines"
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Article Layout */
+        .article-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .article-content {
+            padding: 3rem 0;
+        }
+        
+        .prose {
+            max-width: none;
+        }
+        
+        .prose h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--color-accent);
+        }
+        
+        .prose h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--color-text);
+        }
+        
+        .prose h4 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--color-accent-2);
+        }
+        
+        .prose p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .prose ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .prose a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .prose a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            color: var(--color-text);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        /* Configuration cards */
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .config-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .config-card h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        .config-card p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .config-card .config-example {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background-color: var(--color-surface-2);
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.75rem;
+        }
+        
+        /* File structure display */
+        .file-tree {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+        }
+        
+        .file-tree .folder {
+            color: var(--color-accent-2);
+            font-weight: 600;
+        }
+        
+        .file-tree .file {
+            color: var(--color-text);
+        }
+        
+        .file-tree .comment {
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+        
+        /* Warning/Info boxes */
+        .warning-box {
+            background-color: rgba(255, 180, 84, 0.1);
+            border: 1px solid var(--color-warning);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--color-warning);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: rgba(78, 161, 255, 0.1);
+            border: 1px solid var(--color-info);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-box h4 {
+            color: var(--color-info);
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-box {
+            background-color: rgba(0, 193, 124, 0.1);
+            border: 1px solid var(--color-success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .success-box h4 {
+            color: var(--color-success);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Tab system */
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+        
+        .tab-button:hover {
+            color: var(--color-text);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .prose {
+                font-size: 1rem;
+            }
+            
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a> › <a href="/cheatsheets/">Cheat Sheets</a> › Steering Setup
+        </div>
+        
+        <section class="article-header">
+            <h1>Kiro Steering Configuration Guide</h1>
+            <p class="article-subtitle">Provide project context and guidance to AI agents for smarter assistance</p>
+        </section>
+        
+        <section class="article-content">
+            <div class="prose">
+                <div class="toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#introduction">What is Kiro Steering?</a></li>
+                        <li><a href="#setup">Setting Up Steering Files</a></li>
+                        <li><a href="#project-config">Project Configuration</a></li>
+                        <li><a href="#ai-personas">AI Agent Personas</a></li>
+                        <li><a href="#code-conventions">Code Style & Conventions</a></li>
+                        <li><a href="#advanced-steering">Advanced Steering</a></li>
+                        <li><a href="#team-steering">Team Configurations</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introduction">What is Kiro Steering?</h2>
+                
+                <p>Kiro steering files provide context and guidance to AI agents working on your project. Think of them as configuration files that teach the AI about your project's structure, conventions, preferences, and goals.</p>
+                
+                <p>Without steering, AI agents work with generic knowledge. With proper steering, they understand your specific codebase, follow your team's conventions, and make decisions aligned with your project goals.</p>
+
+                <div class="info-box">
+                    <h4>Steering Benefits</h4>
+                    <ul>
+                        <li><strong>Consistent code style</strong> - AI follows your formatting and naming conventions</li>
+                        <li><strong>Architecture awareness</strong> - AI understands your project structure and patterns</li>
+                        <li><strong>Technology preferences</strong> - AI chooses libraries and approaches you prefer</li>
+                        <li><strong>Team alignment</strong> - All AI agents work according to team standards</li>
+                        <li><strong>Domain knowledge</strong> - AI learns your business logic and terminology</li>
+                    </ul>
+                </div>
+
+                <h2 id="setup">Setting Up Steering Files</h2>
+
+                <p>Steering files live in the <code>.kiro/</code> directory at your project root:</p>
+
+                <div class="file-tree">
+                    my-project/
+                    ├── .kiro/
+                    │   ├── <span class="file">steering.yml</span>        <span class="comment"># Main steering configuration</span>
+                    │   ├── <span class="file">personas.yml</span>       <span class="comment"># AI agent personalities</span>
+                    │   ├── <span class="file">conventions.yml</span>    <span class="comment"># Code style and patterns</span>
+                    │   ├── <span class="file">glossary.yml</span>       <span class="comment"># Domain terminology</span>
+                    │   └── <span class="folder">hooks/</span>          <span class="comment"># Hook configurations</span>
+                    ├── src/
+                    ├── package.json
+                    └── README.md
+                </div>
+
+                <p>To create your first steering configuration:</p>
+
+                <ol>
+                    <li>Open Command Palette (<code>Ctrl+Shift+P</code>)</li>
+                    <li>Run "Kiro: Initialize Steering"</li>
+                    <li>Choose from templates or start with blank configuration</li>
+                    <li>Customize the generated files for your project</li>
+                </ol>
+
+                <h2 id="project-config">Project Configuration</h2>
+
+                <p>The main <code>steering.yml</code> file contains project-wide settings:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/steering.yml
+name: "E-commerce Platform"
+description: "Multi-tenant e-commerce platform with React frontend and Node.js backend"
+
+# Project metadata
+project:
+  type: "web-application"
+  primary_language: "typescript"
+  framework: "react"
+  backend: "express"
+  database: "postgresql"
+  deployment: "aws"
+
+# Technology stack
+tech_stack:
+  frontend:
+    - "react@18"
+    - "typescript@5"
+    - "tailwindcss@3"
+    - "react-router@6"
+    - "react-query@4"
+  
+  backend:
+    - "express@4"
+    - "prisma@5"
+    - "jsonwebtoken@9"
+    - "bcryptjs@2"
+    - "helmet@7"
+  
+  testing:
+    - "jest@29"
+    - "react-testing-library@14"
+    - "cypress@13"
+    - "supertest@6"
+
+# Architecture patterns
+architecture:
+  frontend_pattern: "component-composition"
+  state_management: "react-query + context"
+  api_pattern: "rest"
+  auth_pattern: "jwt-tokens"
+  data_pattern: "prisma-orm"
+
+# Development preferences
+preferences:
+  code_style: "prettier + eslint"
+  import_style: "absolute-imports"
+  component_style: "functional-components"
+  error_handling: "error-boundaries"
+  testing_style: "test-driven-development"</code></pre>
+                </div>
+
+                <h3>Configuration Sections</h3>
+
+                <div class="config-grid">
+                    <div class="config-card">
+                        <h4>Project Metadata</h4>
+                        <p>Basic information about your project type and primary technologies</p>
+                        <div class="config-example">type: "web-application"<br>primary_language: "typescript"</div>
+                    </div>
+                    
+                    <div class="config-card">
+                        <h4>Technology Stack</h4>
+                        <p>Specific versions and libraries the AI should prefer</p>
+                        <div class="config-example">frontend:<br>  - "react@18"<br>  - "tailwindcss@3"</div>
+                    </div>
+                    
+                    <div class="config-card">
+                        <h4>Architecture Patterns</h4>
+                        <p>Design patterns and architectural decisions to follow</p>
+                        <div class="config-example">frontend_pattern: "component-composition"<br>api_pattern: "rest"</div>
+                    </div>
+                    
+                    <div class="config-card">
+                        <h4>Development Preferences</h4>
+                        <p>Code style, testing approach, and development practices</p>
+                        <div class="config-example">testing_style: "test-driven-development"<br>error_handling: "error-boundaries"</div>
+                    </div>
+                </div>
+
+                <h2 id="ai-personas">AI Agent Personas</h2>
+
+                <p>Personas define different AI agent behaviors for specific tasks:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/personas.yml
+personas:
+  architect:
+    role: "Senior Software Architect"
+    personality: "methodical, security-conscious, performance-focused"
+    expertise:
+      - "system design"
+      - "scalability patterns"
+      - "security best practices"
+      - "performance optimization"
+    guidelines: |
+      When designing systems:
+      1. Always consider scalability from the start
+      2. Design for security by default
+      3. Choose battle-tested technologies
+      4. Document architectural decisions
+      5. Consider operational complexity
+
+  developer:
+    role: "Full-Stack Developer"
+    personality: "pragmatic, test-driven, detail-oriented"
+    expertise:
+      - "react development"
+      - "node.js backends"
+      - "database design"
+      - "testing strategies"
+    guidelines: |
+      When writing code:
+      1. Write tests before implementation
+      2. Use TypeScript strictly
+      3. Follow existing patterns
+      4. Handle errors gracefully
+      5. Write self-documenting code
+
+  reviewer:
+    role: "Senior Code Reviewer"
+    personality: "thorough, constructive, quality-focused"
+    expertise:
+      - "code quality"
+      - "security vulnerabilities"
+      - "performance issues"
+      - "maintainability"
+    guidelines: |
+      When reviewing code:
+      1. Check for security vulnerabilities
+      2. Verify test coverage
+      3. Ensure consistent style
+      4. Look for performance issues
+      5. Suggest improvements kindly
+
+  debugger:
+    role: "Senior Debug Specialist"
+    personality: "analytical, patient, systematic"
+    expertise:
+      - "root cause analysis"
+      - "performance debugging"
+      - "error tracking"
+      - "log analysis"
+    guidelines: |
+      When debugging:
+      1. Reproduce the issue first
+      2. Check logs systematically
+      3. Use debugging tools effectively
+      4. Document findings clearly
+      5. Verify fixes thoroughly</code></pre>
+                </div>
+
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="switchTab('using-personas')">Using Personas</button>
+                        <button class="tab-button" onclick="switchTab('custom-personas')">Custom Personas</button>
+                        <button class="tab-button" onclick="switchTab('persona-examples')">Example Outputs</button>
+                    </div>
+                    
+                    <div id="using-personas" class="tab-content active">
+                        <h3>How to Use Personas</h3>
+                        <p>Reference personas in your specs or chat with specific roles:</p>
+                        <div class="code-block">
+                            <pre><code># In tasks.md
+- [ ] @architect: Design the user authentication system
+- [ ] @developer: Implement login form with validation  
+- [ ] @reviewer: Review authentication implementation
+- [ ] @debugger: Investigate login performance issues
+
+# In Kiro chat
+/persona architect
+How should I structure the microservices architecture?
+
+/persona reviewer  
+Please review this component for security issues</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div id="custom-personas" class="tab-content">
+                        <h3>Creating Custom Personas</h3>
+                        <p>Define personas specific to your domain:</p>
+                        <div class="code-block">
+                            <pre><code>personas:
+  ux_designer:
+    role: "UX/UI Designer"
+    personality: "user-focused, empathetic, creative"
+    expertise:
+      - "user experience design"
+      - "accessibility standards"
+      - "design systems"
+      - "user research"
+    guidelines: |
+      When designing interfaces:
+      1. Put user needs first
+      2. Follow WCAG accessibility guidelines
+      3. Maintain design system consistency
+      4. Test with real users
+      5. Consider mobile-first design
+
+  data_analyst:
+    role: "Senior Data Analyst"
+    personality: "analytical, detail-oriented, insight-driven"
+    expertise:
+      - "data modeling"
+      - "analytics implementation"
+      - "performance metrics"
+      - "reporting"
+    guidelines: |
+      When working with data:
+      1. Validate data quality first
+      2. Choose appropriate metrics
+      3. Design for performance
+      4. Document assumptions
+      5. Ensure privacy compliance</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div id="persona-examples" class="tab-content">
+                        <h3>Persona Output Examples</h3>
+                        <p>See how different personas respond to the same request:</p>
+                        <div class="code-block">
+                            <pre><code>Request: "How should I handle user authentication?"
+
+@architect response:
+"For enterprise-grade authentication, I recommend:
+1. OAuth 2.0 with PKCE for web apps
+2. JWT tokens with short expiry (15 min)
+3. Refresh token rotation
+4. Rate limiting on auth endpoints
+5. Multi-factor authentication support
+Consider AWS Cognito or Auth0 for managed solutions."
+
+@developer response:
+"Let's implement JWT authentication step by step:
+1. Install jsonwebtoken and bcryptjs
+2. Create user model with hashed passwords
+3. Build login/register endpoints
+4. Add middleware for token verification
+5. Write tests for all auth flows
+I'll start with the user registration endpoint..."
+
+@reviewer response:
+"Reviewing your auth implementation:
+✅ Passwords are properly hashed
+❌ Missing rate limiting on login attempts
+❌ JWT secret should be environment variable
+❌ No input validation on auth endpoints
+⚠️ Consider adding refresh token mechanism
+Overall: Secure foundation but needs hardening."</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="code-conventions">Code Style & Conventions</h2>
+
+                <p>Define specific coding standards for consistent AI output:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/conventions.yml
+code_style:
+  # General formatting
+  formatting:
+    line_length: 100
+    indent_style: "spaces"
+    indent_size: 2
+    quote_style: "single"
+    trailing_commas: true
+    semicolons: true
+
+  # Naming conventions
+  naming:
+    variables: "camelCase"
+    functions: "camelCase" 
+    classes: "PascalCase"
+    components: "PascalCase"
+    files: "kebab-case"
+    directories: "kebab-case"
+    constants: "UPPER_SNAKE_CASE"
+
+  # TypeScript specific
+  typescript:
+    strict_mode: true
+    no_any: true
+    explicit_return_types: false
+    interface_prefix: false
+    prefer_type_over_interface: false
+
+# React conventions
+react:
+  # Component structure
+  component_style: "functional"
+  prop_types: "typescript"
+  default_props: "default-parameters"
+  
+  # File organization
+  component_files:
+    - "ComponentName/index.tsx"        # Main component
+    - "ComponentName/ComponentName.tsx" # Implementation
+    - "ComponentName/types.ts"          # Type definitions
+    - "ComponentName/hooks.ts"          # Custom hooks
+    - "ComponentName/styles.ts"         # Styled components
+    - "ComponentName/test.tsx"          # Tests
+
+  # Naming patterns
+  hooks: "use[PascalCase]"
+  contexts: "[PascalCase]Context"
+  providers: "[PascalCase]Provider"
+  hocs: "with[PascalCase]"
+
+# Import/Export patterns
+imports:
+  # Import order
+  order:
+    - "react and react-dom"
+    - "external libraries"
+    - "internal utilities"
+    - "components"
+    - "types"
+    - "styles"
+  
+  # Import styles
+  default_imports: "prefer"
+  named_imports: "destructured"
+  path_style: "absolute"
+  
+  # Examples
+  examples:
+    react: "import React from 'react';"
+    external: "import { z } from 'zod';"
+    internal: "import { formatDate } from '@/utils/date';"
+    component: "import { Button } from '@/components/ui/Button';"
+    type: "import type { User } from '@/types/user';"
+
+# Testing conventions
+testing:
+  # File naming
+  test_files: "[ComponentName].test.tsx"
+  test_directory: "__tests__"
+  
+  # Test structure
+  describe_blocks: "Component: [ComponentName]"
+  test_names: "should [expected behavior] when [condition]"
+  
+  # Testing patterns
+  patterns:
+    - "Arrange, Act, Assert"
+    - "One assertion per test"
+    - "Descriptive test names"
+    - "Mock external dependencies"
+    - "Test user interactions, not implementation"
+
+# API conventions
+api:
+  # REST endpoints
+  endpoint_naming: "kebab-case"
+  http_methods:
+    get: "retrieve data"
+    post: "create new resource"
+    put: "update entire resource"
+    patch: "partial update"
+    delete: "remove resource"
+  
+  # Response format
+  response_structure:
+    success: "{ data: T, meta?: object }"
+    error: "{ error: { message: string, code: string, details?: object } }"
+  
+  # Status codes
+  status_codes:
+    200: "successful GET, PUT, PATCH"
+    201: "successful POST (creation)"
+    204: "successful DELETE"
+    400: "bad request/validation error"
+    401: "authentication required"
+    403: "insufficient permissions"
+    404: "resource not found"
+    422: "unprocessable entity"
+    500: "internal server error"</code></pre>
+                </div>
+
+                <h2 id="advanced-steering">Advanced Steering Configurations</h2>
+
+                <h3>Environment-Specific Steering</h3>
+                <p>Different configurations for development, staging, and production:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/environments.yml
+default: &default
+  logging_level: "info"
+  error_reporting: true
+  performance_monitoring: true
+
+development:
+  <<: *default
+  logging_level: "debug"
+  hot_reload: true
+  strict_type_checking: true
+  ai_behavior:
+    verbosity: "high"
+    explain_decisions: true
+    suggest_alternatives: true
+
+staging:
+  <<: *default
+  logging_level: "warn"
+  ai_behavior:
+    verbosity: "medium"
+    focus_on_testing: true
+    validate_deployments: true
+
+production:
+  <<: *default
+  logging_level: "error"
+  strict_validation: true
+  ai_behavior:
+    verbosity: "low"
+    conservative_changes: true
+    require_approval: true</code></pre>
+                </div>
+
+                <h3>Domain-Specific Glossary</h3>
+                <p>Teach AI agents your business terminology:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/glossary.yml
+business_terms:
+  tenant: "A customer organization using our multi-tenant platform"
+  workspace: "A tenant's isolated environment with their data and settings"
+  billing_cycle: "Monthly or yearly subscription period for a tenant"
+  seat: "A licensed user account within a workspace"
+  usage_quota: "Monthly limits on API calls, storage, or features"
+
+technical_terms:
+  service_layer: "Business logic layer between controllers and repositories"
+  repository_pattern: "Data access layer abstracting database operations"
+  aggregate: "Domain entity with related objects treated as a single unit"
+  event_sourcing: "Storing state changes as a sequence of events"
+  cqrs: "Command Query Responsibility Segregation pattern"
+
+api_conventions:
+  endpoints:
+    "/tenants/{tenantId}/workspaces": "Workspace management for a tenant"
+    "/workspaces/{workspaceId}/users": "User management within workspace"
+    "/billing/subscriptions": "Subscription and billing management"
+    "/usage/metrics": "Usage tracking and quota monitoring"
+
+common_patterns:
+  multi_tenancy: |
+    All database queries must include tenant_id for data isolation.
+    Use row-level security policies in PostgreSQL.
+    Validate tenant access in middleware.
+  
+  event_handling: |
+    Use domain events for cross-aggregate communication.
+    Events are stored in event_store table.
+    Event handlers are idempotent and fault-tolerant.
+  
+  caching_strategy: |
+    Cache tenant configuration in Redis with TTL.
+    Use workspace-scoped cache keys.
+    Invalidate cache on configuration changes.</code></pre>
+                </div>
+
+                <h2 id="team-steering">Team Configurations</h2>
+
+                <p>Share steering configurations across your team:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/team.yml
+team:
+  name: "Platform Engineering Team"
+  size: 8
+  experience_level: "senior"
+  
+  # Team preferences
+  communication:
+    code_review_style: "collaborative"
+    documentation_level: "comprehensive" 
+    meeting_frequency: "weekly"
+  
+  # Shared tools and practices
+  tools:
+    version_control: "git"
+    ci_cd: "github-actions"
+    monitoring: "datadog"
+    error_tracking: "sentry"
+    documentation: "notion"
+  
+  # Development workflow
+  workflow:
+    branching_strategy: "git-flow"
+    review_process: "pull-request"
+    deployment_strategy: "blue-green"
+    testing_strategy: "test-pyramid"
+
+# Role-based permissions
+roles:
+  senior_engineer:
+    can_modify_architecture: true
+    can_approve_prs: true
+    can_deploy_production: true
+    steering_override: true
+  
+  engineer:
+    can_modify_architecture: false
+    can_approve_prs: true
+    can_deploy_production: false
+    steering_override: false
+  
+  junior_engineer:
+    can_modify_architecture: false
+    can_approve_prs: false
+    can_deploy_production: false
+    steering_override: false
+
+# Shared guidelines
+shared_guidelines: |
+  Our team values:
+  1. Code quality over speed
+  2. Testing is not optional
+  3. Security by design
+  4. Performance matters
+  5. Documentation enables collaboration
+  
+  When AI agents work on our code:
+  - Always follow our conventions.yml
+  - Write comprehensive tests
+  - Update documentation
+  - Consider security implications
+  - Ask for clarification when uncertain</code></pre>
+                </div>
+
+                <h2 id="best-practices">Steering Best Practices</h2>
+
+                <div class="warning-box">
+                    <h4>Common Steering Mistakes</h4>
+                    <ul>
+                        <li><strong>Too generic</strong> - Steering should be specific to your project</li>
+                        <li><strong>Overly complex</strong> - Start simple and add complexity gradually</li>
+                        <li><strong>Outdated information</strong> - Keep steering files current with your tech stack</li>
+                        <li><strong>Conflicting rules</strong> - Ensure consistency across all steering files</li>
+                        <li><strong>Missing context</strong> - Explain the "why" behind your conventions</li>
+                    </ul>
+                </div>
+
+                <h3>Effective Steering Principles</h3>
+
+                <ul>
+                    <li><strong>Start small</strong> - Begin with basic project info and core conventions</li>
+                    <li><strong>Be specific</strong> - Vague guidance leads to inconsistent AI behavior</li>
+                    <li><strong>Include examples</strong> - Show AI agents exactly what you want</li>
+                    <li><strong>Explain rationale</strong> - Help AI understand why rules exist</li>
+                    <li><strong>Update regularly</strong> - Keep steering current with your evolving project</li>
+                </ul>
+
+                <h3>Testing Your Steering</h3>
+
+                <p>Validate that your steering configuration works effectively:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Test steering with specific requests
+kiro chat "Create a new React component following our conventions"
+kiro chat "@developer: Implement user authentication"
+kiro chat "@reviewer: Check this component for issues"
+
+# Verify consistent outputs across team members
+# Compare AI responses with same steering configuration
+# Check that generated code follows your style guide</code></pre>
+                </div>
+
+                <div class="success-box">
+                    <h4>Steering Success Indicators</h4>
+                    <ul>
+                        <li><strong>Consistent code style</strong> - AI output matches your project patterns</li>
+                        <li><strong>Appropriate technology choices</strong> - AI selects libraries from your stack</li>
+                        <li><strong>Domain-aware responses</strong> - AI uses your business terminology correctly</li>
+                        <li><strong>Architecture alignment</strong> - AI suggestions fit your system design</li>
+                        <li><strong>Team satisfaction</strong> - Developers find AI assistance more helpful</li>
+                    </ul>
+                </div>
+
+                <h3>Steering Maintenance</h3>
+
+                <p>Keep your steering configuration effective over time:</p>
+
+                <ul>
+                    <li><strong>Review monthly</strong> - Check if steering matches current practices</li>
+                    <li><strong>Update with tech stack changes</strong> - Add new libraries and frameworks</li>
+                    <li><strong>Gather team feedback</strong> - Ask developers how AI assistance could improve</li>
+                    <li><strong>Version control steering</strong> - Track changes and maintain history</li>
+                    <li><strong>Share improvements</strong> - Document effective steering patterns</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>Related Resources</h4>
+                    <ul>
+                        <li><a href="/tips/getting-started/">Getting Started with Kiro</a> - Basic project setup</li>
+                        <li><a href="/tips/hooks-basics/">Hooks Automation Guide</a> - Automated workflows</li>
+                        <li><a href="/tips/spec-writing/">Spec Writing Guide</a> - Requirements and design</li>
+                        <li><a href="/cheatsheets/">Kiro Cheat Sheets</a> - Quick reference guides</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+        
+        // Tab switching functionality
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

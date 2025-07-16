@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Kiro Directory - Get in Touch</title>
+    <meta name="description" content="Contact the Kiro Directory team. Questions about AWS Kiro? Want to contribute? Reach out via email, GitHub, or our community channels.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/contact/">
+    <meta property="og:title" content="Contact Kiro Directory">
+    <meta property="og:description" content="Get in touch with the Kiro Directory team">
+    <meta property="og:image" content="https://kiro.directory/images/kiro-contact-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Kiro Directory">
+    <meta name="twitter:description" content="Get in touch with us">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=jetbrains-mono:400,600,800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <style>
+        :root {
+            --bg-primary: #0A0F1B;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1A2332;
+            --text-primary: #E5E7EB;
+            --text-secondary: #9CA3AF;
+            --text-tertiary: #6B7280;
+            --accent-mint: #8AFFEF;
+            --accent-sunray: #FFD46B;
+            --accent-purple: #C084FC;
+            --border-color: #2A3441;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Header */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(17, 24, 39, 0.95);
+        }
+        
+        nav {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-mint);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-mint);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 3rem;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+        }
+        
+        .hero h1 {
+            background: linear-gradient(135deg, var(--accent-mint) 0%, var(--accent-sunray) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Contact Options */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+        
+        .contact-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .contact-card:hover {
+            border-color: var(--accent-mint);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .contact-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-mint);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 255, 239, 0.3);
+        }
+        
+        .contact-btn.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .contact-btn.secondary:hover {
+            border-color: var(--accent-mint);
+            color: var(--accent-mint);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .faq-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: background-color 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--accent-mint);
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+        
+        /* Response Time */
+        .response-info {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent-mint);
+        }
+        
+        .response-info h4 {
+            color: var(--accent-mint);
+            margin-bottom: 0.5rem;
+        }
+        
+        .response-info p {
+            color: var(--text-secondary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-mint);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Kiro Directory",
+        "description": "Get in touch with the Kiro Directory team",
+        "url": "https://kiro.directory/contact/",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "Kiro Directory",
+            "url": "https://kiro.directory",
+            "contactPoint": [
+                {
+                    "@type": "ContactPoint",
+                    "contactType": "general",
+                    "email": "hello@kiro.directory"
+                },
+                {
+                    "@type": "ContactPoint",
+                    "contactType": "technical support",
+                    "url": "https://github.com/kiro-directory/support"
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">
+                <span>⚡</span> Kiro
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/compare/">Compare</a></li>
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/tips/">Tips</a></li>
+                <li><a href="/contact/" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Get in Touch</h1>
+            <p>Have questions about AWS Kiro? Want to contribute to our community? Found an issue with our guides? We'd love to hear from you!</p>
+        </div>
+    </section>
+    
+    <!-- Contact Options -->
+    <main class="container">
+        <section class="contact-grid">
+            <!-- General Inquiries -->
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>General Inquiries</h3>
+                <p>Questions about Kiro Directory, collaboration opportunities, or general feedback about our resources.</p>
+                <a href="mailto:hello@kiro.directory" class="contact-btn">
+                    <span>Send Email</span>
+                    <span>→</span>
+                </a>
+            </div>
+            
+            <!-- Technical Support -->
+            <div class="contact-card">
+                <div class="contact-icon">🛠️</div>
+                <h3>Technical Support</h3>
+                <p>Issues with guides, found errors in our documentation, or need help with specific Kiro implementations.</p>
+                <a href="https://github.com/kiro-directory/support/issues" class="contact-btn" target="_blank" rel="noopener">
+                    <span>Create Issue</span>
+                    <span>↗</span>
+                </a>
+            </div>
+            
+            <!-- Content Contributions -->
+            <div class="contact-card">
+                <div class="contact-icon">✍️</div>
+                <h3>Content Contributions</h3>
+                <p>Want to write guides, share tips, or contribute to our comparison database? We welcome community content!</p>
+                <a href="https://github.com/kiro-directory/content" class="contact-btn" target="_blank" rel="noopener">
+                    <span>Contribute</span>
+                    <span>↗</span>
+                </a>
+            </div>
+            
+            <!-- Community Discussion -->
+            <div class="contact-card">
+                <div class="contact-icon">💬</div>
+                <h3>Community Discussion</h3>
+                <p>Join our community discussions, share your Kiro projects, and connect with other developers.</p>
+                <a href="https://github.com/kiro-directory/discussions" class="contact-btn secondary" target="_blank" rel="noopener">
+                    <span>Join Discussions</span>
+                    <span>↗</span>
+                </a>
+            </div>
+            
+            <!-- Bug Reports -->
+            <div class="contact-card">
+                <div class="contact-icon">🐛</div>
+                <h3>Bug Reports</h3>
+                <p>Found a bug in our website, broken links, or other technical issues? Help us improve by reporting them.</p>
+                <a href="https://github.com/kiro-directory/website/issues" class="contact-btn secondary" target="_blank" rel="noopener">
+                    <span>Report Bug</span>
+                    <span>↗</span>
+                </a>
+            </div>
+            
+            <!-- Feature Requests -->
+            <div class="contact-card">
+                <div class="contact-icon">💡</div>
+                <h3>Feature Requests</h3>
+                <p>Have ideas for new guides, tools, or features that would benefit the Kiro community? We'd love to hear them!</p>
+                <a href="https://github.com/kiro-directory/feature-requests/issues" class="contact-btn secondary" target="_blank" rel="noopener">
+                    <span>Suggest Feature</span>
+                    <span>↗</span>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Response Time Info -->
+        <div class="response-info">
+            <h4>⏰ Response Times</h4>
+            <p>We aim to respond to all inquiries within 24-48 hours. For urgent technical issues, please use GitHub issues for faster community support.</p>
+        </div>
+        
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Is Kiro Directory affiliated with AWS?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>No, Kiro Directory is an independent, community-driven project. We are not affiliated with Amazon Web Services or the official AWS Kiro team. Our goal is to provide valuable resources and insights about AWS Kiro from a developer perspective.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Can I contribute content to Kiro Directory?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Absolutely! We welcome contributions from the community. You can contribute guides, tips, tool comparisons, case studies, or help improve existing content. Check out our GitHub repository for contribution guidelines.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How do you ensure content accuracy?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>All our content is thoroughly tested and reviewed by experienced developers. We regularly update our guides to reflect the latest Kiro features and best practices. If you find any inaccuracies, please let us know through GitHub issues.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Do you provide official Kiro support?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>We don't provide official AWS Kiro support. For official support, please contact AWS directly. However, our community is very helpful with general questions, best practices, and troubleshooting common issues.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How can I stay updated with new content?</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Follow us on GitHub for updates, subscribe to our newsletter, or bookmark our blog page. We regularly publish new guides, tutorials, and tool comparisons.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Alternative Contact Methods -->
+        <section style="padding: 2rem 0; text-align: center;">
+            <h3>Alternative Contact Methods</h3>
+            <p style="color: var(--text-secondary); margin: 1rem 0;">Prefer other ways to reach out?</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://twitter.com/kirodirectory" class="contact-btn secondary" target="_blank" rel="noopener">
+                    <span>Twitter</span>
+                    <span>↗</span>
+                </a>
+                <a href="https://github.com/kiro-directory" class="contact-btn secondary" target="_blank" rel="noopener">
+                    <span>GitHub</span>
+                    <span>↗</span>
+                </a>
+                <a href="https://discord.gg/kiro" class="contact-btn secondary" target="_blank" rel="noopener">
+                    <span>Discord</span>
+                    <span>↗</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                        <li><a href="/tips/">Tips & Tricks</a></li>
+                        <li><a href="/quickstart/">Quick Start</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Compare</h4>
+                    <ul class="footer-links">
+                        <li><a href="/compare/copilot/">vs GitHub Copilot</a></li>
+                        <li><a href="/compare/cursor/">vs Cursor</a></li>
+                        <li><a href="/compare/claude-code/">vs Claude Code</a></li>
+                        <li><a href="/compare/">All Comparisons</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/kiro-directory">GitHub</a></li>
+                        <li><a href="/community/">Contribute</a></li>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/privacy/">Privacy Policy</a></li>
+                        <li><a href="/terms/">Terms of Service</a></li>
+                        <li><a href="/security/">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kiro Directory. Not affiliated with AWS. Updated weekly.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Toggle current item
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+        
+        // Email obfuscation (simple protection)
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+            emailLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Analytics or other tracking can go here
+                    console.log('Email contact initiated');
+                });
+            });
+        });
+    </script>
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://plausible.io/js/script.js"></script>
+</body>
+</html>

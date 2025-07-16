@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Kiro Directory</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Find AWS Kiro resources, guides, and comparisons on Kiro Directory.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/404/">
+    <meta property="og:title" content="Page Not Found - Kiro Directory">
+    <meta property="og:description" content="Page not found. Explore AWS Kiro resources instead.">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://kiro.directory/404/">
+    <meta property="twitter:title" content="Page Not Found">
+    <meta property="twitter:description" content="Find AWS Kiro resources on Kiro Directory.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* 404 Content */
+        .error-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-family: var(--font-mono);
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+        
+        .error-description {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+        
+        .suggestions {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+        
+        .suggestions h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        .suggestions ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .suggestions li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .suggestions li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: bold;
+        }
+        
+        .suggestions a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .suggestions a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(138, 255, 239, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Search box */
+        .search-container {
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            color: var(--color-text);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+        
+        .search-box::placeholder {
+            color: var(--color-text-muted);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="error-content">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Page Not Found</h1>
+                <p class="error-description">
+                    Sorry, the page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.
+                </p>
+                
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        class="search-box" 
+                        placeholder="Search for Kiro resources..." 
+                        onkeypress="handleSearch(event)"
+                        id="searchInput"
+                    >
+                </div>
+                
+                <div class="suggestions">
+                    <h3>Popular Resources</h3>
+                    <ul>
+                        <li><a href="/tips/getting-started/">Getting Started with AWS Kiro</a> - Complete setup guide</li>
+                        <li><a href="/cheatsheets/">Kiro Cheat Sheets</a> - Quick reference guides</li>
+                        <li><a href="/tips/spec-writing/">Spec Writing Guide</a> - EARS format and best practices</li>
+                        <li><a href="/tips/hooks-basics/">Hooks Automation</a> - Event-driven workflows</li>
+                        <li><a href="/tips/best-practices/">Best Practices</a> - Production-ready development</li>
+                        <li><a href="/compare/copilot/">Kiro vs GitHub Copilot</a> - Detailed comparison</li>
+                        <li><a href="/pricing/">Pricing Comparison</a> - AI coding tool costs</li>
+                    </ul>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="/" class="btn btn-primary">Go Home</a>
+                    <a href="/cheatsheets/" class="btn btn-secondary">Browse Guides</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script>
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const query = event.target.value.toLowerCase().trim();
+                
+                // Simple search logic - redirect to relevant pages
+                if (query.includes('get') || query.includes('start') || query.includes('begin')) {
+                    window.location.href = '/tips/getting-started/';
+                } else if (query.includes('hook') || query.includes('automat')) {
+                    window.location.href = '/tips/hooks-basics/';
+                } else if (query.includes('spec') || query.includes('require') || query.includes('ears')) {
+                    window.location.href = '/tips/spec-writing/';
+                } else if (query.includes('best') || query.includes('practice') || query.includes('production')) {
+                    window.location.href = '/tips/best-practices/';
+                } else if (query.includes('steer') || query.includes('config')) {
+                    window.location.href = '/tips/steering-setup/';
+                } else if (query.includes('compare') || query.includes('vs') || query.includes('copilot')) {
+                    window.location.href = '/compare/copilot/';
+                } else if (query.includes('price') || query.includes('cost')) {
+                    window.location.href = '/pricing/';
+                } else if (query.includes('cheat') || query.includes('reference') || query.includes('quick')) {
+                    window.location.href = '/cheatsheets/';
+                } else {
+                    // Default to cheat sheets for general searches
+                    window.location.href = '/cheatsheets/';
+                }
+            }
+        }
+        
+        // Auto-focus search box
+        document.getElementById('searchInput').focus();
+        
+        // Track 404 events for analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_title: '404 Error',
+                page_location: window.location.href
+            });
+        }
+    </script>
+</body>
+</html>

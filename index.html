@@ -167,6 +167,7 @@
         .search-container {
             max-width: 600px;
             margin: 0 auto 3rem;
+            position: relative;
         }
         
         .search-box {
@@ -188,6 +189,48 @@
         
         .search-box::placeholder {
             color: var(--color-text-muted);
+        }
+        
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .search-result {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result:hover {
+            background-color: var(--color-surface-2);
+        }
+        
+        .search-result:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result h4 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 0.25rem;
+            font-size: 0.875rem;
+        }
+        
+        .search-result p {
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
         }
         
         /* CTA Buttons */
@@ -616,7 +659,8 @@
             <p class="hero-subtitle">Ship AI-ready code faster with AWS Kiro's spec-driven development</p>
             
             <div class="search-container">
-                <input type="search" class="search-box" placeholder="Search tips, specs, hooks, comparisons..." aria-label="Search">
+                <input type="search" class="search-box" placeholder="Search tips, specs, hooks, comparisons..." aria-label="Search" id="searchInput">
+                <div class="search-results" id="searchResults"></div>
             </div>
             
             <div class="cta-group">
@@ -723,6 +767,7 @@ agents:
         </section>
         
         <section id="comparisons" class="section container">
+            <img src="/images/banner.png" alt="Kiro Directory Banner" style="width: 100%; max-width: 1200px; height: auto; margin: 0 auto 2rem; display: block; border-radius: 8px;">
             <h2 class="section-title">AI Coding Tools Comparison Directory</h2>
             <p class="section-subtitle">Compare AWS Kiro with 15+ AI coding assistants</p>
             
@@ -769,9 +814,6 @@ agents:
                         </tr>
                     </tbody>
                 </table>
-                <div class="table-more">
-                    <a href="#all-tools" class="btn btn-secondary">View All 15+ Tools ↓</a>
-                </div>
             </div>
             
             <!-- Detailed Comparison Grid -->
@@ -1030,6 +1072,93 @@ agents:
     </footer>
     
     <script>
+        // Search functionality
+        const searchData = [
+            {
+                title: "Spec Writing Guide",
+                description: "Master EARS format and spec-driven development",
+                url: "/tips/spec-writing/",
+                category: "Tips"
+            },
+            {
+                title: "Quick Start Guide", 
+                description: "Get started with Kiro in 10 minutes",
+                url: "/quickstart/",
+                category: "Getting Started"
+            },
+            {
+                title: "Kiro vs GitHub Copilot",
+                description: "Compare spec-driven development vs code completion",
+                url: "/compare/copilot/",
+                category: "Comparison"
+            },
+            {
+                title: "Kiro vs Cursor",
+                description: "Compare structured vs flexible AI coding",
+                url: "/compare/cursor/",
+                category: "Comparison"
+            },
+            {
+                title: "Agent Hooks",
+                description: "Automate testing, docs, and CI/CD with hooks",
+                url: "/tips/hooks/",
+                category: "Tips"
+            },
+            {
+                title: "EARS Format",
+                description: "Easy Approach to Requirements Syntax tutorial",
+                url: "/tips/ears-format/",
+                category: "Tips"
+            },
+            {
+                title: "Basic Spec Structure",
+                description: "Define requirements in EARS format for automatic task generation",
+                url: "#quickstart",
+                category: "Cheat Sheet"
+            },
+            {
+                title: "Auto-Test Hook",
+                description: "Automatically run tests when saving files",
+                url: "#quickstart",
+                category: "Cheat Sheet"
+            },
+            {
+                title: "Multi-Agent Workflow",
+                description: "Coordinate multiple AI agents for complex tasks",
+                url: "#quickstart",
+                category: "Cheat Sheet"
+            }
+        ];
+
+        function performSearch(query) {
+            if (!query.trim()) return [];
+            
+            const lowerQuery = query.toLowerCase();
+            return searchData.filter(item => 
+                item.title.toLowerCase().includes(lowerQuery) ||
+                item.description.toLowerCase().includes(lowerQuery) ||
+                item.category.toLowerCase().includes(lowerQuery)
+            ).slice(0, 5); // Limit to 5 results
+        }
+
+        function displaySearchResults(results) {
+            const resultsContainer = document.getElementById('searchResults');
+            
+            if (results.length === 0) {
+                resultsContainer.style.display = 'none';
+                return;
+            }
+
+            resultsContainer.innerHTML = results.map(result => `
+                <div class="search-result" onclick="window.location.href='${result.url}'">
+                    <h4>${result.title}</h4>
+                    <p>${result.description}</p>
+                </div>
+            `).join('');
+            
+            resultsContainer.style.display = 'block';
+        }
+
         // Copy code functionality
         function copyCode(button) {
             const codeBlock = button.parentElement.querySelector('pre');
@@ -1055,11 +1184,46 @@ agents:
             alert('Thanks for subscribing! Feature coming soon.');
             return false;
         }
-        
-        // Search functionality placeholder
-        document.querySelector('.search-box').addEventListener('input', (e) => {
-            // TODO: Implement search with Algolia DocSearch
-            console.log('Search:', e.target.value);
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
+            if (searchInput && searchResults) {
+                let searchTimeout;
+                
+                searchInput.addEventListener('input', function(e) {
+                    clearTimeout(searchTimeout);
+                    const query = e.target.value;
+                    
+                    if (!query.trim()) {
+                        searchResults.style.display = 'none';
+                        return;
+                    }
+                    
+                    // Debounce search
+                    searchTimeout = setTimeout(() => {
+                        const results = performSearch(query);
+                        displaySearchResults(results);
+                    }, 150);
+                });
+                
+                // Hide results when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                        searchResults.style.display = 'none';
+                    }
+                });
+                
+                // Show results when focusing on search input
+                searchInput.addEventListener('focus', function() {
+                    if (this.value.trim()) {
+                        const results = performSearch(this.value);
+                        displaySearchResults(results);
+                    }
+                });
+            }
         });
     </script>
 </body>

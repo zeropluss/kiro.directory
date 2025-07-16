@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Spec Writing Guide - EARS Format Tutorial | Kiro Directory</title>
+    <meta name="description" content="Master Kiro's spec-driven development with EARS format. Complete guide to writing requirements, design docs, and task lists for production-ready code.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/tips/spec-writing/">
+    <meta property="og:title" content="Complete Guide to Kiro Spec Writing">
+    <meta property="og:description" content="Learn EARS format and spec-driven development with AWS Kiro. From requirements to production-ready code.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Main content */
+        main {
+            padding: 2rem 0;
+        }
+        
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        .breadcrumbs span {
+            margin: 0 0.5rem;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+        
+        h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--color-accent-2);
+        }
+        
+        .intro {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-accent);
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+            margin: 1rem 0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        .example-box {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .example-box h4 {
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .tip-box {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-box::before {
+            content: "💡 Tip: ";
+            font-weight: 600;
+            color: var(--color-success);
+        }
+        
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a>
+            <span>›</span>
+            <a href="/tips/">Tips</a>
+            <span>›</span>
+            <span>Spec Writing Guide</span>
+        </div>
+        
+        <h1>Kiro Spec Writing Guide</h1>
+        
+        <div class="intro">
+            Master Kiro's spec-driven development approach with EARS format requirements, 
+            structured design documents, and actionable task lists. This guide covers everything 
+            from basic syntax to advanced patterns for production-ready specifications.
+        </div>
+        
+        <h2>What Are Kiro Specs?</h2>
+        
+        <p>Kiro specs are structured markdown documents that formalize your feature development process. Unlike traditional coding where you jump straight to implementation, Kiro enforces a three-phase approach:</p>
+        
+        <ol>
+            <li><strong>Requirements</strong> - What the system should do (EARS format)</li>
+            <li><strong>Design</strong> - How the system will work (architecture & interfaces)</li>
+            <li><strong>Tasks</strong> - Step-by-step implementation plan</li>
+        </ol>
+        
+        <h2>EARS Format Requirements</h2>
+        
+        <p>EARS (Easy Approach to Requirements Syntax) is the foundation of Kiro specs. Each requirement follows this template:</p>
+        
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>WHEN [condition] THE SYSTEM SHALL [expected behavior]</pre>
+        </div>
+        
+        <h3>Basic EARS Examples</h3>
+        
+        <div class="example-box">
+            <h4>User Authentication Feature</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre># Requirements
+
+## User Registration
+WHEN a user submits valid registration data THE SYSTEM SHALL create a new user account
+WHEN a user submits an email that already exists THE SYSTEM SHALL display "Email already registered" error
+WHEN a user submits invalid email format THE SYSTEM SHALL display email validation error
+
+## User Login  
+WHEN a user enters correct credentials THE SYSTEM SHALL authenticate and redirect to dashboard
+WHEN a user enters incorrect password THE SYSTEM SHALL display "Invalid credentials" error
+WHEN a user fails login 3 times THE SYSTEM SHALL temporarily lock the account</pre>
+            </div>
+        </div>
+        
+        <div class="tip-box">
+            Each EARS statement should be testable and specific. Avoid vague terms like "user-friendly" or "fast" - instead specify exact behaviors and error conditions.
+        </div>
+        
+        <h3>Advanced EARS Patterns</h3>
+        
+        <div class="example-box">
+            <h4>E-commerce Cart System</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre># Shopping Cart Requirements
+
+## Adding Items
+WHEN a user clicks "Add to Cart" on an available product THE SYSTEM SHALL add the item to their cart
+WHEN a user adds an item that exceeds stock quantity THE SYSTEM SHALL limit quantity to available stock
+WHEN a user adds the same item multiple times THE SYSTEM SHALL increment the quantity
+
+## Cart Persistence
+WHEN a logged-in user adds items to cart THE SYSTEM SHALL persist cart across sessions
+WHEN a guest user adds items to cart THE SYSTEM SHALL store cart in browser session
+WHEN a guest user logs in with existing cart THE SYSTEM SHALL merge guest cart with user cart
+
+## Checkout Process
+WHEN a user proceeds to checkout with valid items THE SYSTEM SHALL display order summary
+WHEN a user attempts checkout with out-of-stock items THE SYSTEM SHALL remove unavailable items and notify user
+WHEN payment processing fails THE SYSTEM SHALL preserve cart contents and display error message</pre>
+            </div>
+        </div>
+        
+        <h2>Design Documents</h2>
+        
+        <p>After requirements are defined, Kiro generates a technical design document that includes:</p>
+        
+        <ul>
+            <li>System architecture diagrams</li>
+            <li>Data models and schemas</li>
+            <li>API endpoint specifications</li>
+            <li>Component hierarchies</li>
+            <li>Integration points</li>
+        </ul>
+        
+        <div class="example-box">
+            <h4>Sample Design Document Structure</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre># Design Document: User Authentication
+
+## Architecture Overview
+```
+Frontend (React) → API Gateway → Auth Service → Database
+                              ↓
+                         JWT Token Service
+```
+
+## Data Models
+
+### User Schema
+```typescript
+interface User {
+  id: string;
+  email: string;
+  passwordHash: string;
+  createdAt: Date;
+  lastLoginAt?: Date;
+  isLocked: boolean;
+  failedLoginAttempts: number;
+}
+```
+
+### Session Schema  
+```typescript
+interface Session {
+  id: string;
+  userId: string;
+  token: string;
+  expiresAt: Date;
+  createdAt: Date;
+}
+```
+
+## API Endpoints
+
+### POST /auth/register
+- Input: { email, password }
+- Output: { user, token } | { error }
+- Validation: Email format, password strength
+
+### POST /auth/login
+- Input: { email, password }
+- Output: { user, token } | { error }
+- Rate limiting: 5 attempts per 15 minutes
+
+## Security Considerations
+- Passwords hashed with bcrypt (12 rounds)
+- JWT tokens expire after 24 hours
+- Account lockout after 3 failed attempts
+- HTTPS required for all auth endpoints</pre>
+            </div>
+        </div>
+        
+        <h2>Task Lists</h2>
+        
+        <p>The final phase breaks down implementation into specific, actionable tasks. Kiro automatically generates these based on your requirements and design:</p>
+        
+        <div class="example-box">
+            <h4>Generated Task List</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre># Implementation Tasks
+
+## Backend Tasks
+- [ ] Create User model with validation
+- [ ] Implement password hashing utility
+- [ ] Create user registration endpoint
+- [ ] Add email uniqueness validation
+- [ ] Implement login endpoint with rate limiting
+- [ ] Create JWT token generation/validation
+- [ ] Add account lockout mechanism
+- [ ] Write unit tests for auth service
+
+## Frontend Tasks  
+- [ ] Create registration form component
+- [ ] Add form validation (email, password strength)
+- [ ] Implement login form component
+- [ ] Add error message display
+- [ ] Create protected route wrapper
+- [ ] Implement logout functionality
+- [ ] Add loading states for auth actions
+- [ ] Write component tests
+
+## Integration Tasks
+- [ ] Set up API client for auth endpoints
+- [ ] Implement token storage (localStorage/cookies)
+- [ ] Add automatic token refresh
+- [ ] Create auth context/state management
+- [ ] Test complete auth flow
+- [ ] Add error boundary for auth failures
+
+## Documentation Tasks
+- [ ] Update API documentation
+- [ ] Create user guide for auth features
+- [ ] Document security considerations
+- [ ] Add troubleshooting guide</pre>
+            </div>
+        </div>
+        
+        <h2>Best Practices</h2>
+        
+        <h3>Writing Effective Requirements</h3>
+        
+        <ul>
+            <li><strong>Be Specific</strong>: "Display error message" → "Display 'Invalid email format' error below email field"</li>
+            <li><strong>Cover Edge Cases</strong>: Consider empty inputs, network failures, concurrent users</li>
+            <li><strong>Include Performance</strong>: "Login shall complete within 2 seconds under normal load"</li>
+            <li><strong>Define Success Criteria</strong>: What does "successful login" actually mean?</li>
+        </ul>
+        
+        <h3>Design Document Tips</h3>
+        
+        <ul>
+            <li><strong>Use Diagrams</strong>: Mermaid diagrams help visualize system flow</li>
+            <li><strong>Define Interfaces</strong>: Specify exact API contracts and data shapes</li>
+            <li><strong>Consider Scale</strong>: How will this work with 1000 users? 100,000?</li>
+            <li><strong>Plan for Failure</strong>: What happens when external services are down?</li>
+        </ul>
+        
+        <h3>Task Organization</h3>
+        
+        <ul>
+            <li><strong>Logical Ordering</strong>: Backend models before API endpoints</li>
+            <li><strong>Testable Chunks</strong>: Each task should be verifiable</li>
+            <li><strong>Include Quality Tasks</strong>: Testing, documentation, security reviews</li>
+            <li><strong>Estimate Complexity</strong>: Mark tasks as S/M/L for planning</li>
+        </ul>
+        
+        <div class="tip-box">
+            Start with simple features to get comfortable with the spec format. A basic CRUD operation is perfect for learning the EARS syntax and task breakdown patterns.
+        </div>
+        
+        <h2>Common Spec Patterns</h2>
+        
+        <h3>API Feature Spec</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre># Feature: Product Search API
+
+## Requirements
+WHEN a user searches with valid query THE SYSTEM SHALL return matching products
+WHEN a user searches with empty query THE SYSTEM SHALL return all products  
+WHEN a user applies price filter THE SYSTEM SHALL return products within price range
+WHEN no products match criteria THE SYSTEM SHALL return empty results with appropriate message
+
+## Design
+- GET /api/products/search?q={query}&minPrice={min}&maxPrice={max}
+- Elasticsearch backend for full-text search
+- Redis caching for popular queries
+- Pagination with limit/offset
+
+## Tasks
+- [ ] Set up Elasticsearch index for products
+- [ ] Implement search service with filters
+- [ ] Add caching layer
+- [ ] Create API endpoint
+- [ ] Write integration tests</pre>
+        </div>
+        
+        <h3>UI Component Spec</h3>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre># Feature: Product Card Component
+
+## Requirements  
+WHEN product data is provided THE SYSTEM SHALL display product image, name, and price
+WHEN product is on sale THE SYSTEM SHALL show original and sale price
+WHEN user hovers over card THE SYSTEM SHALL show quick action buttons
+WHEN product is out of stock THE SYSTEM SHALL display "Out of Stock" overlay
+
+## Design
+- React component with TypeScript props
+- Responsive design (mobile-first)
+- Accessibility: proper ARIA labels, keyboard navigation
+- Loading and error states
+
+## Tasks
+- [ ] Create ProductCard component interface
+- [ ] Implement responsive layout
+- [ ] Add hover interactions
+- [ ] Handle loading/error states  
+- [ ] Write Storybook stories
+- [ ] Add accessibility tests</pre>
+        </div>
+        
+        <h2>Next Steps</h2>
+        
+        <p>Now that you understand Kiro's spec format, try creating your first spec:</p>
+        
+        <ol>
+            <li>Choose a simple feature (user profile, todo list, etc.)</li>
+            <li>Write 5-10 EARS requirements covering main flow and edge cases</li>
+            <li>Let Kiro generate the design document</li>
+            <li>Review and refine the generated tasks</li>
+            <li>Execute tasks one by one, testing as you go</li>
+        </ol>
+        
+        <div class="tip-box">
+            The key to successful spec-driven development is iteration. Your first spec won't be perfect - refine requirements as you discover edge cases during implementation.
+        </div>
+        
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

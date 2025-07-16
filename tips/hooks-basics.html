@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Hooks Automation Guide - Master Event-Driven Workflows | Kiro Directory</title>
+    <meta name="description" content="Complete guide to AWS Kiro hooks automation. Learn to create event-driven workflows for testing, documentation, CI/CD, and quality assurance.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/tips/hooks-basics/">
+    <meta property="og:title" content="Kiro Hooks Automation Guide">
+    <meta property="og:description" content="Master AWS Kiro hooks for automated testing, CI/CD, and quality workflows.">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/tips/hooks-basics/">
+    <meta property="twitter:title" content="Kiro Hooks Automation Guide">
+    <meta property="twitter:description" content="Learn Kiro hooks for automated workflows">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Kiro Hooks Automation Guide",
+      "description": "Comprehensive guide to creating and using AWS Kiro hooks for automated workflows",
+      "image": "https://kiro.directory/logo/favicon-2048x2048.png",
+      "totalTime": "PT45M",
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "AWS Kiro installed and configured"
+        },
+        {
+          "@type": "HowToSupply", 
+          "name": "Basic understanding of YAML"
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "AWS Kiro IDE"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Understand hook trigger types and patterns"
+        },
+        {
+          "@type": "HowToStep", 
+          "text": "Create your first test automation hook"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Configure CI/CD and documentation hooks"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Implement advanced multi-step workflows"
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Article Layout */
+        .article-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .article-content {
+            padding: 3rem 0;
+        }
+        
+        .prose {
+            max-width: none;
+        }
+        
+        .prose h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--color-accent);
+        }
+        
+        .prose h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--color-text);
+        }
+        
+        .prose p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .prose ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .prose a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .prose a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            color: var(--color-text);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        /* Hook type cards */
+        .hook-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .hook-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .hook-card h4 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-accent);
+        }
+        
+        .hook-card p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .hook-card .hook-trigger {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            background-color: var(--color-surface-2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        /* Warning/Info boxes */
+        .warning-box {
+            background-color: rgba(255, 180, 84, 0.1);
+            border: 1px solid var(--color-warning);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--color-warning);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: rgba(78, 161, 255, 0.1);
+            border: 1px solid var(--color-info);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-box h4 {
+            color: var(--color-info);
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-box {
+            background-color: rgba(0, 193, 124, 0.1);
+            border: 1px solid var(--color-success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .success-box h4 {
+            color: var(--color-success);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Tab system */
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab-button.active {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+        
+        .tab-button:hover {
+            color: var(--color-text);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .prose {
+                font-size: 1rem;
+            }
+            
+            .hook-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a> › <a href="/cheatsheets/">Cheat Sheets</a> › Hooks Automation
+        </div>
+        
+        <section class="article-header">
+            <h1>Kiro Hooks Automation Guide</h1>
+            <p class="article-subtitle">Master event-driven workflows for testing, CI/CD, documentation, and quality assurance</p>
+        </section>
+        
+        <section class="article-content">
+            <div class="prose">
+                <div class="toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#introduction">What are Kiro Hooks?</a></li>
+                        <li><a href="#hook-types">Hook Types & Triggers</a></li>
+                        <li><a href="#first-hook">Creating Your First Hook</a></li>
+                        <li><a href="#testing-hooks">Testing Automation</a></li>
+                        <li><a href="#cicd-hooks">CI/CD Integration</a></li>
+                        <li><a href="#documentation-hooks">Auto Documentation</a></li>
+                        <li><a href="#advanced-patterns">Advanced Patterns</a></li>
+                        <li><a href="#best-practices">Best Practices</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="introduction">What are Kiro Hooks?</h2>
+                
+                <p>Kiro hooks are event-driven automation scripts that execute when specific events occur in your project. Think of them as GitHub Actions for your local development environment - they automate repetitive tasks and ensure consistent quality.</p>
+                
+                <p>Unlike traditional build scripts or CI/CD pipelines, Kiro hooks run locally and leverage AI agents to intelligently respond to context changes. This means they can understand your code changes and take appropriate actions automatically.</p>
+
+                <div class="info-box">
+                    <h4>Key Benefits</h4>
+                    <ul>
+                        <li><strong>Automatic testing</strong> - Run relevant tests when files change</li>
+                        <li><strong>Live documentation</strong> - Keep docs synchronized with code</li>
+                        <li><strong>Code quality</strong> - Enforce standards and best practices</li>
+                        <li><strong>Security scanning</strong> - Detect vulnerabilities instantly</li>
+                        <li><strong>Smart suggestions</strong> - Get AI-powered improvement recommendations</li>
+                    </ul>
+                </div>
+
+                <h2 id="hook-types">Hook Types & Triggers</h2>
+
+                <p>Kiro supports multiple trigger types for different automation scenarios:</p>
+
+                <div class="hook-types">
+                    <div class="hook-card">
+                        <h4>onSave</h4>
+                        <p>Triggers when files are saved. Perfect for instant feedback loops.</p>
+                        <span class="hook-trigger">trigger: onSave</span>
+                    </div>
+                    
+                    <div class="hook-card">
+                        <h4>onCreate</h4>
+                        <p>Triggers when new files or folders are created. Great for scaffolding.</p>
+                        <span class="hook-trigger">trigger: onCreate</span>
+                    </div>
+                    
+                    <div class="hook-card">
+                        <h4>onDelete</h4>
+                        <p>Triggers when files are deleted. Useful for cleanup tasks.</p>
+                        <span class="hook-trigger">trigger: onDelete</span>
+                    </div>
+                    
+                    <div class="hook-card">
+                        <h4>onCommit</h4>
+                        <p>Triggers before Git commits. Ideal for pre-commit validation.</p>
+                        <span class="hook-trigger">trigger: onCommit</span>
+                    </div>
+                    
+                    <div class="hook-card">
+                        <h4>onPush</h4>
+                        <p>Triggers before Git pushes. Perfect for final quality checks.</p>
+                        <span class="hook-trigger">trigger: onPush</span>
+                    </div>
+                    
+                    <div class="hook-card">
+                        <h4>onInterval</h4>
+                        <p>Triggers on schedule. Great for periodic maintenance tasks.</p>
+                        <span class="hook-trigger">trigger: onInterval</span>
+                    </div>
+                </div>
+
+                <h2 id="first-hook">Creating Your First Hook</h2>
+
+                <p>Let's create a simple hook that runs tests automatically when you save JavaScript files:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/test-on-save.yml
+name: "Run Tests on Save"
+description: "Automatically run relevant tests when JavaScript files are saved"
+
+# Trigger configuration
+trigger: onSave
+pattern: "**/*.{js,ts,jsx,tsx}"
+
+# AI agent instructions
+action: |
+  Analyze the saved file and determine which tests should run.
+  
+  Steps to follow:
+  1. Identify the file type and its purpose
+  2. Look for corresponding test files
+  3. Run the most relevant tests
+  4. Report results with clear pass/fail status
+  5. If tests fail, suggest potential fixes
+  
+  Be concise but informative in your output.</code></pre>
+                </div>
+
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="switchTab('create-hook')">Create Hook</button>
+                        <button class="tab-button" onclick="switchTab('test-hook')">Test Hook</button>
+                        <button class="tab-button" onclick="switchTab('hook-output')">Hook Output</button>
+                    </div>
+                    
+                    <div id="create-hook" class="tab-content active">
+                        <h3>Creating the Hook</h3>
+                        <p>To create this hook in your project:</p>
+                        <ol>
+                            <li>Open Command Palette (<code>Ctrl+Shift+P</code>)</li>
+                            <li>Run "Kiro: Create Hook"</li>
+                            <li>Choose "onSave" trigger</li>
+                            <li>Set pattern to <code>**/*.{js,ts,jsx,tsx}</code></li>
+                            <li>Paste the action instructions</li>
+                        </ol>
+                    </div>
+                    
+                    <div id="test-hook" class="tab-content">
+                        <h3>Testing Your Hook</h3>
+                        <p>To test the hook:</p>
+                        <ol>
+                            <li>Open any JavaScript or TypeScript file</li>
+                            <li>Make a small change (add a comment)</li>
+                            <li>Save the file (<code>Ctrl+S</code>)</li>
+                            <li>Watch the hook execute in Kiro's output panel</li>
+                        </ol>
+                    </div>
+                    
+                    <div id="hook-output" class="tab-content">
+                        <h3>Example Hook Output</h3>
+                        <div class="code-block">
+                            <pre><code>🪝 Hook: Run Tests on Save
+📁 File: src/components/Button.tsx
+
+✅ Found test file: src/components/__tests__/Button.test.tsx
+🧪 Running tests...
+
+✅ PASS src/components/__tests__/Button.test.tsx
+  ✓ renders button with text
+  ✓ handles click events
+  ✓ applies correct styling
+
+📊 Results: 3 passed, 0 failed
+⏱️ Completed in 1.2s</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="testing-hooks">Testing Automation Hooks</h2>
+
+                <p>Here are proven hook patterns for different testing scenarios:</p>
+
+                <h3>Unit Test Hook</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/unit-tests.yml
+name: "Smart Unit Testing"
+trigger: onSave
+pattern: "**/*.{js,ts,jsx,tsx}"
+throttle: 2000 # Wait 2 seconds for rapid saves
+
+action: |
+  You are a testing expert. When a file is saved:
+  
+  1. Analyze the saved file to understand its functionality
+  2. Look for existing test files in these patterns:
+     - Same directory: filename.test.js, filename.spec.js
+     - Test directory: __tests__/filename.test.js
+     - Tests directory: tests/filename.test.js
+  
+  3. If tests exist:
+     - Run only the relevant test suite
+     - Report pass/fail status with details
+     - If failures occur, analyze and suggest fixes
+  
+  4. If no tests exist:
+     - Suggest creating tests
+     - Provide a basic test template
+  
+  5. For React components, prioritize testing:
+     - Rendering behavior
+     - Props handling  
+     - Event interactions
+     - Accessibility</code></pre>
+                </div>
+
+                <h3>Integration Test Hook</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/integration-tests.yml
+name: "API Integration Tests"
+trigger: onSave
+pattern: "**/api/**/*.{js,ts}"
+
+action: |
+  You are an API testing specialist. For API-related files:
+  
+  1. Identify the API endpoints or functions modified
+  2. Look for integration tests that cover these endpoints
+  3. Run integration test suites that test the modified code
+  4. Check for proper error handling and edge cases
+  5. Validate API contracts and response schemas
+  6. Test authentication and authorization if applicable
+  
+  If tests pass: Report success with coverage details
+  If tests fail: Provide debugging information and suggested fixes
+  If no tests exist: Suggest integration test scenarios to create</code></pre>
+                </div>
+
+                <h2 id="cicd-hooks">CI/CD Integration Hooks</h2>
+
+                <p>Automate your deployment pipeline with these CI/CD hooks:</p>
+
+                <h3>Pre-Commit Quality Gate</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/pre-commit-gate.yml
+name: "Pre-Commit Quality Gate"
+trigger: onCommit
+
+action: |
+  You are a code quality gatekeeper. Before allowing this commit:
+  
+  1. **Linting**: Run ESLint/Prettier and report any violations
+  2. **Type Checking**: Run TypeScript compiler if applicable
+  3. **Tests**: Execute all tests related to changed files
+  4. **Security**: Scan for potential security vulnerabilities
+  5. **Performance**: Check for obvious performance issues
+  6. **Documentation**: Verify critical functions have JSDoc comments
+  
+  Only allow commit if ALL checks pass.
+  
+  For failures:
+  - List specific issues found
+  - Suggest automated fixes where possible  
+  - Provide actionable next steps
+  
+  For success:
+  - Summarize what was validated
+  - Highlight any improvements made</code></pre>
+                </div>
+
+                <h3>Build and Deploy Hook</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/build-deploy.yml
+name: "Build and Deploy"
+trigger: onPush
+branch: ["main", "production"]
+
+action: |
+  You are a deployment specialist. For pushes to production branches:
+  
+  1. **Pre-Build Validation**:
+     - Verify all tests pass
+     - Check environment variables are set
+     - Validate build configuration
+  
+  2. **Build Process**:
+     - Run production build command
+     - Check for build warnings or errors
+     - Verify build artifacts are created
+  
+  3. **Deploy to Staging**:
+     - Deploy to staging environment
+     - Run smoke tests against staging
+     - Validate critical user paths
+  
+  4. **Production Deploy** (if staging passes):
+     - Deploy to production
+     - Monitor for errors in first 5 minutes
+     - Report deployment status
+  
+  Provide detailed logs and rollback instructions if anything fails.</code></pre>
+                </div>
+
+                <h2 id="documentation-hooks">Auto Documentation Hooks</h2>
+
+                <p>Keep your documentation synchronized with your code automatically:</p>
+
+                <h3>API Documentation Hook</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/api-docs.yml
+name: "Auto API Documentation"
+trigger: onSave
+pattern: "**/api/**/*.{js,ts}"
+
+action: |
+  You are a technical documentation expert. When API files change:
+  
+  1. **Extract API Information**:
+     - Identify all endpoints (GET, POST, PUT, DELETE)
+     - Document request/response schemas
+     - Note authentication requirements
+     - List possible error codes
+  
+  2. **Update Documentation**:
+     - Update the main API.md file
+     - Generate OpenAPI/Swagger specs if applicable
+     - Update postman collections
+     - Refresh example requests/responses
+  
+  3. **Validate Documentation**:
+     - Ensure all endpoints are documented
+     - Check that examples are valid
+     - Verify schema definitions match code
+  
+  4. **Generate Client SDKs** (if configured):
+     - Update TypeScript types
+     - Regenerate client libraries
+     - Update SDK documentation
+  
+  Always maintain backward compatibility notes and version information.</code></pre>
+                </div>
+
+                <h3>Component Documentation Hook</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/component-docs.yml
+name: "Component Documentation"
+trigger: onSave
+pattern: "**/components/**/*.{jsx,tsx,vue}"
+
+action: |
+  You are a component documentation specialist. For UI components:
+  
+  1. **Analyze Component**:
+     - Extract props interface/types
+     - Identify component variants and states
+     - Document accessibility features
+     - Note any hooks or context usage
+  
+  2. **Generate Documentation**:
+     - Create/update component README
+     - Generate Storybook stories if missing
+     - Update props table with descriptions
+     - Create usage examples
+  
+  3. **Visual Documentation**:
+     - Suggest screenshot scenarios
+     - Document responsive behavior
+     - Note theme/styling variations
+     - List browser compatibility
+  
+  4. **Integration Examples**:
+     - Show common usage patterns
+     - Document integration with forms
+     - Provide accessibility examples
+     - Include testing recommendations
+  
+  Focus on practical examples that help other developers use the component effectively.</code></pre>
+                </div>
+
+                <h2 id="advanced-patterns">Advanced Hook Patterns</h2>
+
+                <h3>Multi-Step Workflow Hook</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/feature-workflow.yml
+name: "Complete Feature Workflow"
+trigger: onCreate
+pattern: "**/features/**/*"
+
+action: |
+  You are a feature development orchestrator. When new feature files are created:
+  
+  **Phase 1: Setup**
+  1. Analyze the feature structure and purpose
+  2. Create corresponding test files if missing
+  3. Set up Storybook stories for UI components
+  4. Initialize documentation templates
+  
+  **Phase 2: Validation**
+  1. Check that feature follows project conventions
+  2. Verify proper TypeScript types are defined
+  3. Ensure accessibility considerations are included
+  4. Validate against design system standards
+  
+  **Phase 3: Integration**
+  1. Update feature registry/index files
+  2. Add feature to routing if applicable
+  3. Update navigation/menu structures
+  4. Register with any feature flag systems
+  
+  **Phase 4: Documentation**
+  1. Generate feature specification document
+  2. Create user documentation
+  3. Update API documentation if needed
+  4. Add to testing checklist
+  
+  Provide a summary of all actions taken and next steps for the developer.</code></pre>
+                </div>
+
+                <h3>Security Scanning Hook</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/security-scan.yml
+name: "Security Scanner"
+trigger: onSave
+pattern: "**/*.{js,ts,jsx,tsx,py,java,go}"
+
+action: |
+  You are a security specialist. Scan the saved file for potential vulnerabilities:
+  
+  **Code Analysis**:
+  1. Check for hardcoded secrets, API keys, or passwords
+  2. Identify SQL injection vulnerabilities
+  3. Look for XSS attack vectors
+  4. Check for insecure dependencies or imports
+  5. Validate input sanitization practices
+  
+  **Authentication & Authorization**:
+  1. Verify proper authentication checks
+  2. Ensure authorization is implemented correctly
+  3. Check for privilege escalation issues
+  4. Validate session management
+  
+  **Data Security**:
+  1. Check for proper data encryption
+  2. Verify secure data transmission
+  3. Ensure sensitive data isn't logged
+  4. Validate GDPR/privacy compliance
+  
+  **Report Format**:
+  - 🔴 Critical: Immediate security risks
+  - 🟡 Medium: Potential security improvements  
+  - 🟢 Good: Security best practices followed
+  
+  For each issue, provide specific fix recommendations and code examples.</code></pre>
+                </div>
+
+                <h2 id="best-practices">Hook Best Practices</h2>
+
+                <div class="warning-box">
+                    <h4>Performance Considerations</h4>
+                    <p>Hooks count toward your monthly AI interaction limit. Use throttling and specific patterns to avoid excessive usage. Consider using <code>throttle: 3000</code> for frequently triggered hooks.</p>
+                </div>
+
+                <h3>Hook Configuration Guidelines</h3>
+
+                <ul>
+                    <li><strong>Use specific patterns</strong> - Target exact file types instead of wildcards when possible</li>
+                    <li><strong>Add throttling</strong> - Prevent rapid-fire execution during active editing</li>
+                    <li><strong>Include descriptions</strong> - Document what each hook does for team members</li>
+                    <li><strong>Test thoroughly</strong> - Verify hooks work across different project scenarios</li>
+                    <li><strong>Version control</strong> - Commit hook configurations to share with your team</li>
+                </ul>
+
+                <h3>Action Writing Tips</h3>
+
+                <ul>
+                    <li><strong>Be specific</strong> - Clear instructions produce better AI responses</li>
+                    <li><strong>Include context</strong> - Explain the project structure and conventions</li>
+                    <li><strong>Define success criteria</strong> - Specify what constitutes a successful execution</li>
+                    <li><strong>Handle edge cases</strong> - Account for missing files, test failures, etc.</li>
+                    <li><strong>Provide examples</strong> - Show the AI what good output looks like</li>
+                </ul>
+
+                <h3>Debugging Hook Issues</h3>
+
+                <div class="info-box">
+                    <h4>Common Hook Problems</h4>
+                    <ul>
+                        <li><strong>Hook not triggering</strong> - Check pattern syntax and file matching</li>
+                        <li><strong>Slow execution</strong> - Add throttling or narrow the pattern scope</li>
+                        <li><strong>Inconsistent results</strong> - Make action instructions more specific</li>
+                        <li><strong>Resource usage</strong> - Monitor interaction counts in Kiro settings</li>
+                    </ul>
+                </div>
+
+                <h3>Team Hook Management</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/team-config.yml
+# Team-shared hook configuration
+
+# Global settings for all team hooks
+global:
+  throttle: 2000 # Default throttle for all hooks
+  timeout: 30000 # Maximum execution time
+  retries: 2 # Number of retries on failure
+
+# Environment-specific overrides
+environments:
+  development:
+    enabled: true
+    verbose: true
+  
+  production:
+    enabled: false # Disable hooks in production
+    
+  ci:
+    enabled: true
+    timeout: 60000 # Longer timeout for CI
+
+# Team conventions
+conventions:
+  test_patterns:
+    - "**/*.test.{js,ts}"
+    - "**/*.spec.{js,ts}"
+    - "**/__tests__/**/*"
+  
+  documentation_patterns:
+    - "**/README.md"
+    - "**/docs/**/*.md"
+    - "**/*.mdx"</code></pre>
+                </div>
+
+                <div class="success-box">
+                    <h4>Next Steps</h4>
+                    <p>You're now ready to implement powerful automation with Kiro hooks! Start with simple testing hooks and gradually add more sophisticated workflows as your team becomes comfortable with the system.</p>
+                    <ul>
+                        <li>Try the basic test-on-save hook first</li>
+                        <li>Experiment with different trigger types</li>
+                        <li>Share successful hooks with your team</li>
+                        <li>Monitor usage and optimize patterns</li>
+                    </ul>
+                </div>
+
+                <h3>Related Resources</h3>
+                <ul>
+                    <li><a href="/tips/getting-started/">Getting Started with Kiro</a> - Basic setup and first project</li>
+                    <li><a href="/tips/spec-writing/">Spec Writing Guide</a> - Writing effective specs for features</li>
+                    <li><a href="/tips/ears-format/">EARS Format Guide</a> - Requirements syntax deep dive</li>
+                    <li><a href="/cheatsheets/">Kiro Cheat Sheets</a> - Quick reference for all Kiro features</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+        
+        // Tab switching functionality
+        function switchTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

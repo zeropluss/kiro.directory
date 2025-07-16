@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Best Practices Guide - Production-Ready Development Tips | Kiro Directory</title>
+    <meta name="description" content="Comprehensive AWS Kiro best practices for teams. Learn proven patterns for specs, testing, security, performance, and team collaboration.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/tips/best-practices/">
+    <meta property="og:title" content="Kiro Best Practices Guide">
+    <meta property="og:description" content="Master production-ready AWS Kiro development with proven best practices and patterns.">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/tips/best-practices/">
+    <meta property="twitter:title" content="Kiro Best Practices Guide">
+    <meta property="twitter:description" content="Production-ready Kiro development practices">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Kiro Best Practices Guide",
+      "description": "Comprehensive best practices for AWS Kiro development teams",
+      "image": "https://kiro.directory/logo/favicon-2048x2048.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Kiro Directory"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/favicon-2048x2048.png"
+        }
+      },
+      "datePublished": "2025-01-16",
+      "dateModified": "2025-01-16"
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Article Layout */
+        .article-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .article-content {
+            padding: 3rem 0;
+        }
+        
+        .prose {
+            max-width: none;
+        }
+        
+        .prose h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--color-accent);
+        }
+        
+        .prose h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--color-text);
+        }
+        
+        .prose h4 {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--color-accent-2);
+        }
+        
+        .prose p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .prose ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .prose a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .prose a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            color: var(--color-text);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        /* Best practice cards */
+        .practice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .practice-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .practice-card h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        .practice-card .practice-icon {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .practice-card .do-dont {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .practice-card .do {
+            color: var(--color-success);
+            margin-bottom: 0.5rem;
+        }
+        
+        .practice-card .dont {
+            color: var(--color-error);
+        }
+        
+        /* Checklist */
+        .checklist {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .checklist h4 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist li::before {
+            content: "☐ ";
+            color: var(--color-text-muted);
+            margin-right: 0.5rem;
+        }
+        
+        /* Warning/Info boxes */
+        .warning-box {
+            background-color: rgba(255, 180, 84, 0.1);
+            border: 1px solid var(--color-warning);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--color-warning);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background-color: rgba(78, 161, 255, 0.1);
+            border: 1px solid var(--color-info);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-box h4 {
+            color: var(--color-info);
+            margin-bottom: 0.5rem;
+        }
+        
+        .success-box {
+            background-color: rgba(0, 193, 124, 0.1);
+            border: 1px solid var(--color-success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .success-box h4 {
+            color: var(--color-success);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Anti-pattern cards */
+        .antipattern-card {
+            background-color: rgba(255, 94, 94, 0.05);
+            border: 1px solid rgba(255, 94, 94, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .antipattern-card h4 {
+            color: var(--color-error);
+            margin-bottom: 1rem;
+        }
+        
+        .antipattern-card .problem {
+            color: var(--color-error);
+            margin-bottom: 1rem;
+        }
+        
+        .antipattern-card .solution {
+            color: var(--color-success);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 94, 94, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .prose {
+                font-size: 1rem;
+            }
+            
+            .practice-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a> › <a href="/cheatsheets/">Cheat Sheets</a> › Best Practices
+        </div>
+        
+        <section class="article-header">
+            <h1>Kiro Best Practices Guide</h1>
+            <p class="article-subtitle">Production-ready development patterns and proven practices for AWS Kiro teams</p>
+        </section>
+        
+        <section class="article-content">
+            <div class="prose">
+                <div class="toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#fundamentals">Kiro Fundamentals</a></li>
+                        <li><a href="#spec-practices">Spec Writing Best Practices</a></li>
+                        <li><a href="#testing-strategy">Testing Strategy</a></li>
+                        <li><a href="#security-practices">Security Practices</a></li>
+                        <li><a href="#performance-optimization">Performance Optimization</a></li>
+                        <li><a href="#team-collaboration">Team Collaboration</a></li>
+                        <li><a href="#project-structure">Project Structure</a></li>
+                        <li><a href="#common-antipatterns">Common Anti-patterns</a></li>
+                        <li><a href="#production-readiness">Production Readiness</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="fundamentals">Kiro Fundamentals</h2>
+                
+                <p>Before diving into specific practices, understand these core Kiro principles that drive successful implementations:</p>
+
+                <div class="practice-grid">
+                    <div class="practice-card">
+                        <div class="practice-icon">📋</div>
+                        <h4>Spec-First Development</h4>
+                        <p>Always start with clear requirements and design before implementation. This prevents scope creep and ensures AI agents understand your intent.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Write specs before code</div>
+                            <div class="dont">❌ Skip to implementation directly</div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">🔄</div>
+                        <h4>Iterative Refinement</h4>
+                        <p>Kiro works best with incremental improvements. Build features in small, testable chunks rather than monolithic implementations.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Small, frequent iterations</div>
+                            <div class="dont">❌ Big bang releases</div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">🤖</div>
+                        <h4>AI Collaboration</h4>
+                        <p>Treat AI agents as junior developers who need clear instructions and context. The better your guidance, the better their output.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Provide clear context and examples</div>
+                            <div class="dont">❌ Assume AI knows your preferences</div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">🔍</div>
+                        <h4>Quality Gates</h4>
+                        <p>Use hooks and automation to maintain consistent quality. Never rely on manual checks for critical quality measures.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Automated quality checks</div>
+                            <div class="dont">❌ Manual code review only</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="spec-practices">Spec Writing Best Practices</h2>
+
+                <p>Well-written specs are the foundation of successful Kiro projects. Follow these patterns for maximum effectiveness:</p>
+
+                <h3>Requirements (requirements.md)</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># ✅ Good Requirements Structure
+
+## User Stories (EARS Format)
+
+### Authentication
+WHEN a user enters valid login credentials THE SYSTEM SHALL:
+- Authenticate against the user database
+- Create a secure JWT token with 15-minute expiry  
+- Set refresh token cookie with HttpOnly flag
+- Redirect to user dashboard
+- Log successful login event
+
+WHEN login fails THE SYSTEM SHALL:
+- Increment failed attempt counter
+- Display generic "Invalid credentials" message
+- Rate limit after 5 failures (15-minute lockout)
+- Log security event with IP address
+
+### Data Validation
+WHEN a user submits a form THE SYSTEM SHALL:
+- Validate all required fields are present
+- Sanitize input to prevent XSS attacks
+- Enforce field-specific validation rules
+- Display field-level error messages
+- Preserve valid input on validation failure
+
+## Non-Functional Requirements
+
+### Performance
+- API responses ≤ 200ms for 95th percentile
+- Page load time ≤ 3 seconds on 3G connection
+- Support 1000 concurrent users
+
+### Security  
+- All data transmission over HTTPS/TLS 1.3
+- Passwords hashed with bcrypt (12+ rounds)
+- Input validation on all user data
+- OWASP security headers implemented
+
+### Accessibility
+- WCAG 2.1 AA compliance
+- Keyboard navigation support
+- Screen reader compatibility
+- Color contrast ratio ≥ 4.5:1</code></pre>
+                </div>
+
+                <h3>Design (design.md)</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># ✅ Good Design Structure
+
+## Architecture Overview
+
+### System Components
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│   React     │    │   Express   │    │ PostgreSQL  │
+│   Frontend  │◄──►│   Backend   │◄──►│  Database   │
+└─────────────┘    └─────────────┘    └─────────────┘
+       │                   │                   │
+       │            ┌─────────────┐           │
+       └───────────►│    Redis    │◄──────────┘
+                    │    Cache    │
+                    └─────────────┘
+```
+
+### Database Schema
+```sql
+-- Users table with proper indexing
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password_hash VARCHAR(60) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_created_at ON users(created_at);
+```
+
+### API Design
+```typescript
+// RESTful API endpoints
+GET    /api/users          // List users (admin only)
+POST   /api/users          // Create user  
+GET    /api/users/:id      // Get user details
+PUT    /api/users/:id      // Update user
+DELETE /api/users/:id      // Delete user
+
+// Authentication endpoints
+POST   /api/auth/login     // User login
+POST   /api/auth/logout    // User logout  
+POST   /api/auth/refresh   // Refresh token
+```
+
+### Component Architecture
+```typescript
+// Component hierarchy
+App
+├── Layout
+│   ├── Header
+│   ├── Navigation
+│   └── Footer
+├── Pages
+│   ├── Dashboard
+│   ├── Profile
+│   └── Settings
+└── Shared
+    ├── Forms
+    ├── UI Components
+    └── Utilities
+```</code></pre>
+                </div>
+
+                <h3>Tasks (tasks.md)</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># ✅ Good Task Structure
+
+## Phase 1: Foundation
+- [ ] Set up project structure with TypeScript
+- [ ] Configure ESLint, Prettier, and pre-commit hooks
+- [ ] Create database schema and migrations  
+- [ ] Set up basic Express server with middleware
+- [ ] Implement error handling and logging
+
+## Phase 2: Authentication
+- [ ] Create User model with Prisma
+- [ ] Implement password hashing utilities
+- [ ] Build registration endpoint with validation
+- [ ] Build login endpoint with JWT tokens
+- [ ] Add refresh token mechanism
+- [ ] Create authentication middleware
+
+## Phase 3: Frontend Core
+- [ ] Set up React with TypeScript and Tailwind
+- [ ] Create routing structure with React Router
+- [ ] Build reusable UI components (Button, Input, etc.)
+- [ ] Implement authentication context
+- [ ] Create login and registration forms
+
+## Phase 4: Testing
+- [ ] Write unit tests for authentication logic
+- [ ] Add integration tests for API endpoints
+- [ ] Create E2E tests for user registration flow
+- [ ] Set up test database and CI pipeline
+- [ ] Add performance testing for API endpoints
+
+## Phase 5: Security & Polish
+- [ ] Implement rate limiting
+- [ ] Add security headers
+- [ ] Perform security audit
+- [ ] Optimize database queries
+- [ ] Add monitoring and alerting</code></pre>
+                </div>
+
+                <h2 id="testing-strategy">Testing Strategy</h2>
+
+                <p>Implement comprehensive testing that catches issues early and provides confidence for deployment:</p>
+
+                <h3>Test Pyramid Implementation</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Testing Strategy for Kiro Projects
+
+## Unit Tests (70% of tests)
+- Test individual functions and components
+- Mock external dependencies
+- Fast execution (< 1 second per test)
+- High code coverage (>90%)
+
+## Integration Tests (20% of tests)  
+- Test API endpoints with real database
+- Test component interaction
+- Database transactions and rollbacks
+- Authentication flows
+
+## E2E Tests (10% of tests)
+- Critical user journeys
+- Cross-browser compatibility
+- Performance benchmarks
+- Security scenarios
+
+## Hook-Driven Testing
+# .kiro/hooks/test-on-save.yml
+name: "Smart Test Runner"
+trigger: onSave
+pattern: "**/*.{js,ts,jsx,tsx}"
+action: |
+  Run relevant tests for the changed file:
+  1. Unit tests for the specific file
+  2. Integration tests that depend on this file
+  3. Report coverage changes
+  4. Suggest additional test cases if coverage drops</code></pre>
+                </div>
+
+                <h3>Testing Best Practices</h3>
+
+                <ul>
+                    <li><strong>Test behavior, not implementation</strong> - Focus on what the code does, not how it does it</li>
+                    <li><strong>Use descriptive test names</strong> - "should return error when password is too short"</li>
+                    <li><strong>Arrange, Act, Assert pattern</strong> - Clear test structure with setup, execution, and verification</li>
+                    <li><strong>Test edge cases</strong> - Empty inputs, boundary values, error conditions</li>
+                    <li><strong>Keep tests isolated</strong> - Each test should be independent and repeatable</li>
+                </ul>
+
+                <h2 id="security-practices">Security Practices</h2>
+
+                <p>Security must be built in from the start, not added as an afterthought:</p>
+
+                <div class="checklist">
+                    <h4>Security Checklist</h4>
+                    <ul>
+                        <li>All user input validated and sanitized</li>
+                        <li>Passwords hashed with bcrypt (12+ rounds)</li>
+                        <li>HTTPS enforced in production</li>
+                        <li>Security headers implemented (HSTS, CSP, etc.)</li>
+                        <li>SQL injection prevention (parameterized queries)</li>
+                        <li>XSS prevention (input sanitization, CSP)</li>
+                        <li>Authentication tokens properly secured</li>
+                        <li>Rate limiting on sensitive endpoints</li>
+                        <li>Regular security dependency updates</li>
+                        <li>Secrets stored in environment variables</li>
+                        <li>Database access with least privilege</li>
+                        <li>Audit logging for sensitive operations</li>
+                    </ul>
+                </div>
+
+                <h3>Security Automation</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/hooks/security-scan.yml
+name: "Security Scanner"
+trigger: onSave
+pattern: "**/*.{js,ts,jsx,tsx}"
+action: |
+  Perform security analysis on the changed file:
+  
+  1. **Vulnerability Scan**:
+     - Check for hardcoded secrets/API keys
+     - Identify potential SQL injection vectors
+     - Look for XSS vulnerabilities
+     - Verify input validation
+  
+  2. **Authentication Security**:
+     - Ensure proper authentication checks
+     - Verify authorization logic
+     - Check session management
+     - Validate token handling
+  
+  3. **Data Protection**:
+     - Confirm sensitive data encryption
+     - Check for information leakage
+     - Verify secure data transmission
+     - Ensure GDPR compliance
+  
+  Report findings with severity levels and fix suggestions.</code></pre>
+                </div>
+
+                <h2 id="performance-optimization">Performance Optimization</h2>
+
+                <p>Build performance considerations into every aspect of your Kiro project:</p>
+
+                <h3>Frontend Performance</h3>
+
+                <ul>
+                    <li><strong>Code splitting</strong> - Use React.lazy() and Suspense for route-based splitting</li>
+                    <li><strong>Image optimization</strong> - Use next/image or similar for automatic optimization</li>
+                    <li><strong>Bundle analysis</strong> - Regular bundle size monitoring and optimization</li>
+                    <li><strong>Caching strategies</strong> - Browser caching, CDN, and service worker caching</li>
+                    <li><strong>Core Web Vitals</strong> - Monitor LCP, FID, and CLS metrics</li>
+                </ul>
+
+                <h3>Backend Performance</h3>
+
+                <ul>
+                    <li><strong>Database optimization</strong> - Proper indexing, query optimization, connection pooling</li>
+                    <li><strong>API caching</strong> - Redis for session storage and frequent queries</li>
+                    <li><strong>Response compression</strong> - Gzip/Brotli compression for all responses</li>
+                    <li><strong>Async processing</strong> - Background jobs for heavy operations</li>
+                    <li><strong>Rate limiting</strong> - Protect against abuse while maintaining performance</li>
+                </ul>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Performance Monitoring Hook
+# .kiro/hooks/performance-check.yml
+name: "Performance Monitor"
+trigger: onSave
+pattern: "**/*.{js,ts,jsx,tsx}"
+action: |
+  Analyze performance impact of changes:
+  
+  1. **Bundle Size Impact**:
+     - Check if new dependencies increase bundle size
+     - Suggest alternatives for heavy libraries
+     - Identify opportunities for tree shaking
+  
+  2. **Runtime Performance**:
+     - Look for potential memory leaks
+     - Identify expensive operations
+     - Check for unnecessary re-renders
+     - Verify proper cleanup in useEffect
+  
+  3. **Database Performance**:
+     - Analyze new queries for optimization
+     - Check for N+1 query problems
+     - Verify proper indexing usage
+     - Suggest caching opportunities
+  
+  4. **Core Web Vitals**:
+     - Estimate impact on LCP, FID, CLS
+     - Suggest performance improvements
+     - Flag potential regressions</code></pre>
+                </div>
+
+                <h2 id="team-collaboration">Team Collaboration</h2>
+
+                <p>Effective team practices ensure consistent quality and knowledge sharing:</p>
+
+                <h3>Code Review Process</h3>
+
+                <div class="practice-grid">
+                    <div class="practice-card">
+                        <div class="practice-icon">👥</div>
+                        <h4>Review Standards</h4>
+                        <p>Establish clear criteria for code reviews to maintain consistency across the team.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Use review checklists</div>
+                            <div class="dont">❌ Inconsistent review quality</div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">🔄</div>
+                        <h4>Feedback Culture</h4>
+                        <p>Create a supportive environment where feedback improves code quality and team knowledge.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Constructive, educational feedback</div>
+                            <div class="dont">❌ Criticism without context</div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">📚</div>
+                        <h4>Knowledge Sharing</h4>
+                        <p>Document decisions and share learning to prevent knowledge silos.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Decision records and documentation</div>
+                            <div class="dont">❌ Undocumented architectural choices</div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">⚡</div>
+                        <h4>Async Collaboration</h4>
+                        <p>Use tools and practices that support distributed teams and async work.</p>
+                        <div class="do-dont">
+                            <div class="do">✅ Detailed PR descriptions</div>
+                            <div class="dont">❌ Context-free code changes</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Shared Kiro Configuration</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># .kiro/team-standards.yml
+team_practices:
+  code_review:
+    required_reviewers: 2
+    review_checklist:
+      - "Code follows project conventions"
+      - "Tests are comprehensive and passing"
+      - "Security considerations addressed"
+      - "Performance impact evaluated"
+      - "Documentation updated if needed"
+  
+  definition_of_done:
+    - "Feature requirements fully implemented"
+    - "Unit tests written and passing"
+    - "Integration tests passing"
+    - "Code reviewed and approved"
+    - "Documentation updated"
+    - "Security review completed"
+    - "Performance impact assessed"
+  
+  communication:
+    pr_template: |
+      ## What Changed
+      Brief description of the changes
+      
+      ## Why
+      Reasoning behind the changes
+      
+      ## Testing
+      How the changes were tested
+      
+      ## Screenshots (if UI changes)
+      
+      ## Checklist
+      - [ ] Tests added/updated
+      - [ ] Documentation updated
+      - [ ] Breaking changes documented
+    
+  shared_hooks:
+    enabled:
+      - "test-on-save"
+      - "lint-on-save" 
+      - "security-scan"
+      - "performance-check"
+    
+    disabled_in_production:
+      - "debug-logging"
+      - "verbose-output"</code></pre>
+                </div>
+
+                <h2 id="project-structure">Project Structure</h2>
+
+                <p>Organize your Kiro project for maximum maintainability and team productivity:</p>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Recommended Kiro Project Structure
+
+my-kiro-project/
+├── .kiro/                          # Kiro configuration
+│   ├── steering.yml                # Project context and preferences  
+│   ├── personas.yml                # AI agent personalities
+│   ├── conventions.yml             # Code style and patterns
+│   ├── team-standards.yml          # Team collaboration rules
+│   └── hooks/                      # Automation hooks
+│       ├── test-on-save.yml
+│       ├── security-scan.yml
+│       └── performance-check.yml
+│
+├── docs/                           # Project documentation
+│   ├── requirements.md             # EARS format requirements
+│   ├── design.md                   # Architecture and design
+│   ├── tasks.md                    # Implementation tasks
+│   ├── adr/                        # Architecture decision records
+│   └── api/                        # API documentation
+│
+├── src/                            # Source code
+│   ├── components/                 # Reusable UI components
+│   │   ├── ui/                     # Basic UI components
+│   │   ├── forms/                  # Form components
+│   │   └── layout/                 # Layout components
+│   ├── pages/                      # Page components
+│   ├── hooks/                      # Custom React hooks
+│   ├── services/                   # API and external services
+│   ├── utils/                      # Utility functions
+│   ├── types/                      # TypeScript type definitions
+│   └── __tests__/                  # Test files
+│
+├── server/                         # Backend code (if applicable)
+│   ├── routes/                     # API routes
+│   ├── middleware/                 # Express middleware
+│   ├── models/                     # Data models
+│   ├── services/                   # Business logic
+│   └── __tests__/                  # Backend tests
+│
+├── .env.example                    # Environment variables template
+├── .gitignore                      # Git ignore rules
+├── package.json                    # Dependencies and scripts
+├── tsconfig.json                   # TypeScript configuration
+├── tailwind.config.js              # Tailwind CSS configuration
+└── README.md                       # Project overview</code></pre>
+                </div>
+
+                <h2 id="common-antipatterns">Common Anti-patterns</h2>
+
+                <p>Avoid these common mistakes that lead to maintenance headaches and poor performance:</p>
+
+                <div class="antipattern-card">
+                    <h4>❌ Vague Specifications</h4>
+                    <div class="problem">
+                        <strong>Problem:</strong> Writing requirements like "The system should be user-friendly" or "Add good error handling"
+                    </div>
+                    <div class="solution">
+                        <strong>Solution:</strong> Use EARS format with specific, measurable criteria: "WHEN a form validation fails THE SYSTEM SHALL display field-specific error messages within 100ms"
+                    </div>
+                </div>
+
+                <div class="antipattern-card">
+                    <h4>❌ Monolithic Task Lists</h4>
+                    <div class="problem">
+                        <strong>Problem:</strong> Creating massive tasks like "Build entire user management system"
+                    </div>
+                    <div class="solution">
+                        <strong>Solution:</strong> Break into small, testable tasks: "Create User model", "Implement registration endpoint", "Add email validation"
+                    </div>
+                </div>
+
+                <div class="antipattern-card">
+                    <h4>❌ Skipping Steering Configuration</h4>
+                    <div class="problem">
+                        <strong>Problem:</strong> Letting AI agents work without project context, leading to inconsistent code
+                    </div>
+                    <div class="solution">
+                        <strong>Solution:</strong> Set up comprehensive steering files with your tech stack, conventions, and preferences before AI implementation
+                    </div>
+                </div>
+
+                <div class="antipattern-card">
+                    <h4>❌ Testing as an Afterthought</h4>
+                    <div class="problem">
+                        <strong>Problem:</strong> Writing tests after implementation, leading to poor coverage and fragile tests
+                    </div>
+                    <div class="solution">
+                        <strong>Solution:</strong> Include testing requirements in specs and use hooks to enforce test coverage on every change
+                    </div>
+                </div>
+
+                <div class="antipattern-card">
+                    <h4>❌ Ignoring Performance from Start</h4>
+                    <div class="problem">
+                        <strong>Problem:</strong> Building features without considering performance impact, leading to optimization nightmares later
+                    </div>
+                    <div class="solution">
+                        <strong>Solution:</strong> Include performance requirements in specs and use performance monitoring hooks to catch regressions early
+                    </div>
+                </div>
+
+                <h2 id="production-readiness">Production Readiness</h2>
+
+                <p>Ensure your Kiro project is ready for production deployment:</p>
+
+                <div class="checklist">
+                    <h4>Production Deployment Checklist</h4>
+                    <ul>
+                        <li>Environment variables configured for production</li>
+                        <li>Database migrations tested and documented</li>
+                        <li>SSL/TLS certificates configured</li>
+                        <li>Security headers implemented</li>
+                        <li>Error monitoring and alerting setup</li>
+                        <li>Performance monitoring in place</li>
+                        <li>Backup and disaster recovery plan</li>
+                        <li>Health check endpoints implemented</li>
+                        <li>Log aggregation and monitoring</li>
+                        <li>Load testing completed</li>
+                        <li>Security audit performed</li>
+                        <li>Documentation updated for operations team</li>
+                        <li>Rollback plan tested</li>
+                        <li>CI/CD pipeline validated</li>
+                        <li>Rate limiting configured</li>
+                    </ul>
+                </div>
+
+                <h3>Monitoring and Observability</h3>
+
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code># Production Monitoring Setup
+
+## Application Metrics
+- Response time percentiles (p50, p95, p99)
+- Error rates by endpoint
+- Request volume and patterns
+- Database query performance
+- Memory and CPU usage
+
+## Business Metrics  
+- User registration rate
+- Feature adoption metrics
+- Conversion funnel analytics
+- Customer satisfaction scores
+
+## Infrastructure Metrics
+- Server health and availability
+- Database connection pool status
+- Cache hit rates
+- CDN performance
+- Third-party service health
+
+## Alerting Rules
+Critical:
+- Error rate > 5% for 5 minutes
+- Response time p95 > 1 second for 10 minutes  
+- Database connections > 80% for 5 minutes
+- Any 5xx errors in authentication endpoints
+
+Warning:
+- Error rate > 1% for 15 minutes
+- Response time p95 > 500ms for 15 minutes
+- Cache hit rate < 80% for 30 minutes</code></pre>
+                </div>
+
+                <div class="success-box">
+                    <h4>Success Indicators</h4>
+                    <p>You know your Kiro practices are working when:</p>
+                    <ul>
+                        <li><strong>Consistent code quality</strong> - New code follows established patterns</li>
+                        <li><strong>Fast feature delivery</strong> - Requirements to production in days, not weeks</li>
+                        <li><strong>Low bug rates</strong> - Comprehensive testing catches issues early</li>
+                        <li><strong>Team confidence</strong> - Developers feel safe making changes</li>
+                        <li><strong>Stable performance</strong> - Production metrics remain within acceptable ranges</li>
+                        <li><strong>Security posture</strong> - Regular security audits pass without major issues</li>
+                    </ul>
+                </div>
+
+                <h3>Continuous Improvement</h3>
+
+                <p>Kiro best practices evolve with your team and project. Regularly assess and improve:</p>
+
+                <ul>
+                    <li><strong>Monthly retrospectives</strong> - Review what's working and what isn't</li>
+                    <li><strong>Metric-driven decisions</strong> - Use data to guide process improvements</li>
+                    <li><strong>Tool evaluation</strong> - Regularly assess if tools still serve your needs</li>
+                    <li><strong>Knowledge sharing</strong> - Share successes and lessons learned with the community</li>
+                    <li><strong>Experimentation</strong> - Try new approaches in low-risk environments</li>
+                </ul>
+
+                <div class="info-box">
+                    <h4>Related Resources</h4>
+                    <ul>
+                        <li><a href="/tips/getting-started/">Getting Started with Kiro</a> - Foundation setup</li>
+                        <li><a href="/tips/spec-writing/">Spec Writing Guide</a> - Requirements and design best practices</li>
+                        <li><a href="/tips/hooks-basics/">Hooks Automation</a> - Automate quality checks</li>
+                        <li><a href="/tips/steering-setup/">Steering Configuration</a> - Project context for AI agents</li>
+                        <li><a href="/tips/ears-format/">EARS Format Guide</a> - Requirements syntax mastery</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

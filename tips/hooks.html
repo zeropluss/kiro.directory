@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Agent Hooks Guide - Automate Your Development Workflow | Kiro Directory</title>
+    <meta name="description" content="Master Kiro's Agent Hooks for automated testing, documentation, security scanning, and CI/CD. Complete guide with production-ready hook examples.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/tips/hooks/">
+    <meta property="og:title" content="Complete Guide to Kiro Agent Hooks">
+    <meta property="og:description" content="Automate testing, docs, security, and deployment with Kiro's intelligent agent hooks. Production-ready examples included.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Main content */
+        main {
+            padding: 2rem 0;
+        }
+        
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        .breadcrumbs span {
+            margin: 0 0.5rem;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+        
+        h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--color-accent-2);
+        }
+        
+        .intro {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--color-surface);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-accent);
+        }
+        
+        .hook-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .hook-card h3 {
+            margin-top: 0;
+            color: var(--color-accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .hook-type {
+            background-color: var(--color-surface-2);
+            color: var(--color-text-muted);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .hook-type.save { background-color: var(--color-success); color: var(--color-base); }
+        .hook-type.create { background-color: var(--color-accent); color: var(--color-base); }
+        .hook-type.delete { background-color: var(--color-error); color: var(--color-base); }
+        .hook-type.manual { background-color: var(--color-warning); color: var(--color-base); }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            overflow-x: auto;
+            position: relative;
+            margin: 1rem 0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        .tip-box {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .tip-box::before {
+            content: "💡 Tip: ";
+            font-weight: 600;
+            color: var(--color-success);
+        }
+        
+        .warning-box {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-warning);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .warning-box::before {
+            content: "⚠️ Warning: ";
+            font-weight: 600;
+            color: var(--color-warning);
+        }
+        
+        .hooks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .hooks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a>
+            <span>›</span>
+            <a href="/tips/">Tips</a>
+            <span>›</span>
+            <span>Agent Hooks</span>
+        </div>
+        
+        <h1>Kiro Agent Hooks Guide</h1>
+        
+        <div class="intro">
+            Agent Hooks are Kiro's automation system that runs AI tasks in response to development events. 
+            Think of them as intelligent watchers that handle production-readiness tasks automatically - 
+            testing, documentation, security scanning, and more - while you focus on core functionality.
+        </div>
+        
+        <h2>What Are Agent Hooks?</h2>
+        
+        <p>Agent Hooks are event-driven AI automations that trigger when you:</p>
+        
+        <ul>
+            <li><strong>Save files</strong> - Run tests, update docs, format code</li>
+            <li><strong>Create files</strong> - Add boilerplate, generate tests</li>
+            <li><strong>Delete files</strong> - Clean up references, update imports</li>
+            <li><strong>Manual trigger</strong> - On-demand code reviews, audits</li>
+        </ul>
+        
+        <p>Unlike simple scripts, hooks have access to Kiro's AI agent and project context, making them intelligent and context-aware.</p>
+        
+        <h2>Essential Production Hooks</h2>
+        
+        <div class="hooks-grid">
+            <div class="hook-card">
+                <h3>
+                    Security Scanner
+                    <span class="hook-type save">ON SAVE</span>
+                </h3>
+                <p>Automatically scan for secrets, credentials, and security vulnerabilities on every save.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># .kiro/hooks/security-scan.md
+
+## Trigger: On File Save
+## Pattern: **/*
+
+Review changed files for security issues:
+
+1. Look for API keys, tokens, or credentials in source code
+2. Check for hardcoded passwords or secrets
+3. Identify potential SQL injection vulnerabilities
+4. Scan for XSS vulnerabilities in web code
+5. Check for insecure HTTP requests (should be HTTPS)
+
+For each issue found:
+1. Highlight the specific security risk
+2. Suggest a secure alternative (environment variables, etc.)
+3. Provide remediation steps</pre>
+                </div>
+            </div>
+            
+            <div class="hook-card">
+                <h3>
+                    Test Generator
+                    <span class="hook-type create">ON CREATE</span>
+                </h3>
+                <p>Generate comprehensive test files when new code files are created.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># .kiro/hooks/test-generator.md
+
+## Trigger: On File Create
+## Pattern: src/**/*.{js,ts,jsx,tsx}
+
+When a new source file is created:
+
+1. Analyze the file's exports and functions
+2. Create a corresponding test file in the appropriate test directory
+3. Generate test cases for:
+   - All exported functions
+   - Edge cases and error conditions
+   - Integration scenarios if applicable
+4. Include proper imports and setup/teardown
+5. Add TODO comments for complex test scenarios</pre>
+                </div>
+            </div>
+            
+            <div class="hook-card">
+                <h3>
+                    Documentation Sync
+                    <span class="hook-type save">ON SAVE</span>
+                </h3>
+                <p>Keep documentation in sync with code changes automatically.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># .kiro/hooks/doc-sync.md
+
+## Trigger: On File Save
+## Pattern: src/**/*.{js,ts}
+
+When source files are modified:
+
+1. Check if function signatures have changed
+2. Update JSDoc comments if they exist
+3. Update README.md if API changes are detected
+4. Update CHANGELOG.md with a brief description
+5. Check for broken internal links in documentation
+6. Generate API documentation if needed</pre>
+                </div>
+            </div>
+            
+            <div class="hook-card">
+                <h3>
+                    Import Cleanup
+                    <span class="hook-type delete">ON DELETE</span>
+                </h3>
+                <p>Clean up dangling imports when files are deleted.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># .kiro/hooks/import-cleanup.md
+
+## Trigger: On File Delete
+## Pattern: **/*.{js,ts,jsx,tsx}
+
+When a file is deleted:
+
+1. Search the entire codebase for imports of the deleted file
+2. Remove or comment out the import statements
+3. Check for any references to exported items from the deleted file
+4. Suggest alternative imports if similar functionality exists
+5. Update any documentation that referenced the deleted file</pre>
+                </div>
+            </div>
+            
+            <div class="hook-card">
+                <h3>
+                    Code Quality Audit
+                    <span class="hook-type manual">MANUAL</span>
+                </h3>
+                <p>On-demand comprehensive code quality review.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># .kiro/hooks/quality-audit.md
+
+## Trigger: Manual
+## Pattern: **/*
+
+Perform comprehensive code quality analysis:
+
+1. Check for code smells and anti-patterns
+2. Identify overly complex functions (high cyclomatic complexity)
+3. Look for duplicate code that could be refactored
+4. Check naming conventions and consistency
+5. Analyze performance bottlenecks
+6. Review error handling patterns
+7. Generate a quality report with recommendations</pre>
+                </div>
+            </div>
+            
+            <div class="hook-card">
+                <h3>
+                    Internationalization Helper
+                    <span class="hook-type save">ON SAVE</span>
+                </h3>
+                <p>Manage translation files automatically when locale strings change.</p>
+                
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre># .kiro/hooks/i18n-helper.md
+
+## Trigger: On File Save
+## Pattern: src/locales/en/*.json
+
+When English locale files are updated:
+
+1. Identify which string keys were added or modified
+2. For each other language file, check if those keys exist
+3. If a key is missing, add it with "NEEDS_TRANSLATION" placeholder
+4. If a key was modified in English, mark it "NEEDS_REVIEW" in others
+5. Generate a summary of what translations need updating
+6. Create a translation task list</pre>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Advanced Hook Patterns</h2>
+        
+        <h3>Conditional Hooks</h3>
+        <p>Hooks can include conditions to run only in specific scenarios:</p>
+        
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre># .kiro/hooks/conditional-test.md
+
+## Trigger: On File Save
+## Pattern: src/**/*.js
+## Condition: Only run if file contains "TODO" or "FIXME"
+
+When files with TODO/FIXME comments are saved:
+
+1. Extract all TODO and FIXME comments
+2. Check if they have associated GitHub issues
+3. If not, suggest creating issues for tracking
+4. Estimate complexity and priority
+5. Add to project backlog if configured</pre>
+        </div>
+        
+        <h3>Multi-Step Hooks</h3>
+        <p>Complex hooks can chain multiple actions:</p>
+        
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre># .kiro/hooks/deployment-prep.md
+
+## Trigger: Manual
+## Pattern: **/*
+
+Prepare for deployment:
+
+1. Run full test suite and report results
+2. Check for security vulnerabilities
+3. Update version numbers in package.json
+4. Generate/update CHANGELOG.md
+5. Build production assets
+6. Run performance benchmarks
+7. Create deployment checklist
+8. Generate deployment summary report</pre>
+        </div>
+        
+        <h2>Hook Configuration</h2>
+        
+        <h3>Creating Hooks in Kiro</h3>
+        <ol>
+            <li>Open the Kiro sidebar and navigate to "Agent Hooks"</li>
+            <li>Click "+" to create a new hook</li>
+            <li>Choose trigger type (Save, Create, Delete, Manual)</li>
+            <li>Set file pattern (e.g., <code>**/*.js</code> for all JS files)</li>
+            <li>Write instructions in natural language</li>
+            <li>Test the hook on a sample file</li>
+            <li>Enable the hook for automatic execution</li>
+        </ol>
+        
+        <h3>Hook File Structure</h3>
+        <p>Hooks are stored as markdown files in <code>.kiro/hooks/</code>:</p>
+        
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>project/
+├── .kiro/
+│   ├── hooks/
+│   │   ├── security-scan.md
+│   │   ├── test-generator.md
+│   │   ├── doc-sync.md
+│   │   └── quality-audit.md
+│   └── specs/
+└── src/</pre>
+        </div>
+        
+        <div class="tip-box">
+            Hooks are version-controlled with your project, so the entire team benefits from the same automation. When someone commits a hook, everyone gets the same quality checks and automation.
+        </div>
+        
+        <h2>Best Practices</h2>
+        
+        <h3>Hook Design Principles</h3>
+        <ul>
+            <li><strong>Be Specific</strong>: Clear, actionable instructions work better than vague requests</li>
+            <li><strong>Handle Errors</strong>: Include instructions for what to do when things go wrong</li>
+            <li><strong>Provide Context</strong>: Explain why the hook is running and what it's checking</li>
+            <li><strong>Be Incremental</strong>: Focus on the changed files, not the entire codebase</li>
+        </ul>
+        
+        <h3>Performance Considerations</h3>
+        <ul>
+            <li>Use specific file patterns to avoid unnecessary triggers</li>
+            <li>Keep hook instructions concise but complete</li>
+            <li>Consider using manual triggers for expensive operations</li>
+            <li>Test hooks on small files before enabling project-wide</li>
+        </ul>
+        
+        <div class="warning-box">
+            Hooks consume AI interactions from your monthly quota. Design them to be efficient and only run when necessary to avoid hitting limits.
+        </div>
+        
+        <h2>Team Collaboration</h2>
+        
+        <p>Hooks are particularly powerful for team development:</p>
+        
+        <ul>
+            <li><strong>Consistent Standards</strong>: Everyone gets the same code quality checks</li>
+            <li><strong>Knowledge Sharing</strong>: Hooks can enforce team conventions automatically</li>
+            <li><strong>Onboarding</strong>: New team members get guidance through hooks</li>
+            <li><strong>Documentation</strong>: Hooks keep docs updated as code changes</li>
+        </ul>
+        
+        <h3>Example Team Hook: Code Review Assistant</h3>
+        
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre># .kiro/hooks/code-review-assistant.md
+
+## Trigger: Manual
+## Pattern: **/*.{js,ts,jsx,tsx}
+
+Prepare code for team review:
+
+1. Check adherence to team coding standards
+2. Identify potential performance issues
+3. Verify error handling patterns match team conventions
+4. Check for proper logging and monitoring
+5. Ensure accessibility standards are met
+6. Validate security best practices
+7. Generate a pre-review checklist
+8. Suggest improvements with explanations</pre>
+        </div>
+        
+        <h2>Troubleshooting Hooks</h2>
+        
+        <h3>Common Issues</h3>
+        <ul>
+            <li><strong>Hook not triggering</strong>: Check file pattern matches your files</li>
+            <li><strong>Slow execution</strong>: Make instructions more specific and focused</li>
+            <li><strong>Inconsistent results</strong>: Add more context about project structure</li>
+            <li><strong>Too many false positives</strong>: Refine conditions and patterns</li>
+        </ul>
+        
+        <h3>Debugging Hooks</h3>
+        <p>Kiro provides hook execution logs in the Agent Hooks panel. Check these when hooks aren't working as expected.</p>
+        
+        <div class="tip-box">
+            Start with simple hooks and gradually add complexity. It's easier to debug a hook that does one thing well than one that tries to do everything.
+        </div>
+        
+        <h2>Next Steps</h2>
+        
+        <p>Ready to implement hooks in your project?</p>
+        
+        <ol>
+            <li>Start with the Security Scanner hook - it provides immediate value</li>
+            <li>Add the Documentation Sync hook to keep docs current</li>
+            <li>Create project-specific hooks for your team's workflow</li>
+            <li>Share successful hooks with the community</li>
+        </ol>
+        
+        <p>For more advanced automation, explore combining hooks with <a href="/tips/spec-writing/">spec-driven development</a> and <a href="/compare/">compare Kiro's automation</a> with other AI coding tools.</p>
+        
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = 'Copied!';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

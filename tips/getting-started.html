@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with AWS Kiro - Complete Guide | Kiro Directory</title>
+    <meta name="description" content="Complete getting started guide for AWS Kiro. Learn installation, setup, and build your first spec-driven AI project step by step.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/tips/getting-started/">
+    <meta property="og:title" content="Getting Started with AWS Kiro - Complete Guide">
+    <meta property="og:description" content="Complete getting started guide for AWS Kiro. Installation, setup, and first project tutorial.">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/tips/getting-started/">
+    <meta property="twitter:title" content="Getting Started with AWS Kiro">
+    <meta property="twitter:description" content="Learn Kiro spec-driven development from scratch">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Getting Started with AWS Kiro",
+      "description": "Step-by-step guide to install and use AWS Kiro for spec-driven development",
+      "image": "https://kiro.directory/logo/favicon-2048x2048.png",
+      "totalTime": "PT30M",
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Computer with internet connection"
+        },
+        {
+          "@type": "HowToSupply", 
+          "name": "AWS, Google, or GitHub account for login"
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "AWS Kiro IDE"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "text": "Download Kiro from kiro.dev for your operating system"
+        },
+        {
+          "@type": "HowToStep", 
+          "text": "Install and login with Google, GitHub, or AWS account"
+        },
+        {
+          "@type": "HowToStep",
+          "text": "Complete the hands-on tutorial to build your first feature"
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Article Layout */
+        .article-header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .article-content {
+            padding: 3rem 0;
+        }
+        
+        .prose {
+            max-width: none;
+        }
+        
+        .prose h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 3rem 0 1.5rem 0;
+            color: var(--color-accent);
+        }
+        
+        .prose h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin: 2rem 0 1rem 0;
+            color: var(--color-text);
+        }
+        
+        .prose p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .prose ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .prose li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .prose a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .prose a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            color: var(--color-text);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .copy-btn:hover {
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        
+        /* Step boxes */
+        .step-box {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            border-radius: 0 8px 8px 0;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .step-number {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            color: var(--color-accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        /* Warning boxes */
+        .warning-box {
+            background-color: rgba(255, 180, 84, 0.1);
+            border: 1px solid var(--color-warning);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning-box h4 {
+            color: var(--color-warning);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Success boxes */
+        .success-box {
+            background-color: rgba(0, 193, 124, 0.1);
+            border: 1px solid var(--color-success);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .success-box h4 {
+            color: var(--color-success);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Table of Contents */
+        .toc {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .prose {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/cheatsheets/">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <div class="breadcrumbs">
+            <a href="/">Home</a> › <a href="/cheatsheets/">Cheat Sheets</a> › Getting Started
+        </div>
+        
+        <section class="article-header">
+            <h1>Getting Started with AWS Kiro</h1>
+            <p class="article-subtitle">Your complete guide to installing Kiro and building your first spec-driven AI project</p>
+        </section>
+        
+        <section class="article-content">
+            <div class="prose">
+                <div class="toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#what-is-kiro">What is AWS Kiro?</a></li>
+                        <li><a href="#installation">Installation & Setup</a></li>
+                        <li><a href="#first-project">Your First Project</a></li>
+                        <li><a href="#spec-workflow">Spec-Driven Workflow</a></li>
+                        <li><a href="#hooks-setup">Setting up Hooks</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </ul>
+                </div>
+
+                <h2 id="what-is-kiro">What is AWS Kiro?</h2>
+                
+                <p>AWS Kiro is an agentic IDE that helps you go from prototype to production with spec-driven development. Unlike traditional AI coding assistants that only provide code completion, Kiro takes a structured approach:</p>
+                
+                <ul>
+                    <li><strong>Specs</strong> - Plan features using requirements, design, and tasks</li>
+                    <li><strong>Hooks</strong> - Automate testing, documentation, and quality checks</li>
+                    <li><strong>Agents</strong> - AI assistants that execute tasks autonomously</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h4>Preview Status</h4>
+                    <p>Kiro is currently in public preview (launched July 14, 2025). It's free to use with 50 AI interactions per month. Future pricing will be $19/month for 1,000 interactions.</p>
+                </div>
+
+                <h2 id="installation">Installation & Setup</h2>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 1</div>
+                    <div class="step-title">Download Kiro</div>
+                    <p>Visit <a href="https://kiro.dev/downloads" target="_blank" rel="noopener">kiro.dev/downloads</a> and download the installer for your operating system:</p>
+                    <ul>
+                        <li>macOS (Intel & Apple Silicon)</li>
+                        <li>Windows 10/11</li>
+                        <li>Linux (AppImage/DEB/RPM)</li>
+                    </ul>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 2</div>
+                    <div class="step-title">Install and Launch</div>
+                    <p>Run the installer and launch Kiro. The interface will look familiar if you've used VS Code, as Kiro is built on the same foundation.</p>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 3</div>
+                    <div class="step-title">Sign In</div>
+                    <p>Choose from four login options:</p>
+                    <ul>
+                        <li>Google account</li>
+                        <li>GitHub account</li>
+                        <li>AWS account</li>
+                        <li>Email + password</li>
+                    </ul>
+                </div>
+
+                <div class="success-box">
+                    <h4>Installation Complete!</h4>
+                    <p>You should now see the Kiro welcome screen with an option to "Start the Tutorial". This hands-on tutorial walks you through building a complete feature from spec to deployment.</p>
+                </div>
+
+                <h2 id="first-project">Your First Project</h2>
+
+                <p>The best way to learn Kiro is through the built-in tutorial. However, here's what you'll experience:</p>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 1</div>
+                    <div class="step-title">Create a New Spec</div>
+                    <p>Open the Command Palette (<code>Ctrl+Shift+P</code>) and type "Kiro: Create New Spec". You'll be prompted to describe what you want to build.</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>Example prompt: "Add a review system for products"</code></pre>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 2</div>
+                    <div class="step-title">Review Generated Requirements</div>
+                    <p>Kiro will generate user stories in EARS format (Easy Approach to Requirements Syntax):</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># requirements.md
+
+## User Stories
+
+### View Reviews
+WHEN a user visits a product page
+THE SYSTEM SHALL display all reviews for that product
+
+### Submit Review  
+WHEN a user submits a review with valid data
+THE SYSTEM SHALL save the review and display confirmation
+
+### Rate Products
+WHEN a user selects a star rating (1-5)
+THE SYSTEM SHALL record the rating with the review</code></pre>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 3</div>
+                    <div class="step-title">Generate Design Document</div>
+                    <p>After confirming requirements, Kiro creates a technical design:</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># design.md
+
+## Architecture
+
+### Database Schema
+```sql
+CREATE TABLE reviews (
+  id SERIAL PRIMARY KEY,
+  product_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
+  rating INTEGER CHECK (rating >= 1 AND rating <= 5),
+  content TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+### API Endpoints
+- GET /api/products/:id/reviews
+- POST /api/products/:id/reviews
+- PUT /api/reviews/:id
+- DELETE /api/reviews/:id</code></pre>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 4</div>
+                    <div class="step-title">Execute Tasks</div>
+                    <p>Kiro breaks the implementation into actionable tasks:</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># tasks.md
+
+## Implementation Tasks
+
+- [ ] Create Review model and database migration
+- [ ] Implement GET /api/products/:id/reviews endpoint  
+- [ ] Implement POST /api/products/:id/reviews endpoint
+- [ ] Create ReviewForm React component
+- [ ] Create ReviewList React component
+- [ ] Add form validation for reviews
+- [ ] Write unit tests for Review model
+- [ ] Write integration tests for API endpoints
+- [ ] Update product page to display reviews
+- [ ] Add loading states and error handling</code></pre>
+                    </div>
+                </div>
+
+                <h2 id="spec-workflow">Understanding the Spec-Driven Workflow</h2>
+
+                <p>Kiro's three-phase workflow ensures quality from requirements to code:</p>
+
+                <h3>1. Requirements Phase</h3>
+                <p>Define WHAT you're building using EARS format:</p>
+                <ul>
+                    <li><strong>WHEN</strong> [condition] <strong>THE SYSTEM SHALL</strong> [behavior]</li>
+                    <li>Forces clarity and testability</li>
+                    <li>Covers edge cases automatically</li>
+                </ul>
+
+                <h3>2. Design Phase</h3>
+                <p>Define HOW you'll build it:</p>
+                <ul>
+                    <li>Architecture diagrams and data flows</li>
+                    <li>Database schemas and API contracts</li>
+                    <li>Component hierarchies and interfaces</li>
+                </ul>
+
+                <h3>3. Implementation Phase</h3>
+                <p>Execute the plan step by step:</p>
+                <ul>
+                    <li>Tasks ordered by dependencies</li>
+                    <li>Built-in quality checks (tests, docs, security)</li>
+                    <li>Incremental delivery and verification</li>
+                </ul>
+
+                <h2 id="hooks-setup">Setting up Your First Hook</h2>
+
+                <p>Hooks automate repetitive tasks. Here's how to create a hook that runs tests when you save files:</p>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 1</div>
+                    <div class="step-title">Create Hook Configuration</div>
+                    <p>Open Command Palette and run "Kiro: Create Hook":</p>
+                    
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># .kiro/hooks/test-on-save.yml
+name: "Run Tests on Save"
+trigger: onSave
+pattern: "**/*.{js,ts,jsx,tsx}"
+action: |
+  Review the saved file and related test files.
+  If tests exist, run them and report results.
+  If no tests exist, suggest creating them.</code></pre>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number">STEP 2</div>
+                    <div class="step-title">Test the Hook</div>
+                    <p>Save a JavaScript/TypeScript file and watch the hook execute automatically. You'll see the AI agent running tests and providing feedback.</p>
+                </div>
+
+                <div class="warning-box">
+                    <h4>Hook Performance</h4>
+                    <p>Hooks run asynchronously but count toward your monthly interaction limit. Use them wisely for high-value automation.</p>
+                </div>
+
+                <h2 id="next-steps">Next Steps</h2>
+
+                <p>Now that you have Kiro running, explore these advanced features:</p>
+
+                <ul>
+                    <li><a href="/tips/spec-writing/">Master Spec Writing</a> - Learn advanced EARS syntax and design patterns</li>
+                    <li><a href="/tips/hooks-basics/">Hook Automation</a> - Set up CI/CD, security scans, and documentation</li>
+                    <li><a href="/tips/ears-format/">EARS Format Deep Dive</a> - Write better requirements</li>
+                    <li><a href="/compare/copilot/">Kiro vs Copilot</a> - Understand when to use each tool</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4>Join the Community</h4>
+                    <p>Share your Kiro experiences and get help:</p>
+                    <ul>
+                        <li><a href="https://github.com/kirodotdev/Kiro" target="_blank" rel="noopener">Official GitHub Repository</a></li>
+                        <li><a href="/contact/">Contact Kiro Directory</a> for questions</li>
+                        <li>Follow <a href="https://twitter.com/kirodirectory" target="_blank" rel="noopener">@kirodirectory</a> for updates</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+    
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+    
+    <script>
+        // Copy code functionality
+        function copyCode(button) {
+            const codeBlock = button.parentElement.querySelector('pre');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.color = 'var(--color-success)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
