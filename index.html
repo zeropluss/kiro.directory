@@ -143,6 +143,36 @@
             color: var(--color-accent);
         }
         
+        /* Language Selector */
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .lang-btn {
+            padding: 0.5rem 0.75rem;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+        
+        .lang-btn.active {
+            background: var(--color-accent);
+            color: var(--color-base);
+            border-color: var(--color-accent);
+        }
+        
         /* Hero Section */
         .hero {
             padding: 5rem 0 3rem;
@@ -645,10 +675,15 @@
         <nav class="container">
             <a href="/" class="logo">{ kiro.directory }</a>
             <ul class="nav-links">
+                <li><a href="/guides/">Guides</a></li>
                 <li><a href="#cheatsheets">Cheat Sheets</a></li>
                 <li><a href="#comparisons">Comparisons</a></li>
                 <li><a href="/pricing/">Pricing</a></li>
                 <li><a href="/blog/">Blog</a></li>
+                <li class="language-selector">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="zh">中文</button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -1074,59 +1109,237 @@ agents:
     <script>
         // Search functionality
         const searchData = [
+            // Main Guides
+            {
+                title: "AWS Kiro Complete Overview",
+                description: "Complete guide to AWS Kiro's spec-driven AI IDE with agent hooks, steering, and MCP integration",
+                url: "/guides/kiro-overview/",
+                category: "Guide",
+                keywords: "kiro overview guide spec-driven agentic AI IDE AWS claude anthropic"
+            },
             {
                 title: "Spec Writing Guide",
                 description: "Master EARS format and spec-driven development",
                 url: "/tips/spec-writing/",
-                category: "Tips"
+                category: "Tips",
+                keywords: "EARS requirements design tasks specification"
             },
             {
                 title: "Quick Start Guide", 
                 description: "Get started with Kiro in 10 minutes",
                 url: "/quickstart/",
-                category: "Getting Started"
+                category: "Getting Started",
+                keywords: "tutorial setup installation quickstart beginner"
             },
+            
+            // Comparisons
             {
                 title: "Kiro vs GitHub Copilot",
-                description: "Compare spec-driven development vs code completion",
+                description: "Compare spec-driven development vs code completion - pricing, features, workflow differences",
                 url: "/compare/copilot/",
-                category: "Comparison"
+                category: "Comparison",
+                keywords: "copilot microsoft github comparison pricing $10 $19 code completion autocomplete"
             },
             {
                 title: "Kiro vs Cursor",
-                description: "Compare structured vs flexible AI coding",
+                description: "Compare structured vs flexible AI coding approaches and IDE features",
                 url: "/compare/cursor/",
-                category: "Comparison"
+                category: "Comparison",
+                keywords: "cursor anysphere AI editor chat multi-file context comparison"
             },
             {
-                title: "Agent Hooks",
-                description: "Automate testing, docs, and CI/CD with hooks",
+                title: "Kiro vs Amazon Q Developer",
+                description: "Compare Kiro with AWS's previous AI coding assistant",
+                url: "/compare/q-developer/",
+                category: "Comparison", 
+                keywords: "amazon Q developer codewhisperer AWS cloud assistant"
+            },
+            {
+                title: "Kiro vs Devin",
+                description: "Compare autonomous AI developers - Kiro vs Cognition's Devin",
+                url: "/compare/devin/",
+                category: "Comparison",
+                keywords: "devin cognition autonomous AI developer software engineer"
+            },
+            {
+                title: "Kiro vs Windsurf",
+                description: "Compare agentic IDE approaches and workflow automation",
+                url: "/compare/windsurf/",
+                category: "Comparison",
+                keywords: "windsurf codeium AI IDE agentic workflow"
+            },
+            {
+                title: "Kiro vs Gemini CLI",
+                description: "Compare Google's AI coding tools with AWS Kiro",
+                url: "/compare/gemini/",
+                category: "Comparison",
+                keywords: "gemini google CLI code assist AI tools comparison"
+            },
+            {
+                title: "Kiro vs Tabnine",
+                description: "Compare modern agentic development vs traditional AI autocomplete",
+                url: "/compare/tabnine/",
+                category: "Comparison",
+                keywords: "tabnine autocomplete code completion AI assistant"
+            },
+            {
+                title: "AI Coding Tools Comparison Matrix",
+                description: "Side-by-side comparison of all major AI coding assistants and IDEs",
+                url: "/compare/",
+                category: "Comparison",
+                keywords: "comparison matrix tools AI coding assistants overview"
+            },
+            
+            // Tips & Tutorials
+            {
+                title: "Agent Hooks Tutorial",
+                description: "Automate testing, docs, and CI/CD with intelligent agent hooks",
                 url: "/tips/hooks/",
-                category: "Tips"
+                category: "Tips",
+                keywords: "hooks automation events file save commit testing documentation"
             },
             {
-                title: "EARS Format",
-                description: "Easy Approach to Requirements Syntax tutorial",
+                title: "EARS Format Tutorial",
+                description: "Easy Approach to Requirements Syntax - write better specifications",
                 url: "/tips/ears-format/",
-                category: "Tips"
+                category: "Tips",
+                keywords: "EARS requirements syntax WHEN SHALL format specifications"
             },
             {
-                title: "Basic Spec Structure",
-                description: "Define requirements in EARS format for automatic task generation",
-                url: "#quickstart",
-                category: "Cheat Sheet"
+                title: "Steering Setup Guide",
+                description: "Configure project knowledge and AI guidelines with steering files",
+                url: "/tips/steering-setup/",
+                category: "Tips",
+                keywords: "steering files project context tech product structure guidelines"
             },
             {
-                title: "Auto-Test Hook",
-                description: "Automatically run tests when saving files",
-                url: "#quickstart",
-                category: "Cheat Sheet"
+                title: "Getting Started with Kiro",
+                description: "Step-by-step guide to your first Kiro project",
+                url: "/tips/getting-started/",
+                category: "Tips",
+                keywords: "getting started first project setup installation tutorial"
             },
             {
-                title: "Multi-Agent Workflow",
-                description: "Coordinate multiple AI agents for complex tasks",
-                url: "#quickstart",
-                category: "Cheat Sheet"
+                title: "Best Practices",
+                description: "Expert tips for productive spec-driven development with Kiro",
+                url: "/tips/best-practices/",
+                category: "Tips",
+                keywords: "best practices tips expert advice workflow optimization"
+            },
+            
+            // Pricing & Features
+            {
+                title: "Pricing Tracker",
+                description: "Real-time pricing comparison of AI coding assistants - Kiro, Copilot, Cursor",
+                url: "/pricing/",
+                category: "Pricing",
+                keywords: "pricing cost $19 $39 free pro plus interactions subscription"
+            },
+            {
+                title: "Kiro Pricing Plans",
+                description: "Free: 50 interactions, Pro: $19/month (1,000), Pro+: $39/month (3,000)",
+                url: "/pricing/#kiro",
+                category: "Pricing",
+                keywords: "kiro pricing free pro plus $19 $39 interactions limits"
+            },
+            
+            // Cheat Sheets & Quick Reference
+            {
+                title: "EARS Requirements Template",
+                description: "WHEN [condition] THE SYSTEM SHALL [behavior] - Quick reference format",
+                url: "/cheatsheets/#ears",
+                category: "Cheat Sheet",
+                keywords: "EARS template requirements format WHEN SHALL quick reference"
+            },
+            {
+                title: "Agent Hooks Examples",
+                description: "Common hook patterns: file save, commit, test automation",
+                url: "/cheatsheets/#hooks",
+                category: "Cheat Sheet",
+                keywords: "hooks examples patterns file save commit automation"
+            },
+            {
+                title: "Steering File Templates",
+                description: "Ready-to-use templates for product.md, tech.md, structure.md",
+                url: "/cheatsheets/#steering",
+                category: "Cheat Sheet",
+                keywords: "steering templates product tech structure files examples"
+            },
+            {
+                title: "MCP Server List",
+                description: "Available Model Context Protocol servers for extending Kiro",
+                url: "/cheatsheets/#mcp",
+                category: "Cheat Sheet",
+                keywords: "MCP servers context protocol extensions integrations AWS web search"
+            },
+            
+            // Company & Tool Information
+            {
+                title: "AWS Kiro",
+                description: "Amazon's spec-driven agentic IDE - July 2025 launch, Claude-powered",
+                url: "/tools/kiro/",
+                category: "Tool",
+                keywords: "AWS amazon kiro agentic IDE claude anthropic july 2025 spec-driven"
+            },
+            {
+                title: "GitHub Copilot",
+                description: "Microsoft's AI code completion - $10/month individual, $19/month business",
+                url: "/tools/copilot/",
+                category: "Tool",
+                keywords: "github copilot microsoft code completion $10 $19 openai"
+            },
+            {
+                title: "Cursor Editor",
+                description: "Anysphere's AI-native code editor with chat and context understanding",
+                url: "/tools/cursor/",
+                category: "Tool",
+                keywords: "cursor anysphere AI editor chat context multi-file claude"
+            },
+            {
+                title: "Anthropic Claude",
+                description: "The AI model powering Kiro - Claude Sonnet 3.7 and 4.0",
+                url: "/tools/claude/",
+                category: "Tool",
+                keywords: "anthropic claude sonnet AI model LLM reasoning"
+            },
+            
+            // Technical Concepts
+            {
+                title: "Spec-Driven Development",
+                description: "Requirements → Design → Tasks → Implementation workflow",
+                url: "/concepts/spec-driven/",
+                category: "Concept",
+                keywords: "spec-driven development requirements design tasks implementation workflow"
+            },
+            {
+                title: "Agentic AI",
+                description: "Autonomous AI agents that execute tasks without micro-management",
+                url: "/concepts/agentic/",
+                category: "Concept",
+                keywords: "agentic AI autonomous agents tasks execution automation"
+            },
+            {
+                title: "Model Context Protocol",
+                description: "MCP standard for connecting external tools to AI models",
+                url: "/concepts/mcp/",
+                category: "Concept",
+                keywords: "MCP model context protocol integrations external tools API"
+            },
+            
+            // Use Cases & Examples  
+            {
+                title: "Building a Review System",
+                description: "Complete example: from spec to implementation using Kiro",
+                url: "/examples/review-system/",
+                category: "Example",
+                keywords: "example review system tutorial walkthrough implementation"
+            },
+            {
+                title: "Setting Up CI/CD Hooks",
+                description: "Automate testing and deployment with agent hooks",
+                url: "/examples/cicd-hooks/",
+                category: "Example",
+                keywords: "CI/CD hooks automation testing deployment continuous integration"
             }
         ];
 
@@ -1134,11 +1347,25 @@ agents:
             if (!query.trim()) return [];
             
             const lowerQuery = query.toLowerCase();
-            return searchData.filter(item => 
+            const results = searchData.filter(item => 
                 item.title.toLowerCase().includes(lowerQuery) ||
                 item.description.toLowerCase().includes(lowerQuery) ||
-                item.category.toLowerCase().includes(lowerQuery)
-            ).slice(0, 5); // Limit to 5 results
+                item.category.toLowerCase().includes(lowerQuery) ||
+                (item.keywords && item.keywords.toLowerCase().includes(lowerQuery))
+            );
+
+            // Sort results by relevance (title matches first, then description, then keywords)
+            const sortedResults = results.sort((a, b) => {
+                const aTitle = a.title.toLowerCase().includes(lowerQuery) ? 0 : 1;
+                const bTitle = b.title.toLowerCase().includes(lowerQuery) ? 0 : 1;
+                if (aTitle !== bTitle) return aTitle - bTitle;
+                
+                const aDesc = a.description.toLowerCase().includes(lowerQuery) ? 0 : 1;
+                const bDesc = b.description.toLowerCase().includes(lowerQuery) ? 0 : 1;
+                return aDesc - bDesc;
+            });
+
+            return sortedResults.slice(0, 8); // Show up to 8 results
         }
 
         function displaySearchResults(results) {
@@ -1222,6 +1449,64 @@ agents:
                         const results = performSearch(this.value);
                         displaySearchResults(results);
                     }
+                });
+            }
+
+            // Language switching functionality
+            const langBtns = document.querySelectorAll('.lang-btn');
+            const defaultLang = localStorage.getItem('preferred-language') || 'en';
+            
+            // Set initial language
+            setLanguage(defaultLang);
+            
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    setLanguage(lang);
+                    localStorage.setItem('preferred-language', lang);
+                });
+            });
+
+            function setLanguage(lang) {
+                // Update active button
+                langBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+
+                // Update content based on language
+                if (lang === 'zh') {
+                    // Switch to Chinese content
+                    document.querySelector('h1').textContent = 'Kiro 备忘单与对比';
+                    document.querySelector('.hero-subtitle').textContent = '使用 AWS Kiro 的规范驱动开发更快交付 AI 就绪代码';
+                    document.querySelector('.search-box').placeholder = '搜索技巧、规范、钩子、对比...';
+                    
+                    // Update navigation
+                    const navLinks = document.querySelectorAll('.nav-links a');
+                    const chineseNavTexts = ['指南', '备忘单', '对比', '定价', '博客'];
+                    navLinks.forEach((link, index) => {
+                        if (index < chineseNavTexts.length) {
+                            link.textContent = chineseNavTexts[index];
+                        }
+                    });
+                } else {
+                    // Switch to English content (default)
+                    document.querySelector('h1').textContent = 'Kiro Cheat Sheets & Comparisons';
+                    document.querySelector('.hero-subtitle').textContent = 'Ship AI-ready code faster with AWS Kiro\'s spec-driven development';
+                    document.querySelector('.search-box').placeholder = 'Search tips, specs, hooks, comparisons...';
+                    
+                    // Update navigation
+                    const navLinks = document.querySelectorAll('.nav-links a');
+                    const englishNavTexts = ['Guides', 'Cheat Sheets', 'Comparisons', 'Pricing', 'Blog'];
+                    navLinks.forEach((link, index) => {
+                        if (index < englishNavTexts.length) {
+                            link.textContent = englishNavTexts[index];
+                        }
+                    });
+                }
+
+                // Track language change
+                gtag('event', 'language_change', {
+                    'language': lang
                 });
             }
         });

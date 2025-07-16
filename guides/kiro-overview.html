@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Kiro Overview - Complete Guide to Spec-Driven AI Development | Kiro Directory</title>
+    <meta name="description" content="Complete guide to AWS Kiro - the spec-driven AI IDE. Learn about agent hooks, steering files, pricing, and how Kiro revolutionizes AI-assisted development.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/guides/kiro-overview/">
+    <meta property="og:title" content="AWS Kiro Complete Overview Guide">
+    <meta property="og:description" content="Everything you need to know about AWS Kiro's spec-driven development approach, agent hooks, and AI-powered workflow automation.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #e6edf3;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 2rem 0;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #30363d;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #8affef;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e6edf3;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #8affef;
+        }
+
+        main {
+            padding: 3rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #8affef 0%, #ffd46b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: #9198a1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .toc {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+            background: rgba(22, 27, 34, 0.6);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .toc h3 {
+            color: #8affef;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: #9198a1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .toc a:hover {
+            color: #e6edf3;
+        }
+
+        .article {
+            background: rgba(22, 27, 34, 0.4);
+            border: 1px solid #30363d;
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .article h2 {
+            color: #ffd46b;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .article h2:first-child {
+            margin-top: 0;
+        }
+
+        .article h3 {
+            color: #8affef;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+
+        .article h4 {
+            color: #e6edf3;
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .article p {
+            margin-bottom: 1rem;
+            color: #c9d1d9;
+        }
+
+        .article ul, .article ol {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+        }
+
+        .article li {
+            margin-bottom: 0.5rem;
+            color: #c9d1d9;
+        }
+
+        .article strong {
+            color: #e6edf3;
+            font-weight: 600;
+        }
+
+        .article em {
+            color: #8affef;
+            font-style: italic;
+        }
+
+        .article code {
+            background: rgba(110, 118, 129, 0.2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #ffd46b;
+        }
+
+        .article pre {
+            background: rgba(13, 17, 23, 0.8);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .article pre code {
+            background: none;
+            padding: 0;
+            color: #e6edf3;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: #8affef;
+        }
+
+        .feature-card h4 {
+            color: #8affef;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #9198a1;
+        }
+
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .pricing-card {
+            background: rgba(13, 17, 23, 0.6);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .pricing-card.featured {
+            border-color: #8affef;
+            background: rgba(138, 255, 239, 0.05);
+        }
+
+        .pricing-card h4 {
+            color: #8affef;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffd46b;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card .limit {
+            color: #9198a1;
+            margin-bottom: 1.5rem;
+        }
+
+        .quick-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #30363d;
+        }
+
+        .quick-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: rgba(138, 255, 239, 0.1);
+            border: 1px solid #8affef;
+            border-radius: 8px;
+            color: #8affef;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .quick-nav a:hover {
+            background: rgba(138, 255, 239, 0.2);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .toc {
+                position: static;
+                order: 2;
+            }
+
+            .article {
+                order: 1;
+                padding: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .quick-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">kiro.directory</a>
+            <ul class="nav-links">
+                <li><a href="/compare/">Compare</a></li>
+                <li><a href="/guides/">Guides</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/tips/">Tips</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="hero">
+            <h1>AWS Kiro Complete Guide</h1>
+            <p class="subtitle">
+                The spec-driven, agentic IDE that transforms AI-generated prototypes into production-ready software
+            </p>
+        </div>
+
+        <div class="content">
+            <aside class="toc">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#core-features">Core Features</a></li>
+                    <li><a href="#spec-system">Spec System</a></li>
+                    <li><a href="#agent-hooks">Agent Hooks</a></li>
+                    <li><a href="#steering">Steering Rules</a></li>
+                    <li><a href="#mcp">MCP Integration</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#getting-started">Getting Started</a></li>
+                </ul>
+            </aside>
+
+            <article class="article">
+                <h2 id="introduction">What is AWS Kiro?</h2>
+                
+                <p><strong>Kiro</strong> (rhymes with "hero") is AWS's revolutionary AI-powered IDE that bridges the gap between rapid "vibe coding" and production-ready software. Unlike traditional code assistants that just provide autocomplete, Kiro takes an <em>agentic approach</em> with autonomous AI agents that can generate project plans, create files, run tests, and update documentation.</p>
+
+                <p>Kiro's core philosophy: <em>"from vibe code to viable code"</em> - emphasizing upfront planning through specifications, design documents, and structured implementation before writing code.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>🏗️ Spec-Driven Development</h4>
+                        <p>Transform prompts into structured specifications with requirements, design docs, and implementation tasks.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🤖 Agentic Execution</h4>
+                        <p>AI agents autonomously execute implementation plans step-by-step with minimal human intervention.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔧 Agent Hooks</h4>
+                        <p>Event-driven automation that handles documentation, testing, and code quality automatically.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 Smart Steering</h4>
+                        <p>Persistent project knowledge that keeps AI aligned with your conventions and standards.</p>
+                    </div>
+                </div>
+
+                <h2 id="core-features">Core Features & Architecture</h2>
+
+                <h3>Technical Foundation</h3>
+                <ul>
+                    <li><strong>Built on VS Code OSS</strong> - Full compatibility with existing extensions and settings</li>
+                    <li><strong>Powered by Anthropic Claude</strong> - Uses Claude Sonnet 3.7 and 4.0 for advanced reasoning</li>
+                    <li><strong>Multi-platform</strong> - Runs on macOS, Windows, and Linux</li>
+                    <li><strong>Cloud-backed AI</strong> - Heavy processing happens in AWS cloud with guaranteed privacy</li>
+                </ul>
+
+                <h3>Key Capabilities</h3>
+                <ul>
+                    <li><strong>Spec-Driven Workflow</strong> - Requirements → Design → Tasks → Implementation</li>
+                    <li><strong>Agent Hooks</strong> - Intelligent automation triggered by file events</li>
+                    <li><strong>Steering Rules</strong> - Project-specific AI guidelines and conventions</li>
+                    <li><strong>MCP Integration</strong> - Extensible plugin system for external tools</li>
+                    <li><strong>VS Code Ecosystem</strong> - Support for Open VSX extensions</li>
+                </ul>
+
+                <h2 id="spec-system">The Kiro Spec System</h2>
+
+                <p>At the heart of Kiro is its <strong>specification system</strong> - think of it as having a solutions architect and PM built into your IDE. Instead of diving straight into code, Kiro guides you through structured planning.</p>
+
+                <h3>Three-Phase Workflow</h3>
+
+                <h4>1. Requirements Phase</h4>
+                <p>Transform a simple prompt into structured requirements using <strong>EARS notation</strong>:</p>
+                <pre><code>WHEN [condition] THE SYSTEM SHALL [expected behavior]
+
+Example:
+WHEN a user submits invalid form data, 
+THE SYSTEM SHALL display validation errors next to relevant fields</code></pre>
+
+                <h4>2. Design Phase</h4>
+                <p>Kiro generates technical design documents including:</p>
+                <ul>
+                    <li>Architecture diagrams (Mermaid UML, ASCII art)</li>
+                    <li>Data models and interfaces</li>
+                    <li>Component interactions and API designs</li>
+                    <li>Non-functional considerations (security, performance)</li>
+                </ul>
+
+                <h4>3. Implementation Planning</h4>
+                <p>Detailed task breakdown with:</p>
+                <ul>
+                    <li>Granular implementation steps</li>
+                    <li>Requirement traceability</li>
+                    <li>Built-in quality measures (tests, documentation)</li>
+                    <li>Logical sequencing with dependency management</li>
+                </ul>
+
+                <h4>4. Execution</h4>
+                <p>AI agents execute tasks one-by-one, providing:</p>
+                <ul>
+                    <li>Code generation with full diff visibility</li>
+                    <li>Automated test execution</li>
+                    <li>Progress tracking and verification</li>
+                    <li>Timeline view of all changes</li>
+                </ul>
+
+                <h2 id="agent-hooks">Agent Hooks - Automation Excellence</h2>
+
+                <p>Hooks are Kiro's secret weapon for maintaining production-ready code. They're AI-powered automation triggers that handle the "boring but critical" tasks developers often forget.</p>
+
+                <h3>Hook Types & Examples</h3>
+
+                <h4>File Save Hooks</h4>
+                <pre><code>Trigger: On File Save
+Pattern: **/*.js, **/*.ts
+Actions:
+1. Scan for potential security issues (API keys, secrets)
+2. Check coding standards compliance
+3. Update related documentation
+4. Generate/update unit tests if needed</code></pre>
+
+                <h4>Commit Hooks</h4>
+                <pre><code>Trigger: Before Commit
+Actions:
+1. Generate meaningful commit messages
+2. Update CHANGELOG.md
+3. Verify all tests pass
+4. Check for breaking changes</code></pre>
+
+                <h4>File Creation Hooks</h4>
+                <pre><code>Trigger: New File Created
+Pattern: **/*.component.ts
+Actions:
+1. Generate corresponding test file
+2. Add to module exports
+3. Update component documentation
+4. Create Storybook stories</code></pre>
+
+                <h2 id="steering">Steering Rules - Project Intelligence</h2>
+
+                <p>Steering files are Kiro's memory system - markdown documents that store project-specific knowledge and keep the AI aligned with your standards.</p>
+
+                <h3>Steering File Types</h3>
+
+                <h4>Product Context (`product.md`)</h4>
+                <ul>
+                    <li>Business objectives and user personas</li>
+                    <li>Feature priorities and roadmap</li>
+                    <li>Domain-specific terminology</li>
+                    <li>Compliance and regulatory requirements</li>
+                </ul>
+
+                <h4>Technical Standards (`tech.md`)</h4>
+                <ul>
+                    <li>Technology stack and architecture patterns</li>
+                    <li>Coding standards and best practices</li>
+                    <li>Testing strategies and coverage requirements</li>
+                    <li>Performance and security guidelines</li>
+                </ul>
+
+                <h4>Project Structure (`structure.md`)</h4>
+                <ul>
+                    <li>File organization conventions</li>
+                    <li>Naming patterns and conventions</li>
+                    <li>Module boundaries and dependencies</li>
+                    <li>Documentation standards</li>
+                </ul>
+
+                <h2 id="mcp">Model Context Protocol (MCP)</h2>
+
+                <p>MCP extends Kiro's capabilities by connecting external tools and services. Think of it as Kiro's plugin system that allows the AI to interact with your entire development ecosystem.</p>
+
+                <h3>Popular MCP Integrations</h3>
+                <ul>
+                    <li><strong>AWS Documentation</strong> - Query AWS API docs directly</li>
+                    <li><strong>Web Search</strong> - Research libraries and solutions</li>
+                    <li><strong>Database</strong> - Query and analyze data schemas</li>
+                    <li><strong>File System</strong> - Advanced file operations</li>
+                    <li><strong>Git</strong> - Repository management and history</li>
+                </ul>
+
+                <h3>Example MCP Usage</h3>
+                <pre><code># In Kiro chat:
+"Set up an AWS Lambda with API Gateway"
+
+# Kiro uses AWS-docs MCP to:
+1. Look up current Lambda best practices
+2. Check API Gateway integration patterns
+3. Generate infrastructure-as-code
+4. Create deployment scripts</code></pre>
+
+                <h2 id="pricing">Pricing & Plans</h2>
+
+                <div class="pricing-table">
+                    <div class="pricing-card">
+                        <h4>Free (Preview)</h4>
+                        <div class="price">$0</div>
+                        <div class="limit">50 AI interactions/month</div>
+                        <ul>
+                            <li>All Kiro features</li>
+                            <li>VS Code compatibility</li>
+                            <li>Community support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <h4>Pro</h4>
+                        <div class="price">$19<span style="font-size: 1rem;">/month</span></div>
+                        <div class="limit">1,000 AI interactions/month</div>
+                        <ul>
+                            <li>Everything in Free</li>
+                            <li>Priority support</li>
+                            <li>Data privacy guarantee</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h4>Pro+</h4>
+                        <div class="price">$39<span style="font-size: 1rem;">/month</span></div>
+                        <div class="limit">3,000 AI interactions/month</div>
+                        <ul>
+                            <li>Everything in Pro</li>
+                            <li>Heavy usage support</li>
+                            <li>Advanced integrations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>What Counts as an Interaction?</h3>
+                <ul>
+                    <li>Generating spec components (requirements, design, tasks)</li>
+                    <li>Executing individual implementation tasks</li>
+                    <li>Hook triggers that use AI</li>
+                    <li>Chat Q&A exchanges</li>
+                </ul>
+
+                <h2 id="getting-started">Getting Started with Kiro</h2>
+
+                <h3>Installation</h3>
+                <ol>
+                    <li>Download Kiro from the official AWS page</li>
+                    <li>Install on macOS, Windows, or Linux</li>
+                    <li>Sign in with AWS account (or Google/GitHub)</li>
+                    <li>Import your existing VS Code settings</li>
+                </ol>
+
+                <h3>First Project Setup</h3>
+                <ol>
+                    <li><strong>Create Steering Files</strong> - Define your project context and standards</li>
+                    <li><strong>Set Up Hooks</strong> - Configure automation for your workflow</li>
+                    <li><strong>Create Your First Spec</strong> - Start with a small feature to learn the workflow</li>
+                    <li><strong>Install MCP Servers</strong> - Add integrations for your tech stack</li>
+                </ol>
+
+                <h3>Best Practices</h3>
+                <ul>
+                    <li><strong>Start Small</strong> - Begin with simple features to understand the spec workflow</li>
+                    <li><strong>Invest in Steering</strong> - Well-written steering files dramatically improve AI output</li>
+                    <li><strong>Use Hooks Wisely</strong> - Start with basic hooks and gradually add complexity</li>
+                    <li><strong>Review AI Output</strong> - Always verify generated code and specifications</li>
+                    <li><strong>Iterate Specs</strong> - Don't expect perfect requirements on the first try</li>
+                </ul>
+
+                <div class="quick-nav">
+                    <a href="/compare/kiro-vs-cursor/">← Compare with Cursor</a>
+                    <a href="/guides/getting-started/">Getting Started Guide →</a>
+                </div>
+            </article>
+        </div>
+    </main>
+</body>
+</html>
