@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Resources - Documentation, Tools & Community Links</title>
+    <meta name="description" content="Essential AWS Kiro resources including official documentation, community tools, video tutorials, GitHub repos, and learning materials for spec-driven development.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/resources/">
+    <meta property="og:title" content="Kiro Resources Hub">
+    <meta property="og:description" content="All the AWS Kiro documentation, tools, and community resources in one place">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/resources/">
+    <meta property="twitter:title" content="Kiro Resources Hub">
+    <meta property="twitter:description" content="Essential AWS Kiro documentation and tools">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Kiro Resources",
+      "description": "Collection of AWS Kiro documentation, tools, and community resources",
+      "url": "https://kiro.directory/resources/",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory"
+      }
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 3rem;
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+        
+        .quick-link {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .quick-link:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 255, 239, 0.1);
+        }
+        
+        .quick-link-icon {
+            font-size: 1.5rem;
+        }
+        
+        .quick-link-content h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .quick-link-content p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+        
+        /* Resource Sections */
+        .resource-section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-icon {
+            font-size: 2rem;
+        }
+        
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin: 0;
+        }
+        
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .resource-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+        
+        .resource-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(138, 255, 239, 0.1);
+        }
+        
+        .resource-card h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .resource-card h3 a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+        
+        .resource-card h3 a:hover {
+            color: var(--color-accent);
+        }
+        
+        .resource-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .resource-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .resource-description {
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .resource-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+        
+        .resource-link:hover {
+            gap: 0.75rem;
+        }
+        
+        /* Badge Styles */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-official {
+            background-color: var(--color-warning);
+            color: var(--color-base);
+        }
+        
+        .badge-community {
+            background-color: var(--color-info);
+            color: var(--color-base);
+        }
+        
+        .badge-new {
+            background-color: var(--color-success);
+            color: var(--color-base);
+        }
+        
+        /* Tools List */
+        .tools-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .tool-item {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+        
+        .tool-item:hover {
+            border-color: var(--color-accent);
+        }
+        
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tool-name {
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+        
+        .tool-name:hover {
+            color: var(--color-accent);
+        }
+        
+        .tool-description {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        /* Learning Path */
+        .learning-path {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .learning-path h3 {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        .learning-steps {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .learning-step {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+        
+        .step-number {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        
+        .step-content h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-content p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <section class="hero">
+            <h1>Kiro Resources Hub</h1>
+            <p class="hero-subtitle">Everything you need to master AWS Kiro's spec-driven development</p>
+            
+            <div class="quick-links">
+                <a href="#documentation" class="quick-link">
+                    <span class="quick-link-icon">📚</span>
+                    <div class="quick-link-content">
+                        <h3>Documentation</h3>
+                        <p>Official guides & API docs</p>
+                    </div>
+                </a>
+                <a href="#tutorials" class="quick-link">
+                    <span class="quick-link-icon">🎓</span>
+                    <div class="quick-link-content">
+                        <h3>Tutorials</h3>
+                        <p>Video guides & walkthroughs</p>
+                    </div>
+                </a>
+                <a href="#tools" class="quick-link">
+                    <span class="quick-link-icon">🛠️</span>
+                    <div class="quick-link-content">
+                        <h3>Tools</h3>
+                        <p>Extensions & integrations</p>
+                    </div>
+                </a>
+                <a href="#community" class="quick-link">
+                    <span class="quick-link-icon">👥</span>
+                    <div class="quick-link-content">
+                        <h3>Community</h3>
+                        <p>Forums & discussions</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Learning Path -->
+        <div class="learning-path">
+            <h3>🎯 Kiro Learning Path</h3>
+            <div class="learning-steps">
+                <div class="learning-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Understand Spec-Driven Development</h4>
+                        <p>Learn the fundamentals of transforming specifications into production code</p>
+                    </div>
+                </div>
+                <div class="learning-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Master EARS Format</h4>
+                        <p>Write clear specifications that Kiro's AI agents can understand</p>
+                    </div>
+                </div>
+                <div class="learning-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Configure Hooks & Automation</h4>
+                        <p>Set up automated testing, documentation, and deployment workflows</p>
+                    </div>
+                </div>
+                <div class="learning-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Implement Multi-Agent Workflows</h4>
+                        <p>Coordinate architect, coder, tester, and reviewer agents</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Official Documentation -->
+        <section id="documentation" class="resource-section">
+            <div class="section-header">
+                <span class="section-icon">📚</span>
+                <h2>Official Documentation</h2>
+            </div>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3><a href="https://aws.amazon.com/kiro/docs/" target="_blank">Getting Started Guide</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">📄 Documentation</span>
+                        <span class="badge badge-official">OFFICIAL</span>
+                    </div>
+                    <p class="resource-description">Official AWS Kiro documentation covering installation, basic concepts, and your first spec-driven project.</p>
+                    <a href="https://aws.amazon.com/kiro/docs/" target="_blank" class="resource-link">Read documentation →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://aws.amazon.com/kiro/api/" target="_blank">API Reference</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">🔧 API Docs</span>
+                        <span class="badge badge-official">OFFICIAL</span>
+                    </div>
+                    <p class="resource-description">Complete API reference for Kiro's spec format, hooks system, and agent configuration options.</p>
+                    <a href="https://aws.amazon.com/kiro/api/" target="_blank" class="resource-link">View API docs →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://aws.amazon.com/kiro/changelog/" target="_blank">Release Notes</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">📝 Changelog</span>
+                        <span class="badge badge-new">UPDATED</span>
+                    </div>
+                    <p class="resource-description">Latest updates, new features, and bug fixes in AWS Kiro. Stay informed about platform changes.</p>
+                    <a href="https://aws.amazon.com/kiro/changelog/" target="_blank" class="resource-link">View changelog →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Video Tutorials -->
+        <section id="tutorials" class="resource-section">
+            <div class="section-header">
+                <span class="section-icon">🎓</span>
+                <h2>Video Tutorials</h2>
+            </div>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3><a href="https://youtube.com/watch?v=example1" target="_blank">Kiro Fundamentals Course</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">🎥 Video Series</span>
+                        <span>2 hours</span>
+                    </div>
+                    <p class="resource-description">Comprehensive video course covering Kiro basics, from installation to deploying your first production app.</p>
+                    <a href="https://youtube.com/watch?v=example1" target="_blank" class="resource-link">Watch course →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://youtube.com/watch?v=example2" target="_blank">Advanced Hooks Workshop</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">🎥 Workshop</span>
+                        <span>45 min</span>
+                    </div>
+                    <p class="resource-description">Deep dive into Kiro's hooks system. Learn to automate testing, documentation, and CI/CD workflows.</p>
+                    <a href="https://youtube.com/watch?v=example2" target="_blank" class="resource-link">Watch workshop →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://youtube.com/watch?v=example3" target="_blank">Migrating from Copilot to Kiro</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">🎥 Tutorial</span>
+                        <span>30 min</span>
+                    </div>
+                    <p class="resource-description">Step-by-step guide for teams transitioning from GitHub Copilot to AWS Kiro's spec-driven approach.</p>
+                    <a href="https://youtube.com/watch?v=example3" target="_blank" class="resource-link">Watch tutorial →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tools & Extensions -->
+        <section id="tools" class="resource-section">
+            <div class="section-header">
+                <span class="section-icon">🛠️</span>
+                <h2>Tools & Extensions</h2>
+            </div>
+            <div class="tools-list">
+                <div class="tool-item">
+                    <div class="tool-header">
+                        <a href="https://github.com/kiro-community/kiro-vscode" target="_blank" class="tool-name">Kiro VS Code Extension</a>
+                        <span class="badge badge-community">COMMUNITY</span>
+                    </div>
+                    <p class="tool-description">Enhanced VS Code support for Kiro spec files with syntax highlighting and snippets.</p>
+                </div>
+                
+                <div class="tool-item">
+                    <div class="tool-header">
+                        <a href="https://github.com/kiro-community/kiro-cli" target="_blank" class="tool-name">Kiro CLI Tools</a>
+                        <span class="badge badge-community">COMMUNITY</span>
+                    </div>
+                    <p class="tool-description">Command-line utilities for managing Kiro projects, specs, and deployments.</p>
+                </div>
+                
+                <div class="tool-item">
+                    <div class="tool-header">
+                        <a href="https://github.com/kiro-community/kiro-templates" target="_blank" class="tool-name">Kiro Project Templates</a>
+                        <span class="badge badge-new">NEW</span>
+                    </div>
+                    <p class="tool-description">Starter templates for common project types: REST APIs, React apps, microservices.</p>
+                </div>
+                
+                <div class="tool-item">
+                    <div class="tool-header">
+                        <a href="https://github.com/kiro-community/kiro-hooks" target="_blank" class="tool-name">Community Hooks Library</a>
+                        <span class="badge badge-community">COMMUNITY</span>
+                    </div>
+                    <p class="tool-description">Curated collection of production-ready hooks for testing, deployment, and monitoring.</p>
+                </div>
+                
+                <div class="tool-item">
+                    <div class="tool-header">
+                        <a href="https://github.com/kiro-community/kiro-mcp" target="_blank" class="tool-name">MCP Protocol Integrations</a>
+                        <span class="badge badge-new">NEW</span>
+                    </div>
+                    <p class="tool-description">Connect Kiro with external tools via Model Context Protocol (MCP).</p>
+                </div>
+                
+                <div class="tool-item">
+                    <div class="tool-header">
+                        <a href="https://github.com/kiro-community/kiro-dashboard" target="_blank" class="tool-name">Kiro Analytics Dashboard</a>
+                        <span class="badge badge-community">COMMUNITY</span>
+                    </div>
+                    <p class="tool-description">Track productivity metrics and AI usage across your Kiro projects.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Resources -->
+        <section id="community" class="resource-section">
+            <div class="section-header">
+                <span class="section-icon">👥</span>
+                <h2>Community</h2>
+            </div>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3><a href="https://discord.gg/kiro" target="_blank">Kiro Discord Server</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">💬 Chat</span>
+                        <span>5,000+ members</span>
+                    </div>
+                    <p class="resource-description">Join the official Kiro community Discord. Get help, share projects, and connect with other developers.</p>
+                    <a href="https://discord.gg/kiro" target="_blank" class="resource-link">Join Discord →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://github.com/kiro-community" target="_blank">GitHub Organization</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">🐙 Code</span>
+                        <span>50+ repos</span>
+                    </div>
+                    <p class="resource-description">Community-maintained tools, templates, and examples. Contribute your own Kiro projects!</p>
+                    <a href="https://github.com/kiro-community" target="_blank" class="resource-link">Browse repos →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://reddit.com/r/awskiro" target="_blank">r/AWSKiro Subreddit</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">🗣️ Forum</span>
+                        <span>Growing fast</span>
+                    </div>
+                    <p class="resource-description">Reddit community for Kiro discussions, project showcases, and weekly tips threads.</p>
+                    <a href="https://reddit.com/r/awskiro" target="_blank" class="resource-link">Visit subreddit →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- GitHub Repositories -->
+        <section class="resource-section">
+            <div class="section-header">
+                <span class="section-icon">🐙</span>
+                <h2>Popular GitHub Projects</h2>
+            </div>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3><a href="https://github.com/awesome-kiro/awesome-kiro" target="_blank">Awesome Kiro</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">⭐ 2.3k stars</span>
+                        <span class="badge badge-community">COMMUNITY</span>
+                    </div>
+                    <p class="resource-description">Curated list of awesome Kiro resources, tools, articles, and projects from the community.</p>
+                    <a href="https://github.com/awesome-kiro/awesome-kiro" target="_blank" class="resource-link">View collection →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://github.com/kiro-examples/real-world-app" target="_blank">Real World Kiro App</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">⭐ 1.5k stars</span>
+                        <span>Full-stack example</span>
+                    </div>
+                    <p class="resource-description">Production-ready example application showcasing best practices for Kiro development.</p>
+                    <a href="https://github.com/kiro-examples/real-world-app" target="_blank" class="resource-link">Explore code →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3><a href="https://github.com/kiro-patterns/design-patterns" target="_blank">Kiro Design Patterns</a></h3>
+                    <div class="resource-meta">
+                        <span class="resource-type">⭐ 890 stars</span>
+                        <span>Best practices</span>
+                    </div>
+                    <p class="resource-description">Common design patterns and architectural approaches for Kiro applications.</p>
+                    <a href="https://github.com/kiro-patterns/design-patterns" target="_blank" class="resource-link">Learn patterns →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
