@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Kiro vs Tabnine - AI Coding Tools Comparison 2025</title>
+    <meta name="description" content="Compare AWS Kiro and Tabnine. Kiro offers spec-driven development with Claude AI, while Tabnine provides private AI models with on-premise deployment options.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/compare/tabnine/">
+    <meta property="og:title" content="AWS Kiro vs Tabnine Comparison">
+    <meta property="og:description" content="Cloud-based spec-driven development vs private AI code completion">
+    <meta property="og:image" content="https://kiro.directory/images/kiro-vs-tabnine.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/compare/tabnine/">
+    <meta property="twitter:title" content="AWS Kiro vs Tabnine">
+    <meta property="twitter:description" content="Production specs vs private AI models">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AWS Kiro vs Tabnine Comparison",
+      "description": "Compare Kiro's cloud-based spec-driven approach with Tabnine's privacy-focused AI completion",
+      "datePublished": "2025-01-15",
+      "dateModified": "2025-01-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Kiro Directory"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --color-privacy: #9B59B6;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Main Content */
+        .content {
+            padding: 2rem 0;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 3rem;
+        }
+        
+        /* Quick Comparison Table */
+        .comparison-table {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background-color: var(--color-surface-2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .winner {
+            color: var(--color-success);
+            font-weight: 600;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .badge-winner {
+            background-color: var(--color-success);
+            color: var(--color-base);
+        }
+        
+        .badge-privacy {
+            background-color: var(--color-privacy);
+            color: var(--color-base);
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-top: 2rem;
+        }
+        
+        h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        .use-cases {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .use-case-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .use-case-card h4 {
+            color: var(--color-accent-2);
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Key Differences */
+        .differences-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .difference-item {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        /* Privacy Box */
+        .privacy-box {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-privacy);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .privacy-box .icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Recommendation Box */
+        .recommendation {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .recommendation h3 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Pricing Table */
+        .pricing-comparison {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(138, 255, 239, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-accent-2);
+            border: 2px solid var(--color-accent-2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 212, 107, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Features Table */
+        .features-table {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .check {
+            color: var(--color-success);
+        }
+        
+        .cross {
+            color: var(--color-error);
+        }
+        
+        .partial {
+            color: var(--color-warning);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.875rem;
+            }
+            
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a> » <a href="/#comparisons">Comparisons</a> » AWS Kiro vs Tabnine
+        </nav>
+        
+        <article class="content">
+            <h1>AWS Kiro vs Tabnine</h1>
+            <p class="subtitle">Cloud-powered spec-driven development vs privacy-focused AI code completion</p>
+            
+            <div class="privacy-box">
+                <div class="icon">🔒</div>
+                <p><strong>Privacy First:</strong> Tabnine offers complete code privacy with on-premise deployment options, while Kiro operates as a cloud-based service.</p>
+            </div>
+            
+            <!-- Quick Comparison Table -->
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AWS Kiro</th>
+                            <th>Tabnine</th>
+                            <th>Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Code Privacy</strong></td>
+                            <td>Cloud-based</td>
+                            <td>On-premise option</td>
+                            <td><span class="winner">Tabnine</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pricing</strong></td>
+                            <td>$19-39/month</td>
+                            <td>$9-39/month</td>
+                            <td><span class="winner">Tabnine</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Model Quality</strong></td>
+                            <td>Claude 4 / Sonnet 3.7</td>
+                            <td>Custom models</td>
+                            <td><span class="winner">Kiro</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Production Features</strong></td>
+                            <td>Specs, hooks, tests</td>
+                            <td>Code completion</td>
+                            <td><span class="winner">Kiro</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>IDE Support</strong></td>
+                            <td>VS Code based</td>
+                            <td>All major IDEs</td>
+                            <td><span class="winner">Tabnine</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Team Learning</strong></td>
+                            <td>Limited</td>
+                            <td>Learns from codebase</td>
+                            <td><span class="winner">Tabnine</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Offline Mode</strong></td>
+                            <td>Not available</td>
+                            <td>Full offline support</td>
+                            <td><span class="winner">Tabnine</span> <span class="badge badge-privacy">PRIVACY WIN</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- When to Use Each Tool -->
+            <section class="section">
+                <h2>When to Use Each Tool</h2>
+                <div class="use-cases">
+                    <div class="use-case-card">
+                        <h4>Choose AWS Kiro when:</h4>
+                        <ul>
+                            <li>Building production-ready applications</li>
+                            <li>Need spec-driven development workflow</li>
+                            <li>Want automated testing and documentation</li>
+                            <li>Prefer best-in-class AI models (Claude)</li>
+                            <li>Cloud deployment is acceptable</li>
+                        </ul>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>Choose Tabnine when:</h4>
+                        <ul>
+                            <li>Code privacy is paramount</li>
+                            <li>Need on-premise deployment</li>
+                            <li>Working in air-gapped environments</li>
+                            <li>Want AI to learn from your codebase</li>
+                            <li>Budget conscious ($9/month starter)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Key Differences -->
+            <section class="section">
+                <h2>Key Differences Explained</h2>
+                <div class="differences-grid">
+                    <div class="difference-item">
+                        <h3>Privacy & Deployment</h3>
+                        <p><strong>Kiro:</strong> Cloud-only service requiring internet connection. Code is processed on AWS servers with enterprise security.</p>
+                        <p><strong>Tabnine:</strong> Offers both cloud and on-premise options. Can run completely offline with no code leaving your network.</p>
+                    </div>
+                    
+                    <div class="difference-item">
+                        <h3>AI Model Approach</h3>
+                        <p><strong>Kiro:</strong> Uses state-of-the-art Claude 4 and Sonnet 3.7 models for superior understanding and generation quality.</p>
+                        <p><strong>Tabnine:</strong> Custom-trained models that can learn from your team's code patterns. Trade some quality for privacy and personalization.</p>
+                    </div>
+                    
+                    <div class="difference-item">
+                        <h3>Development Philosophy</h3>
+                        <p><strong>Kiro:</strong> Specification-first approach with automated hooks ensuring production readiness at every step.</p>
+                        <p><strong>Tabnine:</strong> Traditional code completion focused on speed and reducing keystrokes during active coding.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Our Recommendation -->
+            <div class="recommendation">
+                <h3>🎯 Our Recommendation</h3>
+                <p><strong>For most teams:</strong> Choose <strong>AWS Kiro</strong> if you want to transform how you build software. Its spec-driven approach and production-ready features justify the higher price and cloud requirement.</p>
+                <p><strong>For privacy-conscious teams:</strong> Choose <strong>Tabnine</strong> if you work with sensitive code, need offline capability, or have strict data residency requirements. The on-premise option is unique in the AI coding space.</p>
+                <p><strong>Budget consideration:</strong> Tabnine's $9/month starter plan makes it accessible for individual developers, while Kiro's $19 minimum targets professional teams.</p>
+            </div>
+            
+            <!-- Detailed Feature Comparison -->
+            <section class="section">
+                <h2>Feature-by-Feature Breakdown</h2>
+                <div class="features-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>AWS Kiro</th>
+                                <th>Tabnine</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Code Completion</strong></td>
+                                <td><span class="check">✓</span> Advanced</td>
+                                <td><span class="check">✓</span> Fast & accurate</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spec-driven Development</strong></td>
+                                <td><span class="check">✓</span> Core feature</td>
+                                <td><span class="cross">✗</span> Not supported</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Test Generation</strong></td>
+                                <td><span class="check">✓</span> Automated</td>
+                                <td><span class="partial">◐</span> Basic support</td>
+                            </tr>
+                            <tr>
+                                <td><strong>On-premise Deploy</strong></td>
+                                <td><span class="cross">✗</span> Cloud only</td>
+                                <td><span class="check">✓</span> Full support</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Team Learning</strong></td>
+                                <td><span class="cross">✗</span> Not available</td>
+                                <td><span class="check">✓</span> Learns patterns</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Natural Language</strong></td>
+                                <td><span class="check">✓</span> Full NLP</td>
+                                <td><span class="partial">◐</span> Limited</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Multi-agent Workflows</strong></td>
+                                <td><span class="check">✓</span> Built-in</td>
+                                <td><span class="cross">✗</span> Not supported</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IDE Integration</strong></td>
+                                <td><span class="partial">◐</span> VS Code only</td>
+                                <td><span class="check">✓</span> 15+ IDEs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Compliance Certs</strong></td>
+                                <td><span class="partial">◐</span> AWS standards</td>
+                                <td><span class="check">✓</span> SOC 2, GDPR</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Free Tier</strong></td>
+                                <td><span class="check">✓</span> 50 interactions</td>
+                                <td><span class="check">✓</span> Limited features</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Pricing Comparison -->
+            <section class="section">
+                <h2>Pricing Breakdown</h2>
+                <div class="pricing-comparison">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>AWS Kiro</th>
+                                <th>Tabnine</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Free</strong></td>
+                                <td>50 interactions/month</td>
+                                <td>Basic completions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Starter/Dev</strong></td>
+                                <td>N/A</td>
+                                <td>$9/month<br>Advanced completions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pro</strong></td>
+                                <td>$19/month<br>1,000 interactions</td>
+                                <td>$19/month<br>Full AI features</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pro+/Enterprise</strong></td>
+                                <td>$39/month<br>3,000 interactions</td>
+                                <td>$39/month<br>On-premise + support</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Deployment</strong></td>
+                                <td>Cloud only</td>
+                                <td>Cloud or on-premise</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2>Ready to Choose?</h2>
+                <div class="cta-grid">
+                    <a href="https://aws.amazon.com/kiro" target="_blank" class="btn btn-primary">Try AWS Kiro</a>
+                    <a href="https://tabnine.com" target="_blank" class="btn btn-secondary">Try Tabnine</a>
+                    <a href="/" class="btn btn-secondary">Back to Comparisons</a>
+                </div>
+            </section>
+        </article>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS or Tabnine</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

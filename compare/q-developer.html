@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Kiro vs Amazon Q Developer - AI Coding Tools Comparison 2025</title>
+    <meta name="description" content="Compare AWS Kiro and Amazon Q Developer. Kiro focuses on spec-driven production code, while Q Developer excels at AWS integration. See pricing, features, and recommendations.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/compare/q-developer/">
+    <meta property="og:title" content="AWS Kiro vs Amazon Q Developer Comparison">
+    <meta property="og:description" content="Detailed comparison of Kiro's spec-driven development vs Q Developer's AWS-centric features">
+    <meta property="og:image" content="https://kiro.directory/images/kiro-vs-q-developer.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/compare/q-developer/">
+    <meta property="twitter:title" content="AWS Kiro vs Amazon Q Developer">
+    <meta property="twitter:description" content="Spec-driven vs AWS-integrated AI coding">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "AWS Kiro vs Amazon Q Developer Comparison",
+      "description": "Compare Kiro's spec-driven development with Q Developer's AWS integration features",
+      "datePublished": "2025-01-15",
+      "dateModified": "2025-01-15",
+      "author": {
+        "@type": "Organization",
+        "name": "Kiro Directory"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      }
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            padding: 1rem 0;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .breadcrumbs a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Main Content */
+        .content {
+            padding: 2rem 0;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 3rem;
+        }
+        
+        /* Quick Comparison Table */
+        .comparison-table {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background-color: var(--color-surface-2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .winner {
+            color: var(--color-success);
+            font-weight: 600;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .badge-winner {
+            background-color: var(--color-success);
+            color: var(--color-base);
+        }
+        
+        .badge-aws {
+            background-color: var(--color-warning);
+            color: var(--color-base);
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-top: 2rem;
+        }
+        
+        h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        .use-cases {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .use-case-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .use-case-card h4 {
+            color: var(--color-accent-2);
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Key Differences */
+        .differences-grid {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .difference-item {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        /* Recommendation Box */
+        .recommendation {
+            background-color: var(--color-surface);
+            border: 2px solid var(--color-accent);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .recommendation h3 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Pricing Table */
+        .pricing-comparison {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+        
+        .btn-primary:hover {
+            background-color: rgba(138, 255, 239, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-accent-2);
+            border: 2px solid var(--color-accent-2);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 212, 107, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        /* Features Table */
+        .features-table {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .check {
+            color: var(--color-success);
+        }
+        
+        .cross {
+            color: var(--color-error);
+        }
+        
+        .partial {
+            color: var(--color-warning);
+        }
+        
+        /* Note Box */
+        .note-box {
+            background-color: var(--color-surface);
+            border-left: 4px solid var(--color-info);
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .note-box p {
+            margin: 0;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            table {
+                font-size: 0.875rem;
+            }
+            
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <nav class="breadcrumbs">
+            <a href="/">Home</a> » <a href="/#comparisons">Comparisons</a> » AWS Kiro vs Amazon Q Developer
+        </nav>
+        
+        <article class="content">
+            <h1>AWS Kiro vs Amazon Q Developer</h1>
+            <p class="subtitle">Both from Amazon, different approaches: Kiro for spec-driven production code, Q Developer for AWS-integrated development</p>
+            
+            <div class="note-box">
+                <p><strong>Note:</strong> Both tools are from Amazon/AWS but serve different purposes. Kiro focuses on turning specs into production-ready code, while Q Developer emphasizes AWS service integration and code transformation.</p>
+            </div>
+            
+            <!-- Quick Comparison Table -->
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AWS Kiro</th>
+                            <th>Amazon Q Developer</th>
+                            <th>Winner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Primary Focus</strong></td>
+                            <td>Spec-driven development</td>
+                            <td>AWS integration & transformation</td>
+                            <td>Tie <span class="badge badge-aws">DIFFERENT</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pricing</strong></td>
+                            <td>$19-39/month</td>
+                            <td>$19/month</td>
+                            <td><span class="winner">Q Developer</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AI Model</strong></td>
+                            <td>Claude 4 / Sonnet 3.7</td>
+                            <td>Amazon's proprietary model</td>
+                            <td><span class="winner">Kiro</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Production Readiness</strong></td>
+                            <td>Automated tests, docs, hooks</td>
+                            <td>Security scanning, code review</td>
+                            <td><span class="winner">Kiro</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AWS Services</strong></td>
+                            <td>General cloud support</td>
+                            <td>Deep AWS integration</td>
+                            <td><span class="winner">Q Developer</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Code Transformation</strong></td>
+                            <td>Limited</td>
+                            <td>Java 8→17, .NET upgrades</td>
+                            <td><span class="winner">Q Developer</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>IDE Support</strong></td>
+                            <td>VS Code based (own IDE)</td>
+                            <td>VS Code, IntelliJ, more</td>
+                            <td><span class="winner">Q Developer</span> <span class="badge badge-winner">WINNER</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- When to Use Each Tool -->
+            <section class="section">
+                <h2>When to Use Each Tool</h2>
+                <div class="use-cases">
+                    <div class="use-case-card">
+                        <h4>Choose AWS Kiro when:</h4>
+                        <ul>
+                            <li>Building new applications from specifications</li>
+                            <li>Need production-ready code with tests and docs</li>
+                            <li>Want spec-driven development workflow</li>
+                            <li>Prefer Claude's advanced reasoning capabilities</li>
+                            <li>Focus on greenfield projects</li>
+                        </ul>
+                    </div>
+                    <div class="use-case-card">
+                        <h4>Choose Amazon Q Developer when:</h4>
+                        <ul>
+                            <li>Working heavily with AWS services</li>
+                            <li>Need to modernize legacy Java/.NET code</li>
+                            <li>Want security vulnerability scanning</li>
+                            <li>Prefer staying within existing IDE</li>
+                            <li>Enterprise AWS environment</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Key Differences -->
+            <section class="section">
+                <h2>Key Differences Explained</h2>
+                <div class="differences-grid">
+                    <div class="difference-item">
+                        <h3>Development Philosophy</h3>
+                        <p><strong>Kiro:</strong> Starts with specifications and generates complete, production-ready implementations. Uses EARS format and steering files to maintain context.</p>
+                        <p><strong>Q Developer:</strong> Assists with existing code, focusing on completion, explanation, and transformation. More traditional copilot approach.</p>
+                    </div>
+                    
+                    <div class="difference-item">
+                        <h3>AWS Integration</h3>
+                        <p><strong>Kiro:</strong> Cloud-agnostic with general AWS support. No special AWS service integration.</p>
+                        <p><strong>Q Developer:</strong> Deep AWS integration - understands IAM policies, CloudFormation, Lambda, and can generate AWS-specific code patterns.</p>
+                    </div>
+                    
+                    <div class="difference-item">
+                        <h3>Code Quality Features</h3>
+                        <p><strong>Kiro:</strong> Automated hooks for tests, documentation sync, and CI/CD integration. Focuses on complete delivery pipeline.</p>
+                        <p><strong>Q Developer:</strong> Security scanning, code quality analysis, and automated code reviews. More focused on code health.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Our Recommendation -->
+            <div class="recommendation">
+                <h3>🎯 Our Recommendation</h3>
+                <p><strong>For most developers:</strong> If you're building new applications and want AI to handle the entire development lifecycle, choose <strong>AWS Kiro</strong>. Its spec-driven approach with Claude 4 produces more complete, production-ready code.</p>
+                <p><strong>For AWS-heavy teams:</strong> If you're deep in the AWS ecosystem or need to modernize legacy code, <strong>Amazon Q Developer</strong> is the better choice with its specialized AWS knowledge and transformation capabilities.</p>
+                <p><strong>Consider using both:</strong> They complement each other well - Kiro for new feature development, Q Developer for AWS integration and code modernization.</p>
+            </div>
+            
+            <!-- Detailed Feature Comparison -->
+            <section class="section">
+                <h2>Feature-by-Feature Breakdown</h2>
+                <div class="features-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>AWS Kiro</th>
+                                <th>Amazon Q Developer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Specification Support</strong></td>
+                                <td><span class="check">✓</span> EARS format, steering files</td>
+                                <td><span class="cross">✗</span> Traditional prompting</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Test Generation</strong></td>
+                                <td><span class="check">✓</span> Automated via hooks</td>
+                                <td><span class="partial">◐</span> On request</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Documentation</strong></td>
+                                <td><span class="check">✓</span> Auto-sync with code</td>
+                                <td><span class="partial">◐</span> Generate on demand</td>
+                            </tr>
+                            <tr>
+                                <td><strong>AWS Service Knowledge</strong></td>
+                                <td><span class="partial">◐</span> General cloud</td>
+                                <td><span class="check">✓</span> Deep AWS expertise</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Code Transformation</strong></td>
+                                <td><span class="cross">✗</span> Not supported</td>
+                                <td><span class="check">✓</span> Java, .NET upgrades</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Security Scanning</strong></td>
+                                <td><span class="partial">◐</span> Via hooks</td>
+                                <td><span class="check">✓</span> Built-in scanning</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Multi-Agent Workflows</strong></td>
+                                <td><span class="check">✓</span> Architect, coder, tester</td>
+                                <td><span class="cross">✗</span> Single agent</td>
+                            </tr>
+                            <tr>
+                                <td><strong>MCP Protocol</strong></td>
+                                <td><span class="check">✓</span> Full support</td>
+                                <td><span class="cross">✗</span> Not supported</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IDE Options</strong></td>
+                                <td><span class="partial">◐</span> Kiro IDE only</td>
+                                <td><span class="check">✓</span> Multiple IDEs</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Offline Mode</strong></td>
+                                <td><span class="cross">✗</span> Cloud only</td>
+                                <td><span class="cross">✗</span> Cloud only</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Pricing Comparison -->
+            <section class="section">
+                <h2>Pricing Breakdown</h2>
+                <div class="pricing-comparison">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>AWS Kiro</th>
+                                <th>Amazon Q Developer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Free Tier</strong></td>
+                                <td>50 interactions/month</td>
+                                <td>Limited features</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pro</strong></td>
+                                <td>$19/month<br>1,000 interactions</td>
+                                <td>$19/month<br>Unlimited interactions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pro+</strong></td>
+                                <td>$39/month<br>3,000 interactions</td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Enterprise</strong></td>
+                                <td>Custom pricing</td>
+                                <td>AWS billing integration</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <h2>Ready to Choose?</h2>
+                <div class="cta-grid">
+                    <a href="https://aws.amazon.com/kiro" target="_blank" class="btn btn-primary">Try AWS Kiro</a>
+                    <a href="https://aws.amazon.com/q/developer/" target="_blank" class="btn btn-secondary">Try Q Developer</a>
+                    <a href="/" class="btn btn-secondary">Back to Comparisons</a>
+                </div>
+            </section>
+        </article>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
