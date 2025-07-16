@@ -143,35 +143,6 @@
             color: var(--color-accent);
         }
         
-        /* Language Selector */
-        .language-selector {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-        
-        .lang-btn {
-            padding: 0.5rem 0.75rem;
-            background: transparent;
-            border: 1px solid var(--color-border);
-            color: var(--color-text-muted);
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        
-        .lang-btn:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
-        }
-        
-        .lang-btn.active {
-            background: var(--color-accent);
-            color: var(--color-base);
-            border-color: var(--color-accent);
-        }
         
         /* Hero Section */
         .hero {
@@ -680,10 +651,6 @@
                 <li><a href="#comparisons">Comparisons</a></li>
                 <li><a href="/pricing/">Pricing</a></li>
                 <li><a href="/blog/">Blog</a></li>
-                <li class="language-selector">
-                    <button class="lang-btn active" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="zh">中文</button>
-                </li>
             </ul>
         </nav>
     </header>
@@ -1452,63 +1419,6 @@ agents:
                 });
             }
 
-            // Language switching functionality
-            const langBtns = document.querySelectorAll('.lang-btn');
-            const defaultLang = localStorage.getItem('preferred-language') || 'en';
-            
-            // Set initial language
-            setLanguage(defaultLang);
-            
-            langBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const lang = btn.dataset.lang;
-                    setLanguage(lang);
-                    localStorage.setItem('preferred-language', lang);
-                });
-            });
-
-            function setLanguage(lang) {
-                // Update active button
-                langBtns.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.lang === lang);
-                });
-
-                // Update content based on language
-                if (lang === 'zh') {
-                    // Switch to Chinese content
-                    document.querySelector('h1').textContent = 'Kiro 备忘单与对比';
-                    document.querySelector('.hero-subtitle').textContent = '使用 AWS Kiro 的规范驱动开发更快交付 AI 就绪代码';
-                    document.querySelector('.search-box').placeholder = '搜索技巧、规范、钩子、对比...';
-                    
-                    // Update navigation
-                    const navLinks = document.querySelectorAll('.nav-links a');
-                    const chineseNavTexts = ['指南', '备忘单', '对比', '定价', '博客'];
-                    navLinks.forEach((link, index) => {
-                        if (index < chineseNavTexts.length) {
-                            link.textContent = chineseNavTexts[index];
-                        }
-                    });
-                } else {
-                    // Switch to English content (default)
-                    document.querySelector('h1').textContent = 'Kiro Cheat Sheets & Comparisons';
-                    document.querySelector('.hero-subtitle').textContent = 'Ship AI-ready code faster with AWS Kiro\'s spec-driven development';
-                    document.querySelector('.search-box').placeholder = 'Search tips, specs, hooks, comparisons...';
-                    
-                    // Update navigation
-                    const navLinks = document.querySelectorAll('.nav-links a');
-                    const englishNavTexts = ['Guides', 'Cheat Sheets', 'Comparisons', 'Pricing', 'Blog'];
-                    navLinks.forEach((link, index) => {
-                        if (index < englishNavTexts.length) {
-                            link.textContent = englishNavTexts[index];
-                        }
-                    });
-                }
-
-                // Track language change
-                gtag('event', 'language_change', {
-                    'language': lang
-                });
-            }
         });
     </script>
 </body>
