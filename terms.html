@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Kiro Directory</title>
+    <meta name="description" content="Terms of Service for Kiro Directory. Learn about the rules and guidelines for using our website and services.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kiro.directory/terms/">
+    <meta property="og:title" content="Terms of Service - Kiro Directory">
+    <meta property="og:description" content="Terms and conditions for using Kiro Directory website and services.">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://kiro.directory/terms/">
+    <meta property="twitter:title" content="Terms of Service - Kiro Directory">
+    <meta property="twitter:description" content="Terms and conditions for using Kiro Directory.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Terms of Service",
+      "url": "https://kiro.directory/terms/",
+      "description": "Terms of Service for Kiro Directory website",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "url": "https://kiro.directory/"
+      }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex: 1;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+        
+        /* Page Header */
+        .page-header {
+            padding: 3rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+        }
+        
+        .page-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+        }
+        
+        .last-updated {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin-top: 1rem;
+        }
+        
+        /* Content */
+        .content {
+            padding: 4rem 0;
+        }
+        
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        .legal-content h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        .legal-content h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+        }
+        
+        .legal-content p {
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+        
+        .legal-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .legal-content li {
+            margin-bottom: 0.75rem;
+            list-style-type: disc;
+        }
+        
+        .legal-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .legal-content a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .toc {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .toc h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: var(--color-accent);
+        }
+        
+        .contact-info {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .contact-info h3 {
+            margin-top: 0;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .legal-content {
+                font-size: 0.9375rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Terms of Service</h1>
+                <p class="page-subtitle">Please read these terms carefully before using our website</p>
+                <p class="last-updated">Last updated: January 2025</p>
+            </div>
+        </section>
+        
+        <section class="content">
+            <div class="container">
+                <div class="legal-content">
+                    <div class="toc">
+                        <h2>Table of Contents</h2>
+                        <ul>
+                            <li><a href="#acceptance">1. Acceptance of Terms</a></li>
+                            <li><a href="#description">2. Description of Service</a></li>
+                            <li><a href="#user-conduct">3. User Conduct</a></li>
+                            <li><a href="#intellectual-property">4. Intellectual Property Rights</a></li>
+                            <li><a href="#user-content">5. User Generated Content</a></li>
+                            <li><a href="#third-party">6. Third-Party Services</a></li>
+                            <li><a href="#disclaimers">7. Disclaimers and Limitations</a></li>
+                            <li><a href="#indemnification">8. Indemnification</a></li>
+                            <li><a href="#termination">9. Termination</a></li>
+                            <li><a href="#governing-law">10. Governing Law</a></li>
+                            <li><a href="#changes">11. Changes to Terms</a></li>
+                            <li><a href="#contact">12. Contact Information</a></li>
+                        </ul>
+                    </div>
+                    
+                    <h2 id="acceptance">1. Acceptance of Terms</h2>
+                    <p>By accessing and using Kiro Directory ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</p>
+                    
+                    <p>You must be at least 13 years old to use this Service. By using this Service and agreeing to these Terms, you warrant and represent that you are at least 13 years of age.</p>
+                    
+                    <h2 id="description">2. Description of Service</h2>
+                    <p>Kiro Directory provides information, resources, cheat sheets, comparisons, and educational content related to AWS Kiro and other AI-powered coding assistants. The Service includes, but is not limited to:</p>
+                    <ul>
+                        <li>Educational articles and tutorials</li>
+                        <li>Comparison guides for AI coding tools</li>
+                        <li>Tips and best practices for spec-driven development</li>
+                        <li>Community-contributed content and resources</li>
+                        <li>Links to third-party tools and services</li>
+                    </ul>
+                    
+                    <h2 id="user-conduct">3. User Conduct</h2>
+                    <p>You agree not to use the Service to:</p>
+                    <ul>
+                        <li>Upload, post, or transmit any content that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, or otherwise objectionable</li>
+                        <li>Impersonate any person or entity, or falsely state or misrepresent your affiliation with any person or entity</li>
+                        <li>Upload, post, or transmit any content that infringes any patent, trademark, copyright, or other proprietary rights of any party</li>
+                        <li>Interfere with or disrupt the Service or servers or networks connected to the Service</li>
+                        <li>Use any robot, spider, scraper, or other automated means to access the Service</li>
+                        <li>Attempt to gain unauthorized access to any portion of the Service</li>
+                        <li>Engage in any activity that could damage, disable, or impair the Service</li>
+                    </ul>
+                    
+                    <h2 id="intellectual-property">4. Intellectual Property Rights</h2>
+                    <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Kiro Directory and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without our prior written consent.</p>
+                    
+                    <p>All content provided on this site is for informational purposes only. The owner of this site makes no representations as to the accuracy or completeness of any information on this site or found by following any link on this site.</p>
+                    
+                    <h2 id="user-content">5. User Generated Content</h2>
+                    <p>Our Service may allow you to post, link, store, share and otherwise make available certain information, text, graphics, or other material ("Content"). You are responsible for the Content that you post to the Service, including its legality, reliability, and appropriateness.</p>
+                    
+                    <p>By posting Content to the Service, you grant us the right and license to use, modify, publicly perform, publicly display, reproduce, and distribute such Content on and through the Service. You retain your rights to any Content you submit, post, or display on or through the Service.</p>
+                    
+                    <h2 id="third-party">6. Third-Party Services</h2>
+                    <p>Our Service may contain links to third-party websites or services that are not owned or controlled by Kiro Directory. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.</p>
+                    
+                    <p>We use third-party advertising services, including Google AdSense, to display advertisements on our Service. These services may use cookies and similar tracking technologies to collect information about your visits to our Service and other websites to provide targeted advertisements. Please refer to our Privacy Policy for more information about how we handle your data in relation to these services.</p>
+                    
+                    <h2 id="disclaimers">7. Disclaimers and Limitations of Liability</h2>
+                    <p>THE INFORMATION ON THIS WEBSITE IS PROVIDED "AS IS" WITHOUT ANY WARRANTIES, EXPRESS OR IMPLIED. KIRO DIRECTORY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+                    
+                    <p>In no event shall Kiro Directory be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on this website, even if Kiro Directory or an authorized representative has been notified of the possibility of such damage.</p>
+                    
+                    <h2 id="indemnification">8. Indemnification</h2>
+                    <p>You agree to defend, indemnify, and hold harmless Kiro Directory and its licensors and licensees from and against any claims, damages, obligations, losses, liabilities, costs or debt, and expenses (including attorney's fees) arising from: (i) your use of and access to the Service; (ii) your violation of any term of these Terms of Service; (iii) your violation of any third party right, including any copyright, property, or privacy right; or (iv) any claim that your Content caused damage to a third party.</p>
+                    
+                    <h2 id="termination">9. Termination</h2>
+                    <p>We may terminate or suspend your access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+                    
+                    <p>Upon termination, your right to use the Service will cease immediately. All provisions of the Terms which by their nature should survive termination shall survive termination, including ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+                    
+                    <h2 id="governing-law">10. Governing Law</h2>
+                    <p>These Terms shall be governed and construed in accordance with the laws of the United States and the State of California, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.</p>
+                    
+                    <h2 id="changes">11. Changes to These Terms</h2>
+                    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+                    
+                    <p>By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.</p>
+                    
+                    <h2 id="contact">12. Contact Information</h2>
+                    <div class="contact-info">
+                        <h3>Questions about these Terms?</h3>
+                        <p>If you have any questions about these Terms of Service, please contact us:</p>
+                        <ul>
+                            <li>By email: <a href="mailto:hi@kiro.directory">hi@kiro.directory</a></li>
+                            <li>By visiting our <a href="/contact/">contact page</a></li>
+                            <li>By mail: Kiro Directory, 1455 Market Street, Suite 600, San Francisco, CA 94103, United States</li>
+                        </ul>
+                    </div>
+                    
+                    <p><strong>Disclaimer:</strong> Kiro Directory is an independent project and is not affiliated with, endorsed by, or connected to Amazon Web Services (AWS) or AWS Kiro. All trademarks and registered trademarks are the property of their respective owners.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/terms/" class="active">Terms</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

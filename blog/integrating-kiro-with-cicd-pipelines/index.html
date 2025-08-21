@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrating Kiro with CI/CD Pipelines: Complete Guide | Kiro Directory</title>
+    <meta name="description" content="Complete guide to integrating AWS Kiro with CI/CD pipelines: GitHub Actions, GitLab CI, Jenkins automation, and intelligent deployment strategies.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/blog/integrating-kiro-with-cicd-pipelines/">
+    <meta property="og:title" content="Integrating Kiro with CI/CD Pipelines: Complete Guide">
+    <meta property="og:description" content="Master intelligent CI/CD integration with AWS Kiro for automated development workflows">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/blog/integrating-kiro-with-cicd-pipelines/">
+    <meta property="twitter:title" content="Integrating Kiro with CI/CD Pipelines: Complete Guide">
+    <meta property="twitter:description" content="Master intelligent CI/CD integration with AWS Kiro for automated development workflows">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Integrating Kiro with CI/CD Pipelines: Complete Guide",
+      "author": {
+        "@type": "Person",
+        "name": "Kiro Directory Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      },
+      "datePublished": "2025-01-21",
+      "description": "Complete guide to integrating AWS Kiro with CI/CD pipelines: GitHub Actions, GitLab CI, Jenkins automation, and intelligent deployment strategies"
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+        
+        /* Article Styles */
+        .article-header {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .article-category {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--color-accent);
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+        
+        .article-content h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .article-content a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .integration-example {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .example-header {
+            background-color: var(--color-surface-2);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+        
+        .example-content {
+            padding: 1.5rem;
+        }
+        
+        .benefit-box {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-success);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .benefit-box h4 {
+            margin-bottom: 0.75rem;
+            color: var(--color-success);
+            font-weight: 600;
+        }
+        
+        .pipeline-flow {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .flow-step {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            position: relative;
+        }
+        
+        .flow-step::after {
+            content: "↓";
+            position: absolute;
+            bottom: -1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--color-accent);
+            font-size: 1.5rem;
+        }
+        
+        .flow-step:last-child::after {
+            display: none;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .article-content {
+                font-size: 0.9375rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="article-header container">
+            <div class="article-meta">
+                <span class="article-category">CI/CD Integration</span>
+                <span>January 21, 2025</span>
+                <span>20 min read</span>
+            </div>
+            <h1>Integrating Kiro with CI/CD Pipelines</h1>
+            <p class="article-subtitle">Complete guide to seamlessly integrating AWS Kiro with your existing CI/CD infrastructure for intelligent, automated development workflows</p>
+        </section>
+        
+        <section class="article-content container">
+            <p>CI/CD integration is where Kiro's spec-driven development approach truly shines. By connecting Kiro's intelligent automation with your continuous integration and deployment pipelines, you create a development workflow that's not just automated, but genuinely intelligent—capable of making decisions, adapting to changes, and continuously optimizing itself.</p>
+            
+            <p>This comprehensive guide covers everything from basic pipeline integration to advanced multi-environment deployment strategies, with practical examples for GitHub Actions, GitLab CI, Jenkins, and AWS CodePipeline. Whether you're adding Kiro to an existing pipeline or building a new one from scratch, these patterns will help you achieve unprecedented automation sophistication.</p>
+            
+            <h2>The Kiro CI/CD Philosophy</h2>
+            
+            <p>Traditional CI/CD pipelines are reactive—they respond to code changes with predefined actions. Kiro-integrated pipelines are <strong>proactive and intelligent</strong>—they understand the context of changes, predict their impact, and adapt their behavior accordingly.</p>
+            
+            <div class="benefit-box">
+                <h4>Key Benefits of Kiro CI/CD Integration</h4>
+                <ul>
+                    <li><strong>Intelligent Test Selection:</strong> Run only tests relevant to your changes</li>
+                    <li><strong>Dynamic Pipeline Configuration:</strong> Adjust build steps based on change impact</li>
+                    <li><strong>Predictive Deployment:</strong> Automatic promotion based on confidence scores</li>
+                    <li><strong>Context-Aware Notifications:</strong> Smart alerts to the right people at the right time</li>
+                    <li><strong>Continuous Optimization:</strong> Pipelines that improve themselves over time</li>
+                </ul>
+            </div>
+            
+            <h2>Pipeline Architecture Overview</h2>
+            
+            <p>A Kiro-integrated pipeline consists of several intelligent stages that work together to deliver high-quality software rapidly and reliably:</p>
+            
+            <div class="pipeline-flow">
+                <h3>Intelligent CI/CD Flow</h3>
+                <div class="flow-step">
+                    <strong>1. Change Analysis</strong><br>
+                    Kiro analyzes commit impact, affected components, and specification changes
+                </div>
+                <div class="flow-step">
+                    <strong>2. Dynamic Test Planning</strong><br>
+                    Generate optimized test strategy based on risk assessment and change scope
+                </div>
+                <div class="flow-step">
+                    <strong>3. Intelligent Build</strong><br>
+                    Optimize build process with dependency analysis and parallel execution
+                </div>
+                <div class="flow-step">
+                    <strong>4. Contextual Testing</strong><br>
+                    Execute relevant tests with intelligent parallelization and failure analysis
+                </div>
+                <div class="flow-step">
+                    <strong>5. Quality Gates</strong><br>
+                    AI-powered quality assessment with automated decision making
+                </div>
+                <div class="flow-step">
+                    <strong>6. Intelligent Deployment</strong><br>
+                    Risk-based deployment strategy with automated rollback capabilities
+                </div>
+                <div class="flow-step">
+                    <strong>7. Continuous Monitoring</strong><br>
+                    Post-deployment monitoring with intelligent alerting and optimization
+                </div>
+            </div>
+            
+            <h2>GitHub Actions Integration</h2>
+            
+            <p>GitHub Actions provides excellent integration capabilities with Kiro through its flexible workflow system and extensive marketplace.</p>
+            
+            <h3>Basic Kiro GitHub Actions Workflow</h3>
+            
+            <div class="integration-example">
+                <div class="example-header">GitHub Actions: Intelligent Kiro Pipeline</div>
+                <div class="example-content">
+                    <div class="code-block">
+                        <pre># .github/workflows/kiro-ci.yml
+name: Intelligent Kiro CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  KIRO_API_KEY: ${{ secrets.KIRO_API_KEY }}
+  KIRO_PROJECT_ID: ${{ secrets.KIRO_PROJECT_ID }}
+
+jobs:
+  analyze-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      impact-analysis: ${{ steps.kiro-analysis.outputs.impact }}
+      test-strategy: ${{ steps.kiro-analysis.outputs.test-strategy }}
+      deployment-strategy: ${{ steps.kiro-analysis.outputs.deployment-strategy }}
+      
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better analysis
+          
+      - name: Setup Kiro CLI
+        uses: aws-kiro/setup-kiro@v1
+        with:
+          version: 'latest'
+          
+      - name: Analyze Change Impact
+        id: kiro-analysis
+        run: |
+          # Analyze changes and generate intelligent pipeline configuration
+          kiro analyze changes \
+            --from-ref ${{ github.event.before }} \
+            --to-ref ${{ github.sha }} \
+            --output-format json \
+            --include-impact-analysis \
+            --include-test-strategy \
+            --include-deployment-strategy > analysis.json
+            
+          # Export analysis results for downstream jobs
+          echo "impact=$(cat analysis.json | jq -c .impact)" >> $GITHUB_OUTPUT
+          echo "test-strategy=$(cat analysis.json | jq -c .testStrategy)" >> $GITHUB_OUTPUT
+          echo "deployment-strategy=$(cat analysis.json | jq -c .deploymentStrategy)" >> $GITHUB_OUTPUT
+          
+      - name: Upload Analysis Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: kiro-analysis
+          path: analysis.json
+
+  intelligent-build:
+    needs: analyze-changes
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Dynamic matrix based on Kiro analysis
+        component: ${{ fromJson(needs.analyze-changes.outputs.impact-analysis).affectedComponents }}
+        
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: Install Dependencies
+        run: |
+          # Intelligent dependency installation based on changes
+          if [[ "${{ matrix.component }}" == "frontend" ]]; then
+            npm ci --prefix frontend
+          elif [[ "${{ matrix.component }}" == "backend" ]]; then
+            npm ci --prefix backend
+          else
+            npm ci  # Full install for cross-cutting changes
+          fi
+          
+      - name: Kiro-Optimized Build
+        run: |
+          # Use Kiro to optimize build process
+          kiro build optimize \
+            --component ${{ matrix.component }} \
+            --parallel-jobs auto \
+            --cache-strategy intelligent \
+            --output-analysis build-analysis.json
+            
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.component }}
+          path: |
+            dist/
+            build-analysis.json
+
+  intelligent-testing:
+    needs: [analyze-changes, intelligent-build]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-suite: ${{ fromJson(needs.analyze-changes.outputs.test-strategy).testSuites }}
+        
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: build-*
+          merge-multiple: true
+          
+      - name: Setup Test Environment
+        run: |
+          # Configure test environment based on test suite requirements
+          kiro test setup \
+            --suite ${{ matrix.test-suite.name }} \
+            --environment ${{ matrix.test-suite.environment }} \
+            --data-strategy ${{ matrix.test-suite.dataStrategy }}
+            
+      - name: Execute Intelligent Tests
+        run: |
+          # Run tests with Kiro optimization
+          kiro test run \
+            --suite ${{ matrix.test-suite.name }} \
+            --parallel-workers ${{ matrix.test-suite.parallelWorkers }} \
+            --retry-strategy intelligent \
+            --coverage-analysis \
+            --performance-baseline \
+            --output-format junit,json
+            
+      - name: Analyze Test Results
+        if: always()
+        run: |
+          # Intelligent test result analysis
+          kiro test analyze \
+            --results test-results.json \
+            --identify-flaky-tests \
+            --suggest-optimizations \
+            --update-baselines
+            
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ matrix.test-suite.name }}
+          path: |
+            test-results.*
+            coverage/
+
+  quality-gates:
+    needs: [analyze-changes, intelligent-testing]
+    runs-on: ubuntu-latest
+    outputs:
+      deployment-approved: ${{ steps.quality-check.outputs.approved }}
+      confidence-score: ${{ steps.quality-check.outputs.confidence }}
+      
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download Test Results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: test-results-*
+          merge-multiple: true
+          
+      - name: Intelligent Quality Assessment
+        id: quality-check
+        run: |
+          # Kiro's AI-powered quality gates
+          quality_result=$(kiro quality assess \
+            --test-results . \
+            --change-impact "${{ needs.analyze-changes.outputs.impact-analysis }}" \
+            --quality-standards production \
+            --risk-tolerance medium \
+            --output-format json)
+            
+          echo "approved=$(echo $quality_result | jq -r .approved)" >> $GITHUB_OUTPUT
+          echo "confidence=$(echo $quality_result | jq -r .confidenceScore)" >> $GITHUB_OUTPUT
+          
+          # Set job status based on quality assessment
+          if [[ "$(echo $quality_result | jq -r .approved)" == "true" ]]; then
+            echo "✅ Quality gates passed with confidence score: $(echo $quality_result | jq -r .confidenceScore)"
+          else
+            echo "❌ Quality gates failed: $(echo $quality_result | jq -r .reason)"
+            exit 1
+          fi
+
+  intelligent-deployment:
+    needs: [analyze-changes, quality-gates]
+    if: needs.quality-gates.outputs.deployment-approved == 'true'
+    runs-on: ubuntu-latest
+    environment: 
+      name: ${{ fromJson(needs.analyze-changes.outputs.deployment-strategy).targetEnvironment }}
+      
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure Deployment Strategy
+        run: |
+          # Use Kiro to determine optimal deployment approach
+          kiro deploy configure \
+            --strategy "${{ fromJson(needs.analyze-changes.outputs.deployment-strategy).strategy }}" \
+            --confidence-score ${{ needs.quality-gates.outputs.confidence-score }} \
+            --rollback-plan automatic \
+            --monitoring-enhanced
+            
+      - name: Execute Intelligent Deployment
+        run: |
+          # Deploy with Kiro intelligence
+          kiro deploy execute \
+            --environment ${{ fromJson(needs.analyze-changes.outputs.deployment-strategy).targetEnvironment }} \
+            --health-checks automatic \
+            --traffic-shifting gradual \
+            --rollback-triggers intelligent
+            
+      - name: Post-Deployment Monitoring
+        run: |
+          # Activate intelligent monitoring
+          kiro monitor activate \
+            --deployment-id ${{ github.sha }} \
+            --alert-strategy context-aware \
+            --optimization continuous</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Advanced GitHub Actions Patterns</h3>
+            
+            <p>For more sophisticated workflows, you can implement advanced patterns like matrix builds based on impact analysis, conditional deployment, and cross-repository coordination.</p>
+            
+            <div class="code-block">
+                <pre># Advanced matrix strategy based on Kiro analysis
+strategy:
+  matrix:
+    include: ${{ fromJson(needs.analyze-changes.outputs.impact-analysis).buildMatrix }}
+    
+# Example matrix output from Kiro:
+# [
+#   { "component": "frontend", "node-version": "18", "build-type": "optimized" },
+#   { "component": "backend", "node-version": "18", "build-type": "standard" },
+#   { "component": "shared", "node-version": "18", "build-type": "library" }
+# ]</pre>
+            </div>
+            
+            <h2>GitLab CI Integration</h2>
+            
+            <p>GitLab CI's comprehensive DevOps platform provides excellent integration points for Kiro's intelligent automation.</p>
+            
+            <div class="integration-example">
+                <div class="example-header">GitLab CI: Kiro-Powered Pipeline</div>
+                <div class="example-content">
+                    <div class="code-block">
+                        <pre># .gitlab-ci.yml
+stages:
+  - analyze
+  - build
+  - test
+  - quality
+  - deploy
+  - monitor
+
+variables:
+  KIRO_API_ENDPOINT: "https://api.kiro.aws.amazon.com"
+  KIRO_PROJECT_ID: $CI_PROJECT_ID
+
+# Change Impact Analysis
+kiro-analysis:
+  stage: analyze
+  image: aws-kiro/cli:latest
+  script:
+    - kiro auth login --token $KIRO_API_TOKEN
+    - |
+      kiro analyze pipeline-optimization \
+        --commit-range $CI_MERGE_REQUEST_TARGET_BRANCH_SHA..$CI_COMMIT_SHA \
+        --project-context .kiro/ \
+        --output-file kiro-analysis.json \
+        --generate-pipeline-config
+  artifacts:
+    reports:
+      kiro_analysis: kiro-analysis.json
+    paths:
+      - kiro-analysis.json
+      - dynamic-pipeline.yml
+    expire_in: 1 hour
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+# Dynamic Build Jobs
+.build_template: &build_template
+  stage: build
+  before_script:
+    - export BUILD_CONFIG=$(cat kiro-analysis.json | jq -r ".buildStrategy.${BUILD_COMPONENT}")
+    - kiro build configure --config "$BUILD_CONFIG"
+  script:
+    - kiro build execute --component $BUILD_COMPONENT --optimization-level auto
+  artifacts:
+    paths:
+      - dist/
+      - build-metrics.json
+    expire_in: 1 day
+  needs:
+    - job: kiro-analysis
+      artifacts: true
+
+build-frontend:
+  <<: *build_template
+  variables:
+    BUILD_COMPONENT: "frontend"
+  rules:
+    - if: '$KIRO_BUILD_FRONTEND == "true"'
+
+build-backend:
+  <<: *build_template
+  variables:
+    BUILD_COMPONENT: "backend"
+  rules:
+    - if: '$KIRO_BUILD_BACKEND == "true"'
+
+build-services:
+  <<: *build_template
+  variables:
+    BUILD_COMPONENT: "services"
+  parallel:
+    matrix:
+      - SERVICE: [auth, api, worker, scheduler]
+  rules:
+    - if: '$KIRO_BUILD_SERVICES == "true"'
+
+# Intelligent Test Execution
+.test_template: &test_template
+  stage: test
+  before_script:
+    - export TEST_CONFIG=$(cat kiro-analysis.json | jq -r ".testStrategy.${TEST_TYPE}")
+    - kiro test environment-setup --config "$TEST_CONFIG"
+  script:
+    - |
+      kiro test execute \
+        --type $TEST_TYPE \
+        --parallel-workers auto \
+        --coverage-threshold auto \
+        --performance-baseline \
+        --ai-generated-tests \
+        --output-format junit,coverage,performance
+  after_script:
+    - kiro test analyze --results test-results/ --update-benchmarks
+  artifacts:
+    reports:
+      junit: test-results/junit.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: test-results/coverage.xml
+    paths:
+      - test-results/
+    expire_in: 1 week
+  coverage: '/Coverage: \d+\.\d+%/'
+
+unit-tests:
+  <<: *test_template
+  variables:
+    TEST_TYPE: "unit"
+  parallel: 3
+  needs:
+    - job: kiro-analysis
+      artifacts: true
+
+integration-tests:
+  <<: *test_template
+  variables:
+    TEST_TYPE: "integration"
+  services:
+    - postgres:13
+    - redis:6
+  needs:
+    - job: build-backend
+      artifacts: true
+
+e2e-tests:
+  <<: *test_template
+  variables:
+    TEST_TYPE: "e2e"
+  services:
+    - selenium/standalone-chrome:latest
+  needs:
+    - job: build-frontend
+      artifacts: true
+    - job: build-backend
+      artifacts: true
+
+# AI-Powered Quality Gates
+quality-assessment:
+  stage: quality
+  image: aws-kiro/cli:latest
+  script:
+    - |
+      quality_result=$(kiro quality comprehensive-assessment \
+        --test-results test-results/ \
+        --build-metrics build-metrics.json \
+        --change-analysis kiro-analysis.json \
+        --quality-profile production \
+        --ai-confidence-threshold 0.85)
+    - echo $quality_result | jq .
+    - |
+      if [[ $(echo $quality_result | jq -r .approved) == "true" ]]; then
+        echo "DEPLOYMENT_APPROVED=true" > deploy.env
+        echo "CONFIDENCE_SCORE=$(echo $quality_result | jq -r .confidenceScore)" >> deploy.env
+      else
+        echo "Quality gates failed: $(echo $quality_result | jq -r .reason)"
+        exit 1
+      fi
+  artifacts:
+    reports:
+      dotenv: deploy.env
+  needs:
+    - job: unit-tests
+      artifacts: true
+    - job: integration-tests
+      artifacts: true
+    - job: e2e-tests
+      artifacts: true
+
+# Intelligent Deployment
+deploy-staging:
+  stage: deploy
+  environment:
+    name: staging
+    url: https://staging.example.com
+  script:
+    - |
+      kiro deploy execute \
+        --environment staging \
+        --strategy blue-green \
+        --health-checks comprehensive \
+        --rollback-policy automatic \
+        --monitoring enhanced \
+        --confidence-score $CONFIDENCE_SCORE
+  rules:
+    - if: $DEPLOYMENT_APPROVED == "true" && $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  needs:
+    - job: quality-assessment
+      artifacts: true
+
+deploy-production:
+  stage: deploy
+  environment:
+    name: production
+    url: https://production.example.com
+  when: manual
+  script:
+    - |
+      # Enhanced production deployment with extra safeguards
+      kiro deploy execute \
+        --environment production \
+        --strategy canary \
+        --canary-percentage 5 \
+        --promotion-criteria ai-determined \
+        --monitoring comprehensive \
+        --incident-response automatic
+  rules:
+    - if: $DEPLOYMENT_APPROVED == "true" && $CONFIDENCE_SCORE > "0.9"
+  needs:
+    - job: deploy-staging
+
+# Continuous Monitoring and Optimization
+post-deployment-monitoring:
+  stage: monitor
+  script:
+    - |
+      kiro monitor deployment \
+        --deployment-id $CI_COMMIT_SHA \
+        --duration 24h \
+        --metrics comprehensive \
+        --alerting intelligent \
+        --optimization continuous
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  needs:
+    - job: deploy-production
+      optional: true</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Jenkins Integration</h2>
+            
+            <p>Jenkins provides powerful plugin architecture and Groovy scripting capabilities that enable sophisticated Kiro integrations.</p>
+            
+            <h3>Jenkins Pipeline with Kiro Intelligence</h3>
+            
+            <div class="integration-example">
+                <div class="example-header">Jenkins: Intelligent Pipeline Script</div>
+                <div class="example-content">
+                    <div class="code-block">
+                        <pre>// Jenkinsfile
+pipeline {
+    agent any
+    
+    environment {
+        KIRO_API_TOKEN = credentials('kiro-api-token')
+        KIRO_PROJECT_ID = "${env.JOB_NAME}"
+    }
+    
+    stages {
+        stage('Kiro Analysis') {
+            steps {
+                script {
+                    // Perform intelligent change analysis
+                    def analysisResult = sh(
+                        script: """
+                            kiro analyze commit-impact \
+                                --from-commit ${env.GIT_PREVIOUS_COMMIT ?: 'HEAD~1'} \
+                                --to-commit ${env.GIT_COMMIT} \
+                                --output-format json \
+                                --include-pipeline-recommendations
+                        """,
+                        returnStdout: true
+                    ).trim()
+                    
+                    env.KIRO_ANALYSIS = analysisResult
+                    def analysis = readJSON text: analysisResult
+                    
+                    // Set dynamic pipeline variables based on analysis
+                    env.SHOULD_RUN_FULL_TESTS = analysis.testStrategy.fullSuite.toString()
+                    env.SHOULD_DEPLOY_STAGING = analysis.deploymentStrategy.staging.recommended.toString()
+                    env.BUILD_PARALLELISM = analysis.buildStrategy.parallelism.toString()
+                    
+                    // Store analysis for later stages
+                    writeFile file: 'kiro-analysis.json', text: analysisResult
+                    archiveArtifacts artifacts: 'kiro-analysis.json'
+                }
+            }
+        }
+        
+        stage('Intelligent Build') {
+            parallel {
+                stage('Frontend Build') {
+                    when {
+                        expression { 
+                            def analysis = readJSON file: 'kiro-analysis.json'
+                            return analysis.affectedComponents.contains('frontend')
+                        }
+                    }
+                    steps {
+                        script {
+                            kiroIntelligentBuild('frontend')
+                        }
+                    }
+                }
+                
+                stage('Backend Build') {
+                    when {
+                        expression {
+                            def analysis = readJSON file: 'kiro-analysis.json'
+                            return analysis.affectedComponents.contains('backend')
+                        }
+                    }
+                    steps {
+                        script {
+                            kiroIntelligentBuild('backend')
+                        }
+                    }
+                }
+                
+                stage('Services Build') {
+                    when {
+                        expression {
+                            def analysis = readJSON file: 'kiro-analysis.json'
+                            return analysis.affectedComponents.contains('services')
+                        }
+                    }
+                    steps {
+                        script {
+                            def analysis = readJSON file: 'kiro-analysis.json'
+                            def services = analysis.affectedServices
+                            
+                            // Build affected services in parallel
+                            def parallelBuilds = [:]
+                            services.each { service ->
+                                parallelBuilds[service] = {
+                                    kiroIntelligentBuild('services', service)
+                                }
+                            }
+                            parallel parallelBuilds
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('AI-Optimized Testing') {
+            parallel {
+                stage('Unit Tests') {
+                    steps {
+                        script {
+                            kiroIntelligentTest('unit')
+                        }
+                    }
+                    post {
+                        always {
+                            publishTestResults testResultsPattern: 'test-results/unit/junit.xml'
+                            publishCoverage adapters: [
+                                cobertura('test-results/unit/coverage.xml')
+                            ]
+                        }
+                    }
+                }
+                
+                stage('Integration Tests') {
+                    when {
+                        expression { env.SHOULD_RUN_FULL_TESTS == 'true' }
+                    }
+                    steps {
+                        script {
+                            kiroIntelligentTest('integration')
+                        }
+                    }
+                    post {
+                        always {
+                            publishTestResults testResultsPattern: 'test-results/integration/junit.xml'
+                        }
+                    }
+                }
+                
+                stage('Performance Tests') {
+                    when {
+                        expression {
+                            def analysis = readJSON file: 'kiro-analysis.json'
+                            return analysis.performanceImpact.significant
+                        }
+                    }
+                    steps {
+                        script {
+                            kiroIntelligentTest('performance')
+                        }
+                    }
+                    post {
+                        always {
+                            publishPerformanceReport(
+                                sourceDataFiles: 'test-results/performance/results.xml'
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('Quality Gates') {
+            steps {
+                script {
+                    // AI-powered quality assessment
+                    def qualityResult = sh(
+                        script: """
+                            kiro quality assess \
+                                --test-results test-results/ \
+                                --build-artifacts dist/ \
+                                --change-analysis kiro-analysis.json \
+                                --quality-profile enterprise \
+                                --output-format json
+                        """,
+                        returnStdout: true
+                    ).trim()
+                    
+                    def quality = readJSON text: qualityResult
+                    
+                    if (!quality.approved) {
+                        error("Quality gates failed: ${quality.reason}")
+                    }
+                    
+                    env.QUALITY_CONFIDENCE = quality.confidenceScore.toString()
+                    env.DEPLOYMENT_STRATEGY = quality.recommendedDeploymentStrategy
+                }
+            }
+        }
+        
+        stage('Intelligent Deployment') {
+            when {
+                allOf {
+                    branch 'main'
+                    expression { env.SHOULD_DEPLOY_STAGING == 'true' }
+                }
+            }
+            stages {
+                stage('Deploy to Staging') {
+                    steps {
+                        script {
+                            kiroIntelligentDeploy('staging')
+                        }
+                    }
+                }
+                
+                stage('Staging Validation') {
+                    steps {
+                        script {
+                            // Intelligent post-deployment validation
+                            sh """
+                                kiro validate deployment \
+                                    --environment staging \
+                                    --deployment-id ${env.BUILD_ID} \
+                                    --validation-suite comprehensive \
+                                    --ai-powered-checks
+                            """
+                        }
+                    }
+                }
+                
+                stage('Deploy to Production') {
+                    when {
+                        expression { 
+                            return env.QUALITY_CONFIDENCE.toFloat() > 0.9 
+                        }
+                    }
+                    input {
+                        message "Deploy to production?"
+                        ok "Deploy"
+                        parameters {
+                            choice(
+                                name: 'DEPLOYMENT_STRATEGY',
+                                choices: ['blue-green', 'canary', 'rolling'],
+                                description: 'Deployment strategy (AI recommended: ' + env.DEPLOYMENT_STRATEGY + ')'
+                            )
+                        }
+                    }
+                    steps {
+                        script {
+                            kiroIntelligentDeploy('production', params.DEPLOYMENT_STRATEGY)
+                        }
+                    }
+                }
+            }
+        }
+        
+        stage('Continuous Monitoring') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    // Activate intelligent monitoring
+                    sh """
+                        kiro monitor activate \
+                            --deployment-id ${env.BUILD_ID} \
+                            --environment production \
+                            --alert-strategy adaptive \
+                            --optimization continuous \
+                            --duration 48h
+                    """
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            script {
+                // Kiro pipeline analytics and optimization
+                sh """
+                    kiro pipeline analyze \
+                        --pipeline-id ${env.BUILD_ID} \
+                        --duration ${currentBuild.duration} \
+                        --result ${currentBuild.result} \
+                        --suggest-optimizations
+                """
+            }
+        }
+        failure {
+            script {
+                // Intelligent failure analysis
+                sh """
+                    kiro failure analyze \
+                        --pipeline-id ${env.BUILD_ID} \
+                        --logs ${env.BUILD_URL}consoleText \
+                        --suggest-fixes \
+                        --create-incident-report
+                """
+            }
+        }
+    }
+}
+
+// Helper functions for Kiro integration
+def kiroIntelligentBuild(component, service = null) {
+    def buildCmd = "kiro build execute --component ${component}"
+    if (service) {
+        buildCmd += " --service ${service}"
+    }
+    buildCmd += " --optimization auto --cache intelligent --metrics detailed"
+    
+    sh buildCmd
+}
+
+def kiroIntelligentTest(testType) {
+    sh """
+        kiro test execute \
+            --type ${testType} \
+            --parallel auto \
+            --selection intelligent \
+            --retry-strategy adaptive \
+            --coverage-analysis \
+            --performance-baseline
+    """
+}
+
+def kiroIntelligentDeploy(environment, strategy = null) {
+    def deployCmd = "kiro deploy execute --environment ${environment}"
+    if (strategy) {
+        deployCmd += " --strategy ${strategy}"
+    } else {
+        deployCmd += " --strategy auto"
+    }
+    deployCmd += " --health-checks comprehensive --rollback automatic --monitoring enhanced"
+    
+    sh deployCmd
+}</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>AWS CodePipeline Integration</h2>
+            
+            <p>For teams already invested in the AWS ecosystem, CodePipeline provides native integration opportunities with Kiro.</p>
+            
+            <div class="integration-example">
+                <div class="example-header">AWS CodePipeline: CloudFormation Template</div>
+                <div class="example-content">
+                    <div class="code-block">
+                        <pre># cloudformation-pipeline.yml
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Intelligent CI/CD Pipeline with Kiro Integration'
+
+Parameters:
+  KiroApiToken:
+    Type: String
+    NoEcho: true
+    Description: Kiro API Token for authentication
+    
+  GitHubRepo:
+    Type: String
+    Description: GitHub repository name
+    
+  GitHubOwner:
+    Type: String
+    Description: GitHub repository owner
+
+Resources:
+  # S3 Bucket for Pipeline Artifacts
+  ArtifactStore:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  # IAM Role for CodePipeline
+  CodePipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: codepipeline.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: KiroIntegrationPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - codebuild:BatchGetBuilds
+                  - codebuild:StartBuild
+                  - lambda:InvokeFunction
+                Resource: '*'
+
+  # Kiro Analysis Lambda Function
+  KiroAnalysisFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.9
+      Handler: index.handler
+      Code:
+        ZipFile: |
+          import json
+          import boto3
+          import subprocess
+          import os
+          
+          def handler(event, context):
+              # Extract CodePipeline job data
+              job_id = event['CodePipeline.job']['id']
+              input_artifacts = event['CodePipeline.job']['data']['inputArtifacts']
+              
+              try:
+                  # Download source artifacts
+                  s3 = boto3.client('s3')
+                  
+                  # Perform Kiro analysis
+                  analysis_result = subprocess.run([
+                      'kiro', 'analyze', 'pipeline-optimization',
+                      '--source-location', '/tmp/source',
+                      '--output-format', 'json'
+                  ], capture_output=True, text=True)
+                  
+                  if analysis_result.returncode != 0:
+                      raise Exception(f"Kiro analysis failed: {analysis_result.stderr}")
+                  
+                  analysis = json.loads(analysis_result.stdout)
+                  
+                  # Store analysis results for subsequent stages
+                  s3.put_object(
+                      Bucket=os.environ['ARTIFACT_BUCKET'],
+                      Key=f"kiro-analysis/{job_id}/analysis.json",
+                      Body=json.dumps(analysis)
+                  )
+                  
+                  # Report success to CodePipeline
+                  codepipeline = boto3.client('codepipeline')
+                  codepipeline.put_job_success_result(jobId=job_id)
+                  
+              except Exception as e:
+                  codepipeline = boto3.client('codepipeline')
+                  codepipeline.put_job_failure_result(
+                      jobId=job_id,
+                      failureDetails={'message': str(e)}
+                  )
+      Environment:
+        Variables:
+          KIRO_API_TOKEN: !Ref KiroApiToken
+          ARTIFACT_BUCKET: !Ref ArtifactStore
+      Role: !GetAtt LambdaExecutionRole.Arn
+
+  # CodeBuild Project for Intelligent Build
+  IntelligentBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      ServiceRole: !GetAtt CodeBuildRole.Arn
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_MEDIUM
+        Image: aws/codebuild/standard:5.0
+        EnvironmentVariables:
+          - Name: KIRO_API_TOKEN
+            Value: !Ref KiroApiToken
+          - Name: ARTIFACT_BUCKET
+            Value: !Ref ArtifactStore
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: |
+          version: 0.2
+          phases:
+            install:
+              runtime-versions:
+                nodejs: 14
+              commands:
+                - curl -fsSL https://kiro.aws.amazon.com/install.sh | sh
+                - export PATH=$PATH:/usr/local/bin/kiro
+            pre_build:
+              commands:
+                - echo "Retrieving Kiro analysis..."
+                - aws s3 cp s3://$ARTIFACT_BUCKET/kiro-analysis/$CODEBUILD_BUILD_ID/analysis.json .
+                - export KIRO_ANALYSIS=$(cat analysis.json)
+            build:
+              commands:
+                - echo "Executing intelligent build..."
+                - |
+                  kiro build execute \
+                    --analysis-file analysis.json \
+                    --optimization-level auto \
+                    --parallel-jobs auto \
+                    --cache-strategy intelligent \
+                    --metrics-output build-metrics.json
+            post_build:
+              commands:
+                - echo "Build completed"
+                - kiro build analyze --metrics build-metrics.json
+          artifacts:
+            files:
+              - '**/*'
+            secondary-artifacts:
+              BuildMetrics:
+                files:
+                  - build-metrics.json
+
+  # Main Pipeline
+  IntelligentPipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: !GetAtt CodePipelineRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactStore
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: SourceAction
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitHub
+                Version: 1
+              Configuration:
+                Owner: !Ref GitHubOwner
+                Repo: !Ref GitHubRepo
+                Branch: main
+                OAuthToken: !Ref GitHubToken
+              OutputArtifacts:
+                - Name: SourceOutput
+
+        - Name: KiroAnalysis
+          Actions:
+            - Name: AnalyzeChanges
+              ActionTypeId:
+                Category: Invoke
+                Owner: AWS
+                Provider: Lambda
+                Version: 1
+              Configuration:
+                FunctionName: !Ref KiroAnalysisFunction
+              InputArtifacts:
+                - Name: SourceOutput
+              OutputArtifacts:
+                - Name: AnalysisOutput
+
+        - Name: IntelligentBuild
+          Actions:
+            - Name: BuildApplication
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              Configuration:
+                ProjectName: !Ref IntelligentBuildProject
+              InputArtifacts:
+                - Name: SourceOutput
+                - Name: AnalysisOutput
+              OutputArtifacts:
+                - Name: BuildOutput
+
+        - Name: IntelligentTest
+          Actions:
+            - Name: RunTests
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              Configuration:
+                ProjectName: !Ref IntelligentTestProject
+              InputArtifacts:
+                - Name: BuildOutput
+                - Name: AnalysisOutput
+              OutputArtifacts:
+                - Name: TestOutput
+
+        - Name: QualityGates
+          Actions:
+            - Name: AssessQuality
+              ActionTypeId:
+                Category: Invoke
+                Owner: AWS
+                Provider: Lambda
+                Version: 1
+              Configuration:
+                FunctionName: !Ref QualityGatesFunction
+              InputArtifacts:
+                - Name: TestOutput
+                - Name: AnalysisOutput
+
+        - Name: IntelligentDeploy
+          Actions:
+            - Name: DeployToStaging
+              ActionTypeId:
+                Category: Deploy
+                Owner: AWS
+                Provider: CloudFormation
+                Version: 1
+              Configuration:
+                ActionMode: CREATE_UPDATE
+                StackName: staging-stack
+                TemplatePath: BuildOutput::infrastructure/staging.yml
+                Capabilities: CAPABILITY_IAM
+                RoleArn: !GetAtt CloudFormationRole.Arn
+              InputArtifacts:
+                - Name: BuildOutput
+              Region: !Ref AWS::Region
+
+Outputs:
+  PipelineName:
+    Description: Name of the created pipeline
+    Value: !Ref IntelligentPipeline
+    
+  ArtifactBucket:
+    Description: S3 bucket for pipeline artifacts
+    Value: !Ref ArtifactStore</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Monitoring and Observability</h2>
+            
+            <p>Effective CI/CD monitoring is crucial for maintaining pipeline health and identifying optimization opportunities.</p>
+            
+            <h3>Pipeline Metrics and Analytics</h3>
+            
+            <div class="code-block">
+                <pre># Kiro Pipeline Monitoring Configuration
+# .kiro/monitoring/pipeline.yml
+metrics:
+  collection:
+    frequency: real-time
+    retention: 90d
+    
+  pipeline_health:
+    - build_success_rate
+    - test_execution_time
+    - deployment_frequency
+    - lead_time_for_changes
+    - mean_time_to_recovery
+    
+  ai_insights:
+    - bottleneck_detection
+    - optimization_suggestions
+    - failure_pattern_analysis
+    - resource_utilization
+    
+  alerts:
+    - name: pipeline_failure_rate_high
+      condition: failure_rate > 10% over 24h
+      severity: high
+      recipients: [devops-team, team-leads]
+      
+    - name: build_time_regression
+      condition: build_time > baseline * 1.5
+      severity: medium
+      auto_remediation: true
+      
+    - name: test_flakiness_detected
+      condition: ai_detected_flaky_tests > 0
+      severity: low
+      action: create_improvement_task
+
+dashboards:
+  pipeline_overview:
+    - deployment_frequency_trend
+    - quality_gates_effectiveness
+    - kiro_optimization_impact
+    - team_velocity_metrics
+    
+  ai_insights:
+    - optimization_recommendations
+    - predictive_failure_analysis
+    - resource_optimization_opportunities
+    - code_quality_trends</pre>
+            </div>
+            
+            <h2>Troubleshooting Common Integration Issues</h2>
+            
+            <p>When integrating Kiro with CI/CD pipelines, teams commonly encounter these challenges and solutions:</p>
+            
+            <h3>Authentication and Permissions</h3>
+            
+            <ul>
+                <li><strong>Issue:</strong> Kiro API authentication failures in CI environment</li>
+                <li><strong>Solution:</strong> Use service accounts with appropriate IAM roles and rotate tokens regularly</li>
+                <li><strong>Best Practice:</strong> Store tokens in secure secret management systems</li>
+            </ul>
+            
+            <h3>Performance and Resource Usage</h3>
+            
+            <ul>
+                <li><strong>Issue:</strong> Kiro analysis adding significant time to pipeline execution</li>
+                <li><strong>Solution:</strong> Enable caching and parallel analysis where possible</li>
+                <li><strong>Best Practice:</strong> Cache analysis results and use incremental analysis for small changes</li>
+            </ul>
+            
+            <h3>Integration Complexity</h3>
+            
+            <ul>
+                <li><strong>Issue:</strong> Complex pipeline logic becomes difficult to maintain</li>
+                <li><strong>Solution:</strong> Use Kiro's pipeline templates and modular configuration</li>
+                <li><strong>Best Practice:</strong> Start with simple integrations and gradually add sophistication</li>
+            </ul>
+            
+            <h2>Best Practices for Production Deployment</h2>
+            
+            <div class="benefit-box">
+                <h4>Production Readiness Guidelines</h4>
+                <ul>
+                    <li><strong>Gradual Rollout:</strong> Start with non-critical pipelines and gradually expand</li>
+                    <li><strong>Fallback Mechanisms:</strong> Always have manual override capabilities</li>
+                    <li><strong>Monitoring:</strong> Comprehensive logging and alerting for all Kiro operations</li>
+                    <li><strong>Performance Testing:</strong> Validate pipeline performance under load</li>
+                    <li><strong>Security Review:</strong> Audit all integrations for security compliance</li>
+                    <li><strong>Team Training:</strong> Ensure team understands Kiro-enhanced workflows</li>
+                </ul>
+            </div>
+            
+            <h2>Future of Intelligent CI/CD</h2>
+            
+            <p>The integration of AI into CI/CD pipelines represents just the beginning of a transformation in how we approach software delivery. Future developments will include:</p>
+            
+            <ul>
+                <li><strong>Predictive Deployment:</strong> AI predicting optimal deployment windows</li>
+                <li><strong>Self-Healing Pipelines:</strong> Automatic recovery from common failures</li>
+                <li><strong>Intelligent Resource Management:</strong> Dynamic resource allocation based on workload</li>
+                <li><strong>Cross-Pipeline Learning:</strong> Knowledge sharing between different projects</li>
+                <li><strong>Autonomous Quality Assurance:</strong> AI taking full responsibility for quality gates</li>
+            </ul>
+            
+            <h2>Getting Started Today</h2>
+            
+            <p>Ready to transform your CI/CD pipeline with Kiro intelligence? Start with these steps:</p>
+            
+            <ol>
+                <li><strong>Assessment:</strong> Evaluate your current pipeline bottlenecks and pain points</li>
+                <li><strong>Pilot Project:</strong> Choose a non-critical project for initial integration</li>
+                <li><strong>Basic Integration:</strong> Start with simple change analysis and intelligent testing</li>
+                <li><strong>Gradual Enhancement:</strong> Add more sophisticated features over time</li>
+                <li><strong>Team Training:</strong> Ensure your team understands the new capabilities</li>
+                <li><strong>Measurement:</strong> Track improvements in velocity, quality, and developer satisfaction</li>
+            </ol>
+            
+            <p>The future of software delivery is intelligent, automated, and continuously optimizing. By integrating Kiro with your CI/CD pipeline, you're not just adopting a new tool—you're embracing a new paradigm that will fundamentally transform how your team delivers software.</p>
+            
+            <p>Start your journey today with our <a href="/quickstart/">Kiro setup guide</a> and join the community of teams already experiencing the benefits of intelligent CI/CD automation.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/terms/">Terms</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

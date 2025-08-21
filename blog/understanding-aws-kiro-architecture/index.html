@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding AWS Kiro's Architecture | Kiro Directory</title>
+    <meta name="description" content="Deep dive into AWS Kiro's unique architecture: spec-driven development, Claude integration, agent hooks, and MCP protocol explained for developers.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/blog/understanding-aws-kiro-architecture/">
+    <meta property="og:title" content="Understanding AWS Kiro's Architecture">
+    <meta property="og:description" content="Deep dive into AWS Kiro's unique architecture and how it transforms development workflows">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/blog/understanding-aws-kiro-architecture/">
+    <meta property="twitter:title" content="Understanding AWS Kiro's Architecture">
+    <meta property="twitter:description" content="Deep dive into AWS Kiro's unique architecture and how it transforms development workflows">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Understanding AWS Kiro's Architecture",
+      "author": {
+        "@type": "Person",
+        "name": "Kiro Directory Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      },
+      "datePublished": "2025-01-21",
+      "description": "Deep dive into AWS Kiro's unique architecture: spec-driven development, Claude integration, agent hooks, and MCP protocol explained for developers"
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+        
+        /* Article Styles */
+        .article-header {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .article-category {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--color-accent);
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+        
+        .article-content h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .article-content a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-block pre {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .highlight-box {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-box h4 {
+            margin-bottom: 0.75rem;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        
+        .architecture-diagram {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .diagram-layer {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .article-content {
+                font-size: 0.9375rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="article-header container">
+            <div class="article-meta">
+                <span class="article-category">Architecture</span>
+                <span>January 21, 2025</span>
+                <span>8 min read</span>
+            </div>
+            <h1>Understanding AWS Kiro's Architecture</h1>
+            <p class="article-subtitle">Deep dive into the revolutionary architecture that makes Kiro the most advanced spec-driven AI IDE for production development</p>
+        </section>
+        
+        <section class="article-content container">
+            <p>AWS Kiro represents a fundamental shift in how we approach software development. Unlike traditional code completion tools or even advanced AI coding assistants, Kiro introduces a completely new paradigm: <strong>spec-driven agentic development</strong>. But what exactly makes Kiro's architecture so unique, and how does it achieve such impressive results in production environments?</p>
+            
+            <p>In this comprehensive guide, we'll explore every layer of Kiro's architecture, from its foundational spec system to its advanced Claude integration and intelligent agent hooks. Whether you're evaluating Kiro for your team or looking to maximize your current implementation, understanding this architecture is crucial for success.</p>
+            
+            <h2>The Four Pillars of Kiro's Architecture</h2>
+            
+            <div class="architecture-diagram">
+                <h3>Kiro Architecture Overview</h3>
+                <div class="diagram-layer">
+                    <strong>Layer 4:</strong> VS Code Interface & Developer Experience
+                </div>
+                <div class="diagram-layer">
+                    <strong>Layer 3:</strong> Agent Hooks & Automation System
+                </div>
+                <div class="diagram-layer">
+                    <strong>Layer 2:</strong> Claude 4.0 AI Engine & MCP Integration
+                </div>
+                <div class="diagram-layer">
+                    <strong>Layer 1:</strong> Spec-Driven Development Core
+                </div>
+            </div>
+            
+            <p>Kiro's architecture is built on four interconnected pillars that work together to create an unprecedented development experience. Each layer builds upon the previous one, creating a cohesive system that's greater than the sum of its parts.</p>
+            
+            <h2>Layer 1: The Spec-Driven Development Core</h2>
+            
+            <p>At the heart of Kiro lies its spec-driven development system. This isn't just another requirements management tool—it's a complete paradigm shift that transforms how we think about building software.</p>
+            
+            <h3>EARS Format Integration</h3>
+            
+            <p>Kiro uses the EARS (Easy Approach to Requirements Syntax) format as its foundation. This standardized approach ensures that specifications are:</p>
+            
+            <ul>
+                <li><strong>Unambiguous:</strong> Clear, precise language that eliminates interpretation errors</li>
+                <li><strong>Testable:</strong> Every requirement can be automatically validated</li>
+                <li><strong>Traceable:</strong> Complete lineage from requirement to implementation</li>
+                <li><strong>Maintainable:</strong> Changes propagate through the entire system automatically</li>
+            </ul>
+            
+            <div class="code-block">
+                <pre># Example EARS Specification
+WHEN a user submits a login form
+THE SYSTEM SHALL validate the credentials against the database
+AND return a JWT token within 200ms
+AND log the authentication attempt for security audit
+
+# Derived Design Tasks (Auto-generated by Kiro)
+- Implement password hashing validation
+- Create JWT token generation service  
+- Add authentication logging middleware
+- Setup 200ms response time monitoring</pre>
+            </div>
+            
+            <h3>Automatic Task Decomposition</h3>
+            
+            <p>What sets Kiro apart is its ability to automatically break down high-level specifications into actionable development tasks. The AI engine analyzes your specs and generates a complete task hierarchy, including:</p>
+            
+            <ul>
+                <li>Database schema changes</li>
+                <li>API endpoint definitions</li>
+                <li>Frontend component requirements</li>
+                <li>Test case specifications</li>
+                <li>Performance optimization tasks</li>
+                <li>Security considerations</li>
+            </ul>
+            
+            <h2>Layer 2: Claude 4.0 AI Engine & MCP Integration</h2>
+            
+            <p>Kiro's intelligence comes from its deep integration with Anthropic's Claude 4.0, but it's not just about using a powerful language model—it's about how Kiro leverages Claude's unique capabilities for software development.</p>
+            
+            <h3>Context-Aware Code Generation</h3>
+            
+            <p>Unlike traditional AI coding tools that work with limited context, Kiro maintains a comprehensive understanding of your entire project through:</p>
+            
+            <div class="highlight-box">
+                <h4>Intelligent Context Management</h4>
+                <p>Kiro automatically maintains project context including architecture patterns, coding standards, dependency relationships, and business logic constraints. This ensures generated code always fits seamlessly into your existing codebase.</p>
+            </div>
+            
+            <ul>
+                <li><strong>Project Memory:</strong> Persistent understanding of your codebase structure, patterns, and conventions</li>
+                <li><strong>Dependency Awareness:</strong> Automatic tracking of how changes affect related components</li>
+                <li><strong>Standard Compliance:</strong> Ensures all generated code follows your team's established patterns</li>
+                <li><strong>Performance Optimization:</strong> Considers performance implications of every architectural decision</li>
+            </ul>
+            
+            <h3>Model Context Protocol (MCP) Integration</h3>
+            
+            <p>One of Kiro's most powerful features is its integration with the Model Context Protocol (MCP), which allows seamless connection to external tools and services:</p>
+            
+            <div class="code-block">
+                <pre># MCP Configuration Example
+{
+  "mcpServers": {
+    "aws-services": {
+      "command": "kiro-mcp-aws",
+      "args": ["--region", "us-east-1"],
+      "capabilities": ["lambda", "rds", "s3", "cloudformation"]
+    },
+    "database": {
+      "command": "kiro-mcp-postgres", 
+      "args": ["--connection", "prod"],
+      "capabilities": ["schema", "migrations", "performance"]
+    },
+    "monitoring": {
+      "command": "kiro-mcp-datadog",
+      "capabilities": ["metrics", "logs", "alerts"]
+    }
+  }
+}</pre>
+            </div>
+            
+            <p>This integration enables Kiro to:</p>
+            
+            <ul>
+                <li>Query live databases for schema information and data patterns</li>
+                <li>Interact with cloud services to understand deployment constraints</li>
+                <li>Access monitoring data to inform performance optimizations</li>
+                <li>Integrate with external APIs and services during development</li>
+            </ul>
+            
+            <h2>Layer 3: Agent Hooks & Automation System</h2>
+            
+            <p>Kiro's agent hooks system represents the future of development automation. Rather than simple build scripts or CI/CD pipelines, Kiro provides intelligent agents that understand context and make decisions.</p>
+            
+            <h3>Event-Driven Development Workflow</h3>
+            
+            <p>Kiro's hooks respond to development events with intelligent actions:</p>
+            
+            <div class="code-block">
+                <pre>// Advanced Hook Example: Smart Test Generation
+module.exports = {
+  trigger: "onFileSave",
+  pattern: "src/**/*.{ts,js}",
+  agent: async (context) => {
+    const { file, changes, projectContext } = context;
+    
+    // Analyze what changed
+    const analysis = await analyzeChanges(changes);
+    
+    if (analysis.hasNewPublicMethods) {
+      // Generate comprehensive tests
+      await generateTests(file, analysis.newMethods);
+    }
+    
+    if (analysis.hasBreakingChanges) {
+      // Update dependent components
+      await updateDependents(file, analysis.breakingChanges);
+      
+      // Notify team of breaking changes
+      await notifyTeam({
+        type: "breaking-change",
+        file: file.path,
+        impact: analysis.impact
+      });
+    }
+    
+    // Always run relevant tests
+    await runSmartTests(file, analysis);
+  }
+};</pre>
+            </div>
+            
+            <h3>Intelligent Automation Capabilities</h3>
+            
+            <p>Kiro's agents go far beyond simple automation:</p>
+            
+            <ul>
+                <li><strong>Adaptive Testing:</strong> Automatically generates and updates tests based on code changes</li>
+                <li><strong>Documentation Sync:</strong> Keeps documentation in perfect sync with code evolution</li>
+                <li><strong>Performance Monitoring:</strong> Identifies and suggests optimizations in real-time</li>
+                <li><strong>Security Scanning:</strong> Continuous security analysis with context-aware recommendations</li>
+                <li><strong>Dependency Management:</strong> Intelligent dependency updates with compatibility analysis</li>
+            </ul>
+            
+            <h2>Layer 4: VS Code Interface & Developer Experience</h2>
+            
+            <p>The top layer of Kiro's architecture focuses on developer experience. Built as a comprehensive VS Code extension, Kiro provides an intuitive interface that makes complex AI-driven development feel natural.</p>
+            
+            <h3>Seamless Integration</h3>
+            
+            <p>Kiro integrates deeply with VS Code to provide:</p>
+            
+            <ul>
+                <li><strong>Spec Editor:</strong> Dedicated interface for writing and managing specifications</li>
+                <li><strong>Task Dashboard:</strong> Visual representation of generated tasks and their dependencies</li>
+                <li><strong>AI Chat Interface:</strong> Context-aware conversations about your codebase</li>
+                <li><strong>Hook Manager:</strong> Easy configuration and monitoring of agent hooks</li>
+                <li><strong>Performance Insights:</strong> Real-time metrics and optimization suggestions</li>
+            </ul>
+            
+            <h3>Developer Workflow Integration</h3>
+            
+            <p>Kiro respects and enhances existing developer workflows rather than replacing them:</p>
+            
+            <div class="highlight-box">
+                <h4>Workflow Preservation</h4>
+                <p>Kiro works within your existing Git workflow, CI/CD pipelines, and development processes. It enhances what you already do rather than forcing you to adopt new tools or methodologies.</p>
+            </div>
+            
+            <h2>How It All Works Together</h2>
+            
+            <p>The true power of Kiro's architecture emerges when all four layers work in harmony. Here's a typical development flow:</p>
+            
+            <ol>
+                <li><strong>Specification:</strong> Developer writes a high-level spec using EARS format</li>
+                <li><strong>Analysis:</strong> Claude analyzes the spec and generates detailed tasks</li>
+                <li><strong>Implementation:</strong> AI generates initial implementation with full context awareness</li>
+                <li><strong>Automation:</strong> Agent hooks automatically handle testing, documentation, and optimization</li>
+                <li><strong>Feedback:</strong> System learns from the implementation to improve future suggestions</li>
+            </ol>
+            
+            <h2>Performance and Scalability Considerations</h2>
+            
+            <p>Kiro's architecture is designed for enterprise-scale development:</p>
+            
+            <ul>
+                <li><strong>Distributed Processing:</strong> Heavy AI computations happen in the cloud, keeping local performance smooth</li>
+                <li><strong>Intelligent Caching:</strong> Common patterns and decisions are cached for instant response</li>
+                <li><strong>Progressive Enhancement:</strong> Features gracefully degrade when connectivity is limited</li>
+                <li><strong>Team Collaboration:</strong> Shared context and knowledge across team members</li>
+            </ul>
+            
+            <h2>Security and Privacy Architecture</h2>
+            
+            <p>Enterprise adoption requires robust security, which Kiro provides through:</p>
+            
+            <ul>
+                <li><strong>Code Privacy:</strong> Your code never leaves your control unless explicitly shared</li>
+                <li><strong>Encrypted Communication:</strong> All data transmission uses end-to-end encryption</li>
+                <li><strong>Access Controls:</strong> Granular permissions for team members and AI capabilities</li>
+                <li><strong>Audit Trails:</strong> Complete logging of all AI interactions and code changes</li>
+            </ul>
+            
+            <h2>The Future of Development Architecture</h2>
+            
+            <p>Kiro's architecture represents more than just an evolution in coding tools—it's a glimpse into the future of software development. By combining structured specifications, advanced AI, intelligent automation, and seamless integration, Kiro creates a development environment where:</p>
+            
+            <ul>
+                <li>Requirements automatically become working code</li>
+                <li>Testing and documentation happen continuously and intelligently</li>
+                <li>Performance and security are built-in from the start</li>
+                <li>Teams can focus on solving business problems rather than managing complexity</li>
+            </ul>
+            
+            <p>As AWS continues to develop Kiro, we can expect even more sophisticated capabilities, including enhanced multi-agent workflows, deeper cloud integration, and more intelligent automation. The architecture we see today is just the beginning of a transformation that will reshape how we build software.</p>
+            
+            <h2>Getting Started with Kiro Architecture</h2>
+            
+            <p>Understanding Kiro's architecture is the first step toward leveraging its full potential. Whether you're planning to adopt Kiro or looking to optimize your current usage, this architectural foundation provides the context you need to make informed decisions about your development workflow.</p>
+            
+            <p>Ready to experience this architecture firsthand? <a href="/quickstart/">Get started with Kiro</a> and see how spec-driven development can transform your next project.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/terms/">Terms</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

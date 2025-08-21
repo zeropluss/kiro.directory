@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Kiro Hooks Techniques for Production Teams | Kiro Directory</title>
+    <meta name="description" content="Master advanced AWS Kiro agent hooks: multi-agent workflows, intelligent automation, CI/CD integration, and production-ready patterns for development teams.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/blog/advanced-kiro-hooks-techniques/">
+    <meta property="og:title" content="Advanced Kiro Hooks Techniques for Production Teams">
+    <meta property="og:description" content="Master advanced agent automation patterns and multi-agent workflows with Kiro">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/blog/advanced-kiro-hooks-techniques/">
+    <meta property="twitter:title" content="Advanced Kiro Hooks Techniques for Production Teams">
+    <meta property="twitter:description" content="Master advanced agent automation patterns and multi-agent workflows with Kiro">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Advanced Kiro Hooks Techniques for Production Teams",
+      "author": {
+        "@type": "Person",
+        "name": "Kiro Directory Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      },
+      "datePublished": "2025-01-21",
+      "description": "Master advanced AWS Kiro agent hooks: multi-agent workflows, intelligent automation, CI/CD integration, and production-ready patterns for development teams"
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+        
+        /* Article Styles */
+        .article-header {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .article-category {
+            background-color: var(--color-accent);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--color-accent);
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+        
+        .article-content h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .article-content a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .pro-tip {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .pro-tip h4 {
+            margin-bottom: 0.75rem;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        
+        .warning {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-warning);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .warning h4 {
+            margin-bottom: 0.75rem;
+            color: var(--color-warning);
+            font-weight: 600;
+        }
+        
+        .hook-example {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        
+        .hook-header {
+            background-color: var(--color-surface-2);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+        
+        .hook-content {
+            padding: 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .article-content {
+                font-size: 0.9375rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="article-header container">
+            <div class="article-meta">
+                <span class="article-category">Advanced Tutorial</span>
+                <span>January 21, 2025</span>
+                <span>18 min read</span>
+            </div>
+            <h1>Advanced Kiro Hooks Techniques</h1>
+            <p class="article-subtitle">Master intelligent automation, multi-agent workflows, and production-ready patterns that transform your development process</p>
+        </section>
+        
+        <section class="article-content container">
+            <p>Kiro's agent hooks system represents the future of development automation—intelligent agents that understand context, make decisions, and execute complex workflows without manual intervention. While basic hooks can automate simple tasks like running tests on file save, advanced techniques unlock transformative capabilities that can revolutionize how your team develops software.</p>
+            
+            <p>This comprehensive guide explores sophisticated hook patterns, multi-agent orchestration, and production-ready automation strategies that experienced teams use to achieve unprecedented productivity gains. These techniques require solid understanding of Kiro fundamentals, but the investment in mastering them pays enormous dividends.</p>
+            
+            <h2>Understanding Advanced Hook Architecture</h2>
+            
+            <p>Before diving into specific techniques, it's crucial to understand how advanced hooks differ from simple automation scripts. Advanced Kiro hooks are intelligent agents that:</p>
+            
+            <ul>
+                <li><strong>Analyze Context:</strong> Understand the broader implications of changes</li>
+                <li><strong>Make Decisions:</strong> Choose appropriate actions based on analysis</li>
+                <li><strong>Coordinate Actions:</strong> Work with other agents to accomplish complex goals</li>
+                <li><strong>Learn Patterns:</strong> Adapt behavior based on project history</li>
+                <li><strong>Handle Exceptions:</strong> Gracefully manage unexpected situations</li>
+            </ul>
+            
+            <h2>Multi-Agent Workflow Orchestration</h2>
+            
+            <p>The most powerful hook technique involves coordinating multiple AI agents, each specialized for specific tasks but working together toward common goals.</p>
+            
+            <h3>The Agent Hierarchy Pattern</h3>
+            
+            <div class="hook-example">
+                <div class="hook-header">Orchestrator Agent: Complex Feature Development</div>
+                <div class="hook-content">
+                    <div class="code-block">
+                        <pre>// .kiro/hooks/orchestrator.js
+module.exports = {
+  trigger: "onSpecificationUpdate",
+  pattern: "specs/features/*.md",
+  agent: async (context) => {
+    const { file, changes, projectContext } = context;
+    
+    // Parse specification changes
+    const specAnalysis = await analyzeSpecification(file);
+    
+    if (specAnalysis.isNewFeature) {
+      // Orchestrate multiple agents for new feature development
+      const workflow = await createWorkflow({
+        spec: specAnalysis,
+        agents: [
+          'architect',
+          'backend-developer', 
+          'frontend-developer',
+          'tester',
+          'documenter'
+        ]
+      });
+      
+      await executeWorkflow(workflow);
+    } else if (specAnalysis.hasBreakingChanges) {
+      // Handle breaking changes with impact analysis
+      await handleBreakingChanges(specAnalysis, projectContext);
+    }
+  }
+};
+
+async function createWorkflow({ spec, agents }) {
+  return {
+    id: generateWorkflowId(),
+    spec: spec,
+    phases: [
+      {
+        name: "Architecture Design",
+        agents: ['architect'],
+        dependencies: [],
+        outputs: ['architecture.md', 'api-contracts.json']
+      },
+      {
+        name: "Backend Implementation",
+        agents: ['backend-developer'],
+        dependencies: ['Architecture Design'],
+        outputs: ['src/api/', 'migrations/']
+      },
+      {
+        name: "Frontend Implementation", 
+        agents: ['frontend-developer'],
+        dependencies: ['Architecture Design'],
+        outputs: ['src/components/', 'src/pages/']
+      },
+      {
+        name: "Integration Testing",
+        agents: ['tester'],
+        dependencies: ['Backend Implementation', 'Frontend Implementation'],
+        outputs: ['tests/integration/', 'tests/e2e/']
+      },
+      {
+        name: "Documentation Update",
+        agents: ['documenter'],
+        dependencies: ['Integration Testing'],
+        outputs: ['docs/', 'README.md']
+      }
+    ]
+  };
+}</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Specialized Agent Implementations</h3>
+            
+            <p>Each agent in the workflow has specialized capabilities and responsibilities:</p>
+            
+            <div class="hook-example">
+                <div class="hook-header">Architect Agent: System Design</div>
+                <div class="hook-content">
+                    <div class="code-block">
+                        <pre>// .kiro/agents/architect.js
+module.exports = {
+  role: "System Architect",
+  capabilities: [
+    "system-design",
+    "api-design", 
+    "data-modeling",
+    "performance-analysis",
+    "security-review"
+  ],
+  
+  async execute(task, context) {
+    const { specification, projectContext } = task;
+    
+    // Analyze existing architecture
+    const currentArchitecture = await analyzeCurrentArchitecture(projectContext);
+    
+    // Design system changes
+    const design = await designSystem({
+      requirements: specification,
+      constraints: currentArchitecture.constraints,
+      patterns: currentArchitecture.patterns,
+      performance: projectContext.performanceRequirements
+    });
+    
+    // Validate design against architectural principles
+    const validation = await validateDesign(design, projectContext.principles);
+    
+    if (!validation.isValid) {
+      throw new ArchitecturalError(validation.issues);
+    }
+    
+    // Generate architecture documentation
+    await generateArchitectureDoc(design);
+    
+    // Create API contracts
+    await generateAPIContracts(design.apis);
+    
+    // Identify infrastructure requirements
+    await analyzeInfrastructureNeeds(design);
+    
+    return {
+      design,
+      contracts: design.apis,
+      infrastructure: design.infrastructure,
+      documentation: design.documentation
+    };
+  }
+};</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hook-example">
+                <div class="hook-header">Intelligent Tester Agent</div>
+                <div class="hook-content">
+                    <div class="code-block">
+                        <pre>// .kiro/agents/tester.js
+module.exports = {
+  role: "Intelligent Test Engineer",
+  
+  async execute(task, context) {
+    const { implementation, specification, architecture } = task;
+    
+    // Analyze what needs testing
+    const testAnalysis = await analyzeTestRequirements({
+      implementation,
+      specification, 
+      riskAreas: await identifyRiskAreas(implementation),
+      changeImpact: await analyzeChangeImpact(implementation, context)
+    });
+    
+    // Generate comprehensive test suite
+    const testSuite = await generateTests({
+      unit: await generateUnitTests(testAnalysis.units),
+      integration: await generateIntegrationTests(testAnalysis.integrations),
+      e2e: await generateE2ETests(testAnalysis.userFlows),
+      performance: await generatePerformanceTests(testAnalysis.performance),
+      security: await generateSecurityTests(testAnalysis.security)
+    });
+    
+    // Execute tests and analyze results
+    const results = await executeTestSuite(testSuite);
+    
+    // Intelligent failure analysis
+    if (results.hasFailures) {
+      const analysis = await analyzeFailures(results.failures);
+      await suggestFixes(analysis);
+      
+      // Auto-fix simple issues
+      const fixableIssues = analysis.filter(issue => issue.confidence > 0.9);
+      for (const issue of fixableIssues) {
+        await applyFix(issue);
+      }
+    }
+    
+    // Update test coverage analysis
+    await updateCoverageAnalysis(results);
+    
+    return results;
+  }
+};</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Context-Aware Automation Patterns</h2>
+            
+            <p>Advanced hooks excel at understanding context and making intelligent decisions based on the full picture of your development environment.</p>
+            
+            <h3>Smart Dependency Management</h3>
+            
+            <div class="hook-example">
+                <div class="hook-header">Dependency Intelligence Hook</div>
+                <div class="hook-content">
+                    <div class="code-block">
+                        <pre>// .kiro/hooks/dependency-intelligence.js
+module.exports = {
+  trigger: "onDependencyChange",
+  pattern: ["package.json", "requirements.txt", "Cargo.toml"],
+  
+  agent: async (context) => {
+    const { file, changes, projectContext } = context;
+    
+    // Analyze dependency changes
+    const analysis = await analyzeDependencyChanges(changes);
+    
+    for (const change of analysis.changes) {
+      if (change.type === 'version-update') {
+        // Check for breaking changes
+        const compatibility = await checkCompatibility(
+          change.package,
+          change.fromVersion,
+          change.toVersion,
+          projectContext.codebase
+        );
+        
+        if (compatibility.hasBreakingChanges) {
+          // Generate migration plan
+          const migrationPlan = await generateMigrationPlan(compatibility);
+          
+          // Notify developers
+          await notifyTeam({
+            type: 'breaking-dependency-change',
+            package: change.package,
+            migrationPlan: migrationPlan,
+            estimatedEffort: migrationPlan.estimatedHours
+          });
+          
+          // Auto-create migration tasks
+          await createMigrationTasks(migrationPlan);
+        }
+      }
+      
+      if (change.type === 'new-dependency') {
+        // Security and license analysis
+        const securityScan = await scanDependencySecurity(change.package);
+        const licenseCheck = await checkLicenseCompatibility(
+          change.package, 
+          projectContext.licensePolicy
+        );
+        
+        if (securityScan.hasVulnerabilities) {
+          await blockDependencyUpdate(change, securityScan.vulnerabilities);
+        }
+        
+        if (!licenseCheck.isCompatible) {
+          await flagLicenseIssue(change, licenseCheck.conflicts);
+        }
+      }
+    }
+    
+    // Update dependency graph
+    await updateDependencyGraph(analysis);
+    
+    // Check for circular dependencies
+    const circularDeps = await detectCircularDependencies(analysis);
+    if (circularDeps.length > 0) {
+      await reportCircularDependencies(circularDeps);
+    }
+  }
+};</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Intelligent Performance Monitoring</h3>
+            
+            <div class="hook-example">
+                <div class="hook-header">Performance Intelligence Hook</div>
+                <div class="hook-content">
+                    <div class="code-block">
+                        <pre>// .kiro/hooks/performance-monitor.js
+module.exports = {
+  trigger: "onCodeChange",
+  pattern: "src/**/*.{js,ts,py,go,rs}",
+  
+  agent: async (context) => {
+    const { file, changes, projectContext } = context;
+    
+    // Analyze performance impact of changes
+    const performanceAnalysis = await analyzePerformanceImpact({
+      file,
+      changes,
+      historicalData: projectContext.performanceHistory,
+      benchmarks: projectContext.performanceBenchmarks
+    });
+    
+    if (performanceAnalysis.hasPotentialRegression) {
+      // Run targeted performance tests
+      const perfTests = await runPerformanceTests(
+        performanceAnalysis.affectedComponents
+      );
+      
+      if (perfTests.hasRegression) {
+        // Analyze root cause
+        const rootCause = await analyzePerformanceRegression(
+          perfTests.results,
+          changes
+        );
+        
+        // Generate optimization suggestions
+        const optimizations = await generateOptimizations(rootCause);
+        
+        // Auto-apply low-risk optimizations
+        const safeOptimizations = optimizations.filter(opt => opt.risk === 'low');
+        for (const opt of safeOptimizations) {
+          await applyOptimization(opt);
+        }
+        
+        // Report significant regressions
+        if (perfTests.regression > 0.1) { // 10% threshold
+          await reportPerformanceRegression({
+            file: file.path,
+            regression: perfTests.regression,
+            optimizations: optimizations,
+            appliedFixes: safeOptimizations
+          });
+        }
+      }
+    }
+    
+    // Update performance baseline
+    await updatePerformanceBaseline(file, performanceAnalysis);
+  }
+};</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Advanced Integration Patterns</h2>
+            
+            <p>Production teams need hooks that integrate seamlessly with existing development infrastructure and processes.</p>
+            
+            <h3>CI/CD Pipeline Integration</h3>
+            
+            <div class="hook-example">
+                <div class="hook-header">Intelligent Pipeline Orchestration</div>
+                <div class="hook-content">
+                    <div class="code-block">
+                        <pre>// .kiro/hooks/pipeline-orchestrator.js
+module.exports = {
+  trigger: "onCommit",
+  
+  agent: async (context) => {
+    const { commit, changedFiles, projectContext } = context;
+    
+    // Analyze commit impact
+    const impactAnalysis = await analyzeCommitImpact({
+      commit,
+      changedFiles,
+      testSuite: projectContext.testSuite,
+      dependencies: projectContext.dependencies
+    });
+    
+    // Generate optimized pipeline configuration
+    const pipelineConfig = await generatePipelineConfig({
+      impact: impactAnalysis,
+      changedComponents: impactAnalysis.affectedComponents,
+      testStrategy: await determineTestStrategy(impactAnalysis),
+      deploymentStrategy: await determineDeploymentStrategy(impactAnalysis)
+    });
+    
+    // Execute pipeline with intelligent test selection
+    const pipeline = await executePipeline({
+      config: pipelineConfig,
+      tests: await selectRelevantTests(impactAnalysis),
+      parallelization: await optimizeParallelization(impactAnalysis),
+      environmentStrategy: await selectEnvironments(impactAnalysis)
+    });
+    
+    // Monitor pipeline execution
+    await monitorPipelineExecution(pipeline, {
+      onFailure: async (failure) => {
+        const analysis = await analyzeFailure(failure);
+        
+        // Auto-retry transient failures
+        if (analysis.isTransient) {
+          await retryPipelineStage(failure.stage);
+        } else {
+          // Intelligent failure diagnosis
+          const diagnosis = await diagnoseFailure(failure, context);
+          await reportFailureWithSolutions(diagnosis);
+        }
+      },
+      
+      onSuccess: async (results) => {
+        // Update success metrics
+        await updatePipelineMetrics(results);
+        
+        // Determine deployment readiness
+        const readiness = await assessDeploymentReadiness(results);
+        
+        if (readiness.isReady && impactAnalysis.isHotfix) {
+          // Auto-deploy hotfixes
+          await initiateDeployment({
+            type: 'hotfix',
+            approval: 'auto',
+            monitoring: 'enhanced'
+          });
+        }
+      }
+    });
+  }
+};</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Cloud Infrastructure Integration</h3>
+            
+            <div class="hook-example">
+                <div class="hook-header">Infrastructure Intelligence Hook</div>
+                <div class="hook-content">
+                    <div class="code-block">
+                        <pre>// .kiro/hooks/infrastructure-intelligence.js
+module.exports = {
+  trigger: "onDeployment",
+  
+  agent: async (context) => {
+    const { deployment, environment, projectContext } = context;
+    
+    // Analyze infrastructure requirements
+    const infraAnalysis = await analyzeInfrastructureNeeds({
+      deployment,
+      currentInfra: await getCurrentInfrastructure(environment),
+      usage: await getUsagePatterns(environment),
+      performance: await getPerformanceMetrics(environment)
+    });
+    
+    // Optimize resource allocation
+    if (infraAnalysis.needsOptimization) {
+      const optimizations = await generateInfraOptimizations(infraAnalysis);
+      
+      // Apply safe optimizations automatically
+      const safeOptimizations = optimizations.filter(opt => 
+        opt.risk === 'low' && opt.impact > 0.1
+      );
+      
+      for (const optimization of safeOptimizations) {
+        await applyInfrastructureChange(optimization, environment);
+      }
+    }
+    
+    // Predictive scaling
+    const scalingPrediction = await predictScalingNeeds({
+      currentUsage: infraAnalysis.usage,
+      trends: infraAnalysis.trends,
+      deployment: deployment
+    });
+    
+    if (scalingPrediction.needsScaling) {
+      await scheduleScaling({
+        when: scalingPrediction.timing,
+        resources: scalingPrediction.resources,
+        duration: scalingPrediction.duration
+      });
+    }
+    
+    // Cost optimization
+    const costAnalysis = await analyzeCosts({
+      current: infraAnalysis.currentCosts,
+      projected: infraAnalysis.projectedCosts,
+      optimizations: await getCostOptimizations(infraAnalysis)
+    });
+    
+    if (costAnalysis.savingsOpportunity > 0.15) { // 15% savings threshold
+      await reportCostOptimization(costAnalysis);
+    }
+    
+    // Security compliance monitoring
+    await monitorSecurityCompliance({
+      infrastructure: infraAnalysis.infrastructure,
+      policies: projectContext.securityPolicies,
+      onViolation: async (violation) => {
+        await handleSecurityViolation(violation, environment);
+      }
+    });
+  }
+};</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Error Handling and Recovery Patterns</h2>
+            
+            <p>Advanced hooks must gracefully handle failures and unexpected situations while maintaining system stability.</p>
+            
+            <h3>Resilient Hook Architecture</h3>
+            
+            <div class="code-block">
+                <pre>// .kiro/hooks/base/resilient-hook.js
+class ResilientHook {
+  constructor(config) {
+    this.config = config;
+    this.retryPolicy = config.retryPolicy || defaultRetryPolicy;
+    this.circuitBreaker = new CircuitBreaker(config.circuitBreaker);
+    this.metrics = new HookMetrics(config.name);
+  }
+  
+  async execute(context) {
+    const startTime = Date.now();
+    let attempt = 0;
+    
+    while (attempt < this.retryPolicy.maxAttempts) {
+      try {
+        // Check circuit breaker
+        if (this.circuitBreaker.isOpen()) {
+          throw new CircuitBreakerOpenError();
+        }
+        
+        // Execute hook logic with timeout
+        const result = await Promise.race([
+          this.executeHookLogic(context),
+          this.createTimeout(this.config.timeout)
+        ]);
+        
+        // Success - update metrics and return
+        this.metrics.recordSuccess(Date.now() - startTime);
+        this.circuitBreaker.recordSuccess();
+        
+        return result;
+        
+      } catch (error) {
+        attempt++;
+        this.metrics.recordError(error);
+        this.circuitBreaker.recordFailure();
+        
+        // Determine if error is retryable
+        if (!this.isRetryableError(error) || attempt >= this.retryPolicy.maxAttempts) {
+          await this.handleFinalFailure(error, context, attempt);
+          throw error;
+        }
+        
+        // Wait before retry with exponential backoff
+        const delay = this.calculateBackoffDelay(attempt);
+        await this.wait(delay);
+      }
+    }
+  }
+  
+  async handleFinalFailure(error, context, attempts) {
+    // Log failure details
+    await this.logFailure({
+      error,
+      context,
+      attempts,
+      hookName: this.config.name,
+      timestamp: new Date().toISOString()
+    });
+    
+    // Trigger fallback behavior if configured
+    if (this.config.fallback) {
+      try {
+        await this.config.fallback(error, context);
+      } catch (fallbackError) {
+        console.error('Fallback failed:', fallbackError);
+      }
+    }
+    
+    // Notify monitoring systems
+    await this.notifyFailure({
+      hookName: this.config.name,
+      error: error.message,
+      context: this.sanitizeContext(context)
+    });
+  }
+  
+  isRetryableError(error) {
+    // Network errors, timeouts, and temporary service unavailability are retryable
+    return error.code === 'NETWORK_ERROR' ||
+           error.code === 'TIMEOUT' ||
+           error.code === 'SERVICE_UNAVAILABLE' ||
+           (error.status >= 500 && error.status < 600);
+  }
+  
+  calculateBackoffDelay(attempt) {
+    const baseDelay = this.retryPolicy.baseDelay || 1000;
+    const maxDelay = this.retryPolicy.maxDelay || 30000;
+    
+    // Exponential backoff with jitter
+    const exponentialDelay = baseDelay * Math.pow(2, attempt - 1);
+    const jitter = Math.random() * 0.1 * exponentialDelay;
+    
+    return Math.min(exponentialDelay + jitter, maxDelay);
+  }
+}</pre>
+            </div>
+            
+            <h2>Performance Optimization Techniques</h2>
+            
+            <p>Advanced hooks can consume significant resources. These optimization techniques ensure they enhance rather than hinder development velocity.</p>
+            
+            <h3>Intelligent Caching Strategies</h3>
+            
+            <div class="code-block">
+                <pre>// .kiro/hooks/utils/intelligent-cache.js
+class IntelligentCache {
+  constructor(config) {
+    this.config = config;
+    this.cache = new Map();
+    this.hitRates = new Map();
+    this.accessPatterns = new Map();
+  }
+  
+  async get(key, contextAnalysis) {
+    // Analyze access pattern
+    this.recordAccess(key, contextAnalysis);
+    
+    const cached = this.cache.get(key);
+    if (cached && this.isValid(cached, contextAnalysis)) {
+      this.recordHit(key);
+      return cached.value;
+    }
+    
+    this.recordMiss(key);
+    return null;
+  }
+  
+  async set(key, value, contextAnalysis) {
+    const metadata = {
+      value,
+      timestamp: Date.now(),
+      contextHash: this.hashContext(contextAnalysis),
+      accessCount: 0,
+      lastAccess: Date.now(),
+      dependencies: this.extractDependencies(contextAnalysis)
+    };
+    
+    this.cache.set(key, metadata);
+    
+    // Intelligent eviction based on usage patterns
+    await this.manageCache();
+  }
+  
+  isValid(cached, contextAnalysis) {
+    const age = Date.now() - cached.timestamp;
+    const maxAge = this.calculateMaxAge(cached, contextAnalysis);
+    
+    if (age > maxAge) return false;
+    
+    // Check if dependencies have changed
+    return !this.dependenciesChanged(cached.dependencies, contextAnalysis);
+  }
+  
+  calculateMaxAge(cached, contextAnalysis) {
+    const baseMaxAge = this.config.defaultTTL || 3600000; // 1 hour
+    
+    // Adjust based on access patterns
+    const accessFrequency = this.getAccessFrequency(cached);
+    const contextStability = this.getContextStability(contextAnalysis);
+    
+    // More frequently accessed and stable contexts can be cached longer
+    return baseMaxAge * accessFrequency * contextStability;
+  }
+  
+  async manageCache() {
+    if (this.cache.size <= this.config.maxSize) return;
+    
+    // Calculate eviction scores
+    const entries = Array.from(this.cache.entries()).map(([key, value]) => ({
+      key,
+      value,
+      score: this.calculateEvictionScore(key, value)
+    }));
+    
+    // Sort by eviction score (higher = more likely to evict)
+    entries.sort((a, b) => b.score - a.score);
+    
+    // Evict lowest scoring entries
+    const toEvict = entries.slice(0, entries.length - this.config.maxSize + 1);
+    toEvict.forEach(entry => this.cache.delete(entry.key));
+  }
+}</pre>
+            </div>
+            
+            <h3>Parallel Processing Optimization</h3>
+            
+            <div class="pro-tip">
+                <h4>Pro Tip: Resource-Aware Parallelization</h4>
+                <p>Advanced hooks should dynamically adjust their resource usage based on system load and available capacity. This prevents hooks from overwhelming the development environment during peak usage.</p>
+            </div>
+            
+            <div class="code-block">
+                <pre>// .kiro/hooks/utils/parallel-processor.js
+class ResourceAwareProcessor {
+  constructor(config) {
+    this.config = config;
+    this.activeJobs = new Map();
+    this.resourceMonitor = new ResourceMonitor();
+  }
+  
+  async processInParallel(tasks, context) {
+    const availableResources = await this.resourceMonitor.getAvailableResources();
+    const optimalConcurrency = this.calculateOptimalConcurrency(
+      tasks,
+      availableResources,
+      context
+    );
+    
+    // Create task batches based on dependencies and resource requirements
+    const batches = await this.createTaskBatches(tasks, optimalConcurrency);
+    
+    const results = [];
+    
+    for (const batch of batches) {
+      // Process batch with dynamic resource allocation
+      const batchResults = await Promise.allSettled(
+        batch.map(task => this.processTask(task, availableResources))
+      );
+      
+      results.push(...batchResults);
+      
+      // Adjust resource allocation based on performance
+      await this.adjustResourceAllocation(batchResults, availableResources);
+    }
+    
+    return results;
+  }
+  
+  calculateOptimalConcurrency(tasks, resources, context) {
+    const cpuIntensiveTasks = tasks.filter(t => t.type === 'cpu-intensive').length;
+    const ioIntensiveTasks = tasks.filter(t => t.type === 'io-intensive').length;
+    const memoryIntensiveTasks = tasks.filter(t => t.type === 'memory-intensive').length;
+    
+    // Calculate based on resource availability and task characteristics
+    const cpuConcurrency = Math.min(cpuIntensiveTasks, resources.availableCPUs);
+    const ioConcurrency = Math.min(ioIntensiveTasks, resources.ioCapacity);
+    const memoryConcurrency = Math.floor(resources.availableMemory / 
+                                      this.config.averageMemoryPerTask);
+    
+    // Consider system load and development environment impact
+    const systemLoadFactor = 1 - resources.systemLoad;
+    const devEnvironmentFactor = context.isDevelopmentTime ? 0.7 : 1.0;
+    
+    return Math.floor(
+      Math.min(cpuConcurrency, ioConcurrency, memoryConcurrency) *
+      systemLoadFactor * 
+      devEnvironmentFactor
+    );
+  }
+}</pre>
+            </div>
+            
+            <h2>Security and Compliance Considerations</h2>
+            
+            <p>Advanced hooks often handle sensitive data and system access, requiring robust security measures.</p>
+            
+            <h3>Secure Hook Execution</h3>
+            
+            <div class="warning">
+                <h4>Security Warning</h4>
+                <p>Advanced hooks can access sensitive project data, external services, and system resources. Always implement proper access controls, audit logging, and principle of least privilege.</p>
+            </div>
+            
+            <div class="code-block">
+                <pre>// .kiro/hooks/security/secure-executor.js
+class SecureHookExecutor {
+  constructor(config) {
+    this.config = config;
+    this.auditLogger = new AuditLogger();
+    this.accessController = new AccessController();
+    this.dataProtector = new DataProtector();
+  }
+  
+  async executeHook(hookConfig, context) {
+    // Validate hook permissions
+    const permissions = await this.accessController.validatePermissions(
+      hookConfig.permissions,
+      context.user,
+      context.project
+    );
+    
+    if (!permissions.isValid) {
+      throw new PermissionDeniedError(permissions.violations);
+    }
+    
+    // Sanitize and protect sensitive data
+    const sanitizedContext = await this.dataProtector.sanitizeContext(context);
+    
+    // Create secure execution environment
+    const executionEnv = await this.createSecureEnvironment({
+      permissions: permissions.granted,
+      resourceLimits: hookConfig.resourceLimits,
+      networkAccess: hookConfig.networkAccess,
+      fileSystemAccess: hookConfig.fileSystemAccess
+    });
+    
+    // Log execution start
+    await this.auditLogger.logHookExecution({
+      hookName: hookConfig.name,
+      user: context.user,
+      permissions: permissions.granted,
+      timestamp: new Date().toISOString(),
+      contextHash: this.dataProtector.hashContext(sanitizedContext)
+    });
+    
+    try {
+      // Execute hook in secure environment
+      const result = await executionEnv.execute(
+        hookConfig.agent,
+        sanitizedContext
+      );
+      
+      // Audit successful execution
+      await this.auditLogger.logHookSuccess({
+        hookName: hookConfig.name,
+        duration: Date.now() - startTime,
+        resourceUsage: executionEnv.getResourceUsage()
+      });
+      
+      return result;
+      
+    } catch (error) {
+      // Audit execution failure
+      await this.auditLogger.logHookFailure({
+        hookName: hookConfig.name,
+        error: error.message,
+        stackTrace: this.sanitizeStackTrace(error.stack)
+      });
+      
+      throw error;
+      
+    } finally {
+      // Clean up secure environment
+      await executionEnv.cleanup();
+    }
+  }
+  
+  async createSecureEnvironment(config) {
+    return {
+      async execute(agent, context) {
+        // Implement sandboxed execution
+        return await this.executeInSandbox(agent, context, config);
+      },
+      
+      getResourceUsage() {
+        return this.resourceMonitor.getUsage();
+      },
+      
+      async cleanup() {
+        await this.cleanupResources();
+      }
+    };
+  }
+}</pre>
+            </div>
+            
+            <h2>Monitoring and Observability</h2>
+            
+            <p>Production-grade hooks require comprehensive monitoring to ensure reliability and performance.</p>
+            
+            <h3>Hook Observability Platform</h3>
+            
+            <div class="code-block">
+                <pre>// .kiro/hooks/monitoring/observability.js
+class HookObservability {
+  constructor(config) {
+    this.metricsCollector = new MetricsCollector();
+    this.traceCollector = new TraceCollector();
+    this.alertManager = new AlertManager();
+  }
+  
+  async instrumentHook(hookConfig) {
+    const hookName = hookConfig.name;
+    
+    return {
+      async execute(context) {
+        const traceId = generateTraceId();
+        const span = this.traceCollector.startSpan(hookName, traceId);
+        
+        try {
+          // Record execution metrics
+          this.metricsCollector.increment(`hooks.${hookName}.executions`);
+          this.metricsCollector.gauge(`hooks.${hookName}.active`, 1);
+          
+          const startTime = Date.now();
+          const result = await hookConfig.agent(context);
+          const duration = Date.now() - startTime;
+          
+          // Record success metrics
+          this.metricsCollector.histogram(`hooks.${hookName}.duration`, duration);
+          this.metricsCollector.increment(`hooks.${hookName}.success`);
+          
+          // Check for performance anomalies
+          await this.checkPerformanceAnomaly(hookName, duration);
+          
+          span.setStatus({ code: 'OK' });
+          span.end();
+          
+          return result;
+          
+        } catch (error) {
+          // Record error metrics
+          this.metricsCollector.increment(`hooks.${hookName}.errors`);
+          this.metricsCollector.increment(`hooks.${hookName}.errors.${error.code}`);
+          
+          // Alert on critical errors
+          if (this.isCriticalError(error)) {
+            await this.alertManager.sendAlert({
+              level: 'critical',
+              message: `Hook ${hookName} failed with critical error: ${error.message}`,
+              hookName,
+              traceId,
+              context: this.sanitizeContext(context)
+            });
+          }
+          
+          span.recordException(error);
+          span.setStatus({ code: 'ERROR', message: error.message });
+          span.end();
+          
+          throw error;
+          
+        } finally {
+          this.metricsCollector.gauge(`hooks.${hookName}.active`, -1);
+        }
+      }
+    };
+  }
+  
+  async checkPerformanceAnomaly(hookName, duration) {
+    const baseline = await this.getPerformanceBaseline(hookName);
+    
+    if (duration > baseline.p95 * 2) {
+      await this.alertManager.sendAlert({
+        level: 'warning',
+        message: `Hook ${hookName} execution took ${duration}ms (baseline P95: ${baseline.p95}ms)`,
+        hookName,
+        metrics: { duration, baseline }
+      });
+    }
+  }
+}</pre>
+            </div>
+            
+            <h2>Best Practices for Production Deployment</h2>
+            
+            <p>Deploying advanced hooks in production environments requires careful consideration of reliability, performance, and maintainability.</p>
+            
+            <h3>Production Readiness Checklist</h3>
+            
+            <ul>
+                <li><strong>Testing:</strong> Comprehensive unit, integration, and load testing</li>
+                <li><strong>Error Handling:</strong> Graceful degradation and recovery mechanisms</li>
+                <li><strong>Monitoring:</strong> Detailed metrics, logging, and alerting</li>
+                <li><strong>Security:</strong> Access controls, audit trails, and data protection</li>
+                <li><strong>Performance:</strong> Resource optimization and scalability testing</li>
+                <li><strong>Documentation:</strong> Clear operational procedures and troubleshooting guides</li>
+                <li><strong>Rollback Plan:</strong> Ability to quickly disable or rollback hooks</li>
+            </ul>
+            
+            <h3>Gradual Rollout Strategy</h3>
+            
+            <div class="code-block">
+                <pre>// .kiro/hooks/deployment/gradual-rollout.js
+class GradualRollout {
+  constructor(config) {
+    this.config = config;
+    this.featureFlags = new FeatureFlags();
+    this.metricsCollector = new MetricsCollector();
+  }
+  
+  async deployHook(hookConfig) {
+    const rolloutPlan = {
+      phases: [
+        { name: 'canary', percentage: 5, duration: '24h' },
+        { name: 'limited', percentage: 25, duration: '48h' },
+        { name: 'majority', percentage: 75, duration: '72h' },
+        { name: 'full', percentage: 100, duration: 'ongoing' }
+      ]
+    };
+    
+    for (const phase of rolloutPlan.phases) {
+      console.log(`Starting rollout phase: ${phase.name} (${phase.percentage}%)`);
+      
+      // Configure feature flag
+      await this.featureFlags.setPercentage(
+        `hook.${hookConfig.name}`,
+        phase.percentage
+      );
+      
+      // Monitor phase performance
+      const phaseResults = await this.monitorPhase(hookConfig, phase);
+      
+      // Check success criteria
+      if (!this.evaluatePhaseSuccess(phaseResults)) {
+        // Rollback on failure
+        await this.rollback(hookConfig, phase);
+        throw new RolloutFailureError(`Phase ${phase.name} failed criteria`);
+      }
+      
+      // Wait for phase duration
+      await this.waitForPhaseDuration(phase.duration);
+    }
+    
+    console.log(`Hook ${hookConfig.name} successfully rolled out to 100%`);
+  }
+}</pre>
+            </div>
+            
+            <h2>Conclusion: The Future of Development Automation</h2>
+            
+            <p>Advanced Kiro hooks represent a paradigm shift from simple automation scripts to intelligent development agents. These techniques enable:</p>
+            
+            <ul>
+                <li><strong>Unprecedented Productivity:</strong> Complex workflows automated end-to-end</li>
+                <li><strong>Quality Assurance:</strong> Intelligent testing and validation at every step</li>
+                <li><strong>Knowledge Retention:</strong> Institutional knowledge encoded in automation</li>
+                <li><strong>Scalable Development:</strong> Consistent processes that scale with team growth</li>
+                <li><strong>Predictive Capabilities:</strong> Proactive issue detection and resolution</li>
+            </ul>
+            
+            <p>The investment in mastering these advanced techniques pays dividends through improved development velocity, reduced errors, and enhanced team coordination. As AI capabilities continue to evolve, teams that master these patterns will have a significant competitive advantage.</p>
+            
+            <p>Start by implementing one advanced pattern in your current project, measure its impact, and gradually expand your automation capabilities. The future of software development is intelligent, and advanced Kiro hooks are your gateway to that future.</p>
+            
+            <p>Ready to implement these techniques? Start with our <a href="/quickstart/">Kiro setup guide</a> and join the community of developers transforming their development workflow with intelligent automation.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/terms/">Terms</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
