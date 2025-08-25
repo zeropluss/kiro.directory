@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro Security Best Practices: Protecting Your AI Development Workflow | Kiro Directory</title>
+    <meta name="description" content="Comprehensive security guide for AWS Kiro: API key protection, code analysis security, compliance frameworks, and threat mitigation strategies.">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://kiro.directory/blog/kiro-security-best-practices/">
+    <meta property="og:title" content="Kiro Security Best Practices: Protecting Your AI Development">
+    <meta property="og:description" content="Essential security practices for AWS Kiro development workflows">
+    <meta property="og:image" content="https://kiro.directory/logo/favicon-2048x2048.png">
+    
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://kiro.directory/blog/kiro-security-best-practices/">
+    <meta property="twitter:title" content="Kiro Security Best Practices: Protecting Your AI Development">
+    <meta property="twitter:description" content="Essential security practices for AWS Kiro development workflows">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Kiro Security Best Practices: Protecting Your AI Development Workflow",
+      "author": {
+        "@type": "Person",
+        "name": "Kiro Directory Team"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kiro Directory",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://kiro.directory/logo/logo.png"
+        }
+      },
+      "datePublished": "2025-01-22",
+      "description": "Comprehensive security guide for AWS Kiro: API key protection, code analysis security, compliance frameworks, and threat mitigation strategies."
+    }
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/logo/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo/apple-touch-icon.png">
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/logo/manifest.json">
+    <meta name="theme-color" content="#0D1117">
+    
+    <!-- Analytics -->
+    <script defer data-domain="kiro.directory" src="https://click.pageview.click/js/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JNFZ73S1SF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JNFZ73S1SF');
+    </script>
+    
+    <style>
+        :root {
+            --color-base: #0D1117;
+            --color-surface: #161B22;
+            --color-surface-2: #21262D;
+            --color-accent: #8AFFEF;
+            --color-accent-2: #FFD46B;
+            --color-text: #E6EDF3;
+            --color-text-muted: #8B949E;
+            --color-border: #30363D;
+            --color-success: #00C17C;
+            --color-info: #4EA1FF;
+            --color-warning: #FFB454;
+            --color-error: #FF5E5E;
+            --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-base);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-base);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-accent);
+        }
+        
+        /* Article Styles */
+        .article-header {
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+        
+        .article-category {
+            background-color: var(--color-error);
+            color: var(--color-base);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        h1 {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--color-accent);
+        }
+        
+        .article-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+        }
+        
+        .article-content h2 {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 3rem 0 1.5rem;
+            color: var(--color-accent);
+        }
+        
+        .article-content h3 {
+            font-family: var(--font-mono);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-content a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .article-content a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .code-block {
+            background-color: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .security-alert {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-error);
+            border-left: 4px solid var(--color-error);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .security-alert h4 {
+            margin-bottom: 0.75rem;
+            color: var(--color-error);
+            font-weight: 600;
+        }
+        
+        .security-tip {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-success);
+            border-left: 4px solid var(--color-success);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .security-tip h4 {
+            margin-bottom: 0.75rem;
+            color: var(--color-success);
+            font-weight: 600;
+        }
+        
+        .threat-card {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .threat-card h4 {
+            color: var(--color-warning);
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+        }
+        
+        .compliance-framework {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-info);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .compliance-framework h4 {
+            color: var(--color-info);
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+        }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--color-border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.875rem;
+            }
+            
+            .article-content {
+                font-size: 0.9375rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">{ kiro.directory }</a>
+            <ul class="nav-links">
+                <li><a href="/#cheatsheets">Cheat Sheets</a></li>
+                <li><a href="/#comparisons">Comparisons</a></li>
+                <li><a href="/pricing/">Pricing</a></li>
+                <li><a href="/blog/" class="active">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="article-header container">
+            <div class="article-meta">
+                <span class="article-category">Security</span>
+                <span>January 22, 2025</span>
+                <span>18 min read</span>
+            </div>
+            <h1>Kiro Security Best Practices</h1>
+            <p class="article-subtitle">Comprehensive security guide for protecting your AI development workflow, sensitive data, and intellectual property in AWS Kiro</p>
+        </section>
+        
+        <section class="article-content container">
+            <p>Security in AI-powered development environments presents unique challenges that traditional security frameworks don't fully address. AWS Kiro's integration with Claude models, extensive context processing, and automated code generation capabilities require specialized security considerations to protect sensitive data, intellectual property, and development workflows.</p>
+            
+            <p>This comprehensive guide covers essential security practices, from API key protection and data privacy to compliance frameworks and threat mitigation strategies. Whether you're implementing Kiro in a startup or enterprise environment, these security best practices will help you maintain robust protection while maximizing development productivity.</p>
+            
+            <div class="security-alert">
+                <h4>🚨 Critical Security Warning</h4>
+                <p>AI development environments can inadvertently expose sensitive data through context sharing, code generation, and automated processes. Implementing proper security controls from the start is essential to prevent data breaches and maintain compliance.</p>
+            </div>
+            
+            <h2>API Key and Credential Security</h2>
+            
+            <p>Proper credential management is the foundation of Kiro security, as compromised API keys can lead to unauthorized access and data exposure.</p>
+            
+            <h3>Secure API Key Management</h3>
+            
+            <div class="code-block">
+                <pre># Secure credential configuration
+# .kiro/security/credentials.yml
+credential_management:
+  storage:
+    method: "aws_secrets_manager"       # Never store in config files
+    region: "us-east-1"
+    encryption: "aws_kms"
+    
+  rotation:
+    enabled: true
+    frequency: "30days"
+    automatic: true
+    notification: ["security@company.com"]
+    
+  access_control:
+    principle: "least_privilege"
+    roles:
+      - name: "developer"
+        permissions: ["read", "generate_code"]
+        restrictions: ["no_sensitive_data_access"]
+        
+      - name: "lead_developer" 
+        permissions: ["read", "write", "review"]
+        restrictions: ["audit_logged"]
+        
+      - name: "admin"
+        permissions: ["full_access"]
+        restrictions: ["mfa_required", "ip_restricted"]
+        
+  monitoring:
+    usage_tracking: true
+    anomaly_detection: true
+    suspicious_activity_alerts: true</pre>
+            </div>
+            
+            <div class="security-tip">
+                <h4>💡 Pro Security Tip</h4>
+                <p>Use short-lived tokens with automatic rotation whenever possible. Configure Kiro to refresh tokens before expiration to prevent service interruptions while maintaining security.</p>
+            </div>
+            
+            <h3>Environment-Specific Security</h3>
+            
+            <div class="code-block">
+                <pre># Environment-specific security configuration
+environments:
+  development:
+    api_keys:
+      claude: "${CLAUDE_DEV_API_KEY}"
+      aws: "${AWS_DEV_ACCESS_KEY}"
+    restrictions:
+      - no_production_data
+      - limited_context_size
+      - restricted_model_access
+      
+  staging:
+    api_keys:
+      claude: "${CLAUDE_STAGING_API_KEY}"
+      aws: "${AWS_STAGING_ACCESS_KEY}"
+    restrictions:
+      - sanitized_data_only
+      - audit_all_requests
+      - time_limited_access
+      
+  production:
+    api_keys:
+      claude: "${CLAUDE_PROD_API_KEY}" 
+      aws: "${AWS_PROD_ACCESS_KEY}"
+    restrictions:
+      - full_audit_trail
+      - mfa_required
+      - ip_whitelist_only
+      - data_loss_prevention
+      
+# Never commit actual keys - use placeholder values
+security_placeholders:
+  claude_api_key: "sk-ant-api03-PLACEHOLDER-DO-NOT-COMMIT"
+  aws_access_key: "AKIA-PLACEHOLDER-DO-NOT-COMMIT"</pre>
+            </div>
+            
+            <h2>Data Privacy and Protection</h2>
+            
+            <p>Kiro processes large amounts of code and context data, making data protection crucial for maintaining confidentiality and compliance.</p>
+            
+            <h3>Data Classification and Handling</h3>
+            
+            <div class="code-block">
+                <pre># Data classification framework
+data_classification:
+  public:
+    examples: ["open_source_libraries", "public_documentation"]
+    handling: "standard_processing"
+    restrictions: "none"
+    
+  internal:
+    examples: ["company_coding_standards", "internal_tools"]
+    handling: "encrypted_in_transit"
+    restrictions: ["team_access_only"]
+    
+  confidential:
+    examples: ["proprietary_algorithms", "customer_data_schemas"]
+    handling: "encrypted_at_rest_and_transit"
+    restrictions: ["need_to_know_only", "audit_logged"]
+    
+  restricted:
+    examples: ["api_keys", "customer_pii", "financial_data"]
+    handling: "highest_encryption_level"
+    restrictions: ["senior_approval_required", "no_ai_processing"]
+
+automatic_classification:
+  enabled: true
+  patterns:
+    api_keys: "(?i)(api[_-]?key|secret|token).*[=:]\s*['\"]?[a-zA-Z0-9-_]{20,}['\"]?"
+    emails: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+    credit_cards: "\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}"
+    ssn: "\d{3}-\d{2}-\d{4}"
+    
+  actions:
+    api_keys: "block_and_alert"
+    emails: "mask_in_context"
+    credit_cards: "block_and_alert"  
+    ssn: "block_and_alert"</pre>
+            </div>
+            
+            <h3>Context Sanitization</h3>
+            
+            <div class="security-alert">
+                <h4>⚠️ Context Security Risk</h4>
+                <p>Kiro's large context windows can inadvertently include sensitive information. Always sanitize context before processing to prevent data exposure.</p>
+            </div>
+            
+            <div class="code-block">
+                <pre>// Automated context sanitization
+class ContextSanitizer {
+  constructor(config) {
+    this.sensitivePatterns = config.patterns;
+    this.replacementStrategies = config.replacements;
+  }
+  
+  async sanitizeContext(context) {
+    let sanitized = context;
+    
+    // Remove API keys and secrets
+    sanitized = this.removeSecrets(sanitized);
+    
+    // Mask PII data
+    sanitized = this.maskPersonalData(sanitized);
+    
+    // Remove proprietary business logic
+    sanitized = this.removeProprietaryCode(sanitized);
+    
+    // Validate sanitization completeness
+    const risks = await this.detectRemainingRisks(sanitized);
+    if (risks.critical.length > 0) {
+      throw new SecurityError("Critical data detected after sanitization");
+    }
+    
+    return {
+      sanitized_context: sanitized,
+      removed_items: this.removed_items,
+      risk_assessment: risks
+    };
+  }
+  
+  removeSecrets(text) {
+    const patterns = [
+      /(?i)(api[_-]?key|secret|token|password).*[=:]\s*['\"]?[a-zA-Z0-9-_]{10,}['\"]?/g,
+      /(?i)sk-ant-api03-[a-zA-Z0-9-_]{95}/g,  // Claude API keys
+      /(?i)AKIA[0-9A-Z]{16}/g,                 // AWS access keys
+      /(?i)-----BEGIN [A-Z ]+-----[\s\S]*-----END [A-Z ]+-----/g  // Private keys
+    ];
+    
+    patterns.forEach(pattern => {
+      text = text.replace(pattern, '[REDACTED_SECRET]');
+    });
+    
+    return text;
+  }
+}</pre>
+            </div>
+            
+            <h2>Access Control and Authentication</h2>
+            
+            <p>Implementing robust access controls ensures only authorized personnel can access Kiro features and sensitive development resources.</p>
+            
+            <h3>Role-Based Access Control (RBAC)</h3>
+            
+            <div class="code-block">
+                <pre># RBAC Configuration for Kiro
+rbac_configuration:
+  roles:
+    junior_developer:
+      permissions:
+        - read_public_specs
+        - generate_basic_code
+        - run_unit_tests
+      restrictions:
+        - no_production_access
+        - limited_context_size: "50KB"
+        - models: ["claude-haiku"]
+        
+    senior_developer:
+      permissions:
+        - read_internal_specs
+        - generate_complex_code
+        - review_code
+        - modify_specifications
+      restrictions:
+        - audit_critical_operations
+        - context_size: "200KB"
+        - models: ["claude-haiku", "claude-sonnet-3.7"]
+        
+    tech_lead:
+      permissions:
+        - access_confidential_specs
+        - approve_architecture_changes
+        - manage_team_configurations
+        - deploy_to_staging
+      restrictions:
+        - all_operations_logged
+        - mfa_for_sensitive_operations
+        - models: ["claude-sonnet-3.7", "claude-4.0"]
+        
+    security_admin:
+      permissions:
+        - manage_access_controls
+        - view_security_logs
+        - configure_data_classification
+        - emergency_access_revocation
+      restrictions:
+        - all_actions_audited
+        - dual_approval_required
+        - ip_restriction_enforced
+
+  groups:
+    frontend_team:
+      roles: ["senior_developer"]
+      additional_permissions:
+        - access_ui_specifications
+        - deploy_frontend_components
+      resource_restrictions:
+        - no_backend_database_access
+        
+    backend_team:
+      roles: ["senior_developer"]
+      additional_permissions:
+        - access_api_specifications
+        - manage_database_schemas
+      resource_restrictions:
+        - no_frontend_deployment_access</pre>
+            </div>
+            
+            <h3>Multi-Factor Authentication</h3>
+            
+            <div class="code-block">
+                <pre># MFA Configuration
+mfa_configuration:
+  required_for:
+    - production_access
+    - sensitive_data_operations
+    - administrative_functions
+    - api_key_management
+    
+  methods:
+    primary: "totp"           # Time-based One-Time Password
+    backup: "hardware_token"  # YubiKey or similar
+    emergency: "recovery_codes"
+    
+  enforcement:
+    session_timeout: "4hours"
+    re_authentication_for:
+      - credential_changes
+      - security_setting_modifications
+      - bulk_data_operations
+      
+  integration:
+    identity_providers:
+      - "okta"
+      - "azure_ad"
+      - "google_workspace"
+    saml_sso: enabled
+    just_in_time_provisioning: true</pre>
+            </div>
+            
+            <h2>Code Analysis Security</h2>
+            
+            <p>AI-generated code requires additional security validation to prevent the introduction of vulnerabilities and ensure compliance with security standards.</p>
+            
+            <h3>Automated Security Scanning</h3>
+            
+            <div class="code-block">
+                <pre># Security scanning configuration
+security_scanning:
+  static_analysis:
+    tools:
+      - name: "semgrep"
+        rules: ["owasp-top-10", "cwe-top-25", "custom-rules"]
+        severity_threshold: "medium"
+        
+      - name: "sonarqube" 
+        quality_gate: "security"
+        coverage_requirement: "80%"
+        
+      - name: "bandit"        # Python security linter
+        confidence_level: "high"
+        excluded_tests: []
+        
+    triggers:
+      - "on_code_generation"
+      - "pre_commit"
+      - "pull_request"
+      
+  dynamic_analysis:
+    tools:
+      - name: "owasp_zap"
+        scan_type: "full"
+        authentication: "configured"
+        
+      - name: "burp_suite"
+        extensions: ["active_scan", "passive_scan"]
+        
+    environments: ["staging", "pre_production"]
+    
+  dependency_scanning:
+    tools:
+      - name: "snyk"
+        vulnerability_threshold: "high"
+        license_compliance: true
+        
+      - name: "npm_audit"
+        auto_fix: "minor_vulnerabilities"
+        
+    update_policy:
+      critical: "immediate"
+      high: "within_24_hours"
+      medium: "within_1_week"</pre>
+            </div>
+            
+            <div class="threat-card">
+                <h4>🎯 Common AI Code Security Risks</h4>
+                <ul>
+                    <li><strong>Hardcoded Secrets:</strong> AI models may generate code with embedded API keys or passwords</li>
+                    <li><strong>SQL Injection:</strong> Generated database queries may be vulnerable to injection attacks</li>
+                    <li><strong>XSS Vulnerabilities:</strong> Frontend code generation may include unsafe user input handling</li>
+                    <li><strong>Insecure Dependencies:</strong> AI may suggest outdated libraries with known vulnerabilities</li>
+                    <li><strong>Authentication Bypasses:</strong> Generated auth logic may have logical flaws</li>
+                </ul>
+            </div>
+            
+            <h3>Secure Code Generation Hooks</h3>
+            
+            <div class="code-block">
+                <pre># Security validation hooks
+# .kiro/hooks/security-validation.js
+module.exports = {
+  trigger: "post_code_generation",
+  priority: "critical",
+  
+  async execute(context) {
+    const generatedCode = context.generated_code;
+    const securityIssues = [];
+    
+    // Check for hardcoded secrets
+    const secrets = await this.detectSecrets(generatedCode);
+    if (secrets.length > 0) {
+      securityIssues.push({
+        type: "hardcoded_secrets",
+        severity: "critical",
+        items: secrets,
+        suggestion: "Use environment variables or secret management"
+      });
+    }
+    
+    // Validate SQL queries
+    const sqlVulns = await this.detectSQLInjection(generatedCode);
+    if (sqlVulns.length > 0) {
+      securityIssues.push({
+        type: "sql_injection_risk",
+        severity: "high", 
+        items: sqlVulns,
+        suggestion: "Use parameterized queries"
+      });
+    }
+    
+    // Check authentication logic
+    const authIssues = await this.validateAuthLogic(generatedCode);
+    if (authIssues.length > 0) {
+      securityIssues.push({
+        type: "authentication_issues",
+        severity: "high",
+        items: authIssues,
+        suggestion: "Review authentication implementation"
+      });
+    }
+    
+    if (securityIssues.length > 0) {
+      const criticalIssues = securityIssues.filter(i => i.severity === "critical");
+      
+      if (criticalIssues.length > 0) {
+        // Block code generation for critical issues
+        throw new SecurityError("Critical security issues detected", {
+          issues: securityIssues,
+          action: "code_generation_blocked"
+        });
+      } else {
+        // Allow but flag for review
+        return {
+          status: "warning",
+          issues: securityIssues,
+          action: "requires_security_review"
+        };
+      }
+    }
+    
+    return { status: "passed" };
+  }
+};</pre>
+            </div>
+            
+            <h2>Compliance and Regulatory Requirements</h2>
+            
+            <p>Many organizations must comply with industry regulations and standards when implementing AI development tools.</p>
+            
+            <h3>GDPR Compliance</h3>
+            
+            <div class="compliance-framework">
+                <h4>🛡️ GDPR Compliance Framework</h4>
+                <p><strong>Key Requirements:</strong> Data minimization, purpose limitation, consent management, right to deletion</p>
+                <ul>
+                    <li>Implement data anonymization in development contexts</li>
+                    <li>Maintain processing logs for all AI operations</li>
+                    <li>Provide mechanisms for data subject rights</li>
+                    <li>Conduct regular privacy impact assessments</li>
+                </ul>
+            </div>
+            
+            <div class="code-block">
+                <pre># GDPR compliance configuration
+gdpr_compliance:
+  data_processing:
+    lawful_basis: "legitimate_interest"
+    purpose: "software_development_assistance"
+    retention_period: "90_days"
+    
+  data_subject_rights:
+    access_request: 
+      automated: true
+      response_time: "30_days"
+      
+    erasure_request:
+      automated: true
+      verification_required: true
+      cascading_deletion: true
+      
+    portability_request:
+      format: "structured_json"
+      encryption: "aes_256"
+      
+  consent_management:
+    explicit_consent_required: true
+    granular_permissions: true
+    withdrawal_mechanism: "self_service"
+    
+  privacy_by_design:
+    data_minimization: true
+    anonymization_techniques:
+      - "k_anonymity"
+      - "differential_privacy"
+      - "data_masking"
+    
+  audit_trail:
+    processing_logs: "comprehensive"
+    retention: "6_years"
+    access_controls: "restricted"</pre>
+            </div>
+            
+            <h3>SOC 2 Type II Compliance</h3>
+            
+            <div class="compliance-framework">
+                <h4>📋 SOC 2 Type II Requirements</h4>
+                <p><strong>Trust Principles:</strong> Security, Availability, Processing Integrity, Confidentiality, Privacy</p>
+            </div>
+            
+            <div class="code-block">
+                <pre># SOC 2 compliance controls
+soc2_controls:
+  security:
+    access_controls:
+      - multi_factor_authentication
+      - role_based_permissions
+      - regular_access_reviews
+      
+    vulnerability_management:
+      - automated_scanning
+      - patch_management
+      - penetration_testing
+      
+  availability:
+    monitoring:
+      - system_uptime_tracking
+      - performance_monitoring
+      - capacity_planning
+      
+    disaster_recovery:
+      - backup_procedures
+      - recovery_testing
+      - business_continuity_plan
+      
+  processing_integrity:
+    data_validation:
+      - input_validation
+      - processing_controls
+      - output_verification
+      
+    quality_assurance:
+      - code_review_processes
+      - automated_testing
+      - error_handling
+      
+  confidentiality:
+    encryption:
+      - data_in_transit: "tls_1_3"
+      - data_at_rest: "aes_256"
+      - key_management: "hsm_backed"
+      
+    access_restrictions:
+      - least_privilege_principle
+      - need_to_know_basis
+      - regular_permissions_review
+      
+  privacy:
+    data_governance:
+      - classification_scheme
+      - handling_procedures
+      - retention_policies
+      
+    individual_rights:
+      - access_procedures
+      - correction_mechanisms
+      - deletion_processes</pre>
+            </div>
+            
+            <h2>Incident Response and Recovery</h2>
+            
+            <p>A well-defined incident response plan is crucial for handling security breaches or data exposure events in AI development environments.</p>
+            
+            <h3>Security Incident Response Plan</h3>
+            
+            <div class="code-block">
+                <pre># Incident response procedures
+incident_response:
+  classification:
+    critical:
+      examples: ["data_breach", "system_compromise", "credential_exposure"]
+      response_time: "15_minutes"
+      escalation: "immediate"
+      
+    high:
+      examples: ["unauthorized_access", "malware_detection", "service_disruption"]
+      response_time: "1_hour"
+      escalation: "within_2_hours"
+      
+    medium:
+      examples: ["policy_violation", "suspicious_activity", "configuration_error"]
+      response_time: "4_hours"
+      escalation: "within_24_hours"
+      
+  response_team:
+    incident_commander: "security_lead"
+    technical_lead: "platform_engineer"
+    communications_lead: "engineering_manager"
+    legal_counsel: "company_legal"
+    
+  containment_procedures:
+    immediate_actions:
+      - isolate_affected_systems
+      - revoke_compromised_credentials
+      - preserve_evidence
+      - notify_stakeholders
+      
+    investigation_steps:
+      - collect_system_logs
+      - analyze_attack_vectors
+      - assess_data_impact
+      - identify_root_cause
+      
+    recovery_actions:
+      - restore_from_backups
+      - apply_security_patches
+      - implement_additional_controls
+      - validate_system_integrity
+      
+  notification_requirements:
+    internal:
+      - security_team: "immediate"
+      - executive_team: "within_1_hour"
+      - affected_users: "within_24_hours"
+      
+    external:
+      - regulatory_bodies: "within_72_hours"
+      - customers: "as_required_by_law"
+      - law_enforcement: "if_criminal_activity"</pre>
+            </div>
+            
+            <h3>Automated Threat Detection</h3>
+            
+            <div class="code-block">
+                <pre>// AI-powered security monitoring
+class SecurityMonitor {
+  constructor(config) {
+    this.alertThresholds = config.thresholds;
+    this.responseActions = config.actions;
+  }
+  
+  async monitorKiroActivity() {
+    const activities = await this.collectActivityData();
+    
+    // Detect anomalous API usage
+    const apiAnomalies = await this.detectAPIAnomalies(activities);
+    if (apiAnomalies.score > this.alertThresholds.high) {
+      await this.triggerSecurityAlert({
+        type: "api_anomaly",
+        severity: "high",
+        details: apiAnomalies,
+        automated_response: "rate_limit_user"
+      });
+    }
+    
+    // Monitor for data exfiltration patterns
+    const exfiltrationRisk = await this.assessDataExfiltrationRisk(activities);
+    if (exfiltrationRisk.indicators.length > 3) {
+      await this.triggerSecurityAlert({
+        type: "potential_data_exfiltration",
+        severity: "critical",
+        details: exfiltrationRisk,
+        automated_response: "block_user_immediately"
+      });
+    }
+    
+    // Check for credential stuffing attempts
+    const authAnomalies = await this.detectAuthenticationAnomalies(activities);
+    if (authAnomalies.failed_attempts > 10) {
+      await this.triggerSecurityAlert({
+        type: "brute_force_attempt",
+        severity: "high", 
+        details: authAnomalies,
+        automated_response: "temporary_account_lock"
+      });
+    }
+  }
+  
+  async triggerSecurityAlert(alert) {
+    // Log the alert
+    await this.logSecurityEvent(alert);
+    
+    // Execute automated response
+    await this.executeAutomatedResponse(alert);
+    
+    // Notify security team
+    await this.notifySecurityTeam(alert);
+    
+    // Escalate if critical
+    if (alert.severity === "critical") {
+      await this.escalateToIncidentResponse(alert);
+    }
+  }
+}</pre>
+            </div>
+            
+            <h2>Security Training and Awareness</h2>
+            
+            <p>Human factors are often the weakest link in security. Comprehensive training ensures team members understand AI-specific security risks.</p>
+            
+            <h3>Developer Security Training</h3>
+            
+            <div class="security-tip">
+                <h4>🎓 Essential Security Training Topics</h4>
+                <ul>
+                    <li><strong>AI Security Fundamentals:</strong> Understanding unique risks in AI development</li>
+                    <li><strong>Data Classification:</strong> How to properly classify and handle sensitive information</li>
+                    <li><strong>Prompt Injection:</strong> Preventing malicious prompt manipulation</li>
+                    <li><strong>Context Security:</strong> Sanitizing development context before AI processing</li>
+                    <li><strong>Incident Response:</strong> Steps to take when security issues are discovered</li>
+                </ul>
+            </div>
+            
+            <h3>Security Metrics and KPIs</h3>
+            
+            <div class="code-block">
+                <pre># Security metrics dashboard
+security_metrics:
+  detection_metrics:
+    - name: "mean_time_to_detection"
+      target: "< 15_minutes"
+      current: "12_minutes"
+      
+    - name: "false_positive_rate"
+      target: "< 5%"
+      current: "3.2%"
+      
+    - name: "security_alert_volume"
+      target: "manageable_levels"
+      current: "45_per_day"
+      
+  response_metrics:
+    - name: "mean_time_to_containment"
+      target: "< 30_minutes"
+      current: "25_minutes"
+      
+    - name: "incident_resolution_time"
+      target: "< 4_hours"
+      current: "3.5_hours"
+      
+  prevention_metrics:
+    - name: "vulnerability_count"
+      target: "trending_downward"
+      current: "23_open_issues"
+      
+    - name: "security_training_completion"
+      target: "100%"
+      current: "92%"
+      
+  compliance_metrics:
+    - name: "audit_findings"
+      target: "zero_critical"
+      current: "2_medium"
+      
+    - name: "policy_compliance_rate"
+      target: "> 95%"
+      current: "97%"</pre>
+            </div>
+            
+            <h2>Advanced Security Configurations</h2>
+            
+            <p>For organizations with strict security requirements, advanced configurations provide additional layers of protection.</p>
+            
+            <h3>Zero Trust Architecture</h3>
+            
+            <div class="code-block">
+                <pre># Zero Trust implementation for Kiro
+zero_trust_config:
+  principles:
+    - "never_trust_always_verify"
+    - "least_privilege_access"
+    - "assume_breach_mentality"
+    
+  implementation:
+    network_segmentation:
+      kiro_services:
+        vlan: "isolated"
+        firewall_rules: "strict"
+        monitoring: "comprehensive"
+        
+    identity_verification:
+      continuous_authentication: true
+      device_compliance_checking: true
+      behavioral_analytics: enabled
+      
+    data_protection:
+      encryption_everywhere: true
+      data_loss_prevention: enabled
+      rights_management: "granular"
+      
+    monitoring:
+      real_time_analysis: true
+      anomaly_detection: "ml_powered"
+      correlation_rules: "comprehensive"
+      
+  enforcement_points:
+    - api_gateway
+    - service_mesh
+    - database_proxy
+    - file_system_monitor</pre>
+            </div>
+            
+            <h3>Air-Gapped Development Environment</h3>
+            
+            <div class="security-alert">
+                <h4>🔒 Maximum Security Configuration</h4>
+                <p>For highly sensitive projects, consider an air-gapped Kiro deployment with on-premises Claude model hosting and restricted network access.</p>
+            </div>
+            
+            <div class="code-block">
+                <pre># Air-gapped security configuration
+air_gapped_deployment:
+  network_isolation:
+    internet_access: "completely_disabled"
+    internal_network_only: true
+    dedicated_hardware: required
+    
+  model_deployment:
+    claude_hosting: "on_premises"
+    model_updates: "manual_process"
+    security_validation: "required"
+    
+  data_handling:
+    no_external_apis: true
+    local_storage_only: true
+    encrypted_at_rest: "always"
+    
+  access_controls:
+    physical_security: "required"
+    smart_card_authentication: "mandatory"
+    biometric_verification: "enabled"
+    
+  monitoring:
+    internal_siem: "comprehensive"
+    anomaly_detection: "behavioral_based"
+    audit_logging: "everything"</pre>
+            </div>
+            
+            <h2>Security Checklist and Implementation Guide</h2>
+            
+            <p>Use this comprehensive checklist to ensure your Kiro implementation meets security best practices.</p>
+            
+            <h3>Pre-Implementation Security Checklist</h3>
+            
+            <div class="security-tip">
+                <h4>✅ Security Implementation Checklist</h4>
+                <ul>
+                    <li>☐ Configure secure API key storage with rotation</li>
+                    <li>☐ Implement data classification and handling procedures</li>
+                    <li>☐ Set up role-based access controls</li>
+                    <li>☐ Configure multi-factor authentication</li>
+                    <li>☐ Deploy automated security scanning</li>
+                    <li>☐ Establish context sanitization procedures</li>
+                    <li>☐ Create incident response plan</li>
+                    <li>☐ Set up security monitoring and alerting</li>
+                    <li>☐ Conduct security training for team members</li>
+                    <li>☐ Perform security testing and validation</li>
+                    <li>☐ Document security procedures and policies</li>
+                    <li>☐ Plan regular security assessments</li>
+                </ul>
+            </div>
+            
+            <h2>Conclusion</h2>
+            
+            <p>Security in AI development environments requires a comprehensive, multi-layered approach that addresses both traditional security concerns and AI-specific risks. By implementing the practices outlined in this guide, you can protect sensitive data, maintain compliance, and ensure that your Kiro implementation enhances productivity without compromising security.</p>
+            
+            <p>Remember that security is not a one-time implementation but an ongoing process requiring regular review, updates, and training. Stay informed about emerging AI security threats and continuously adapt your security posture to address new challenges.</p>
+            
+            <p>Start by implementing the foundational security controls—API key management, access controls, and basic monitoring—then gradually add advanced features based on your organization's risk profile and compliance requirements. A secure Kiro implementation enables your team to innovate confidently while protecting valuable intellectual property and sensitive data.</p>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <p>&copy; 2025 kiro.directory | Not affiliated with AWS</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="/about/">About</a></li>
+                <li><a href="https://github.com/kiro-directory" target="_blank">GitHub</a></li>
+                <li><a href="/privacy/">Privacy</a></li>
+                <li><a href="/terms/">Terms</a></li>
+                <li><a href="/contact/">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
